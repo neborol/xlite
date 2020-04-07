@@ -1,0 +1,9 @@
+.cancel-bt-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    .cancel-bt {
+        margin-top: 5px;
+        background-color: grey;
+    }
+}

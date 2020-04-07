@@ -1,0 +1,25 @@
+.navbar-container {
+    width: 100%;
+    .nav-label {
+        float: left;
+        width: 180px;
+        font-size: 1.2em;
+    }
+    .nav-links {
+        float: right;
+        width: 500px;
+        .nav-tool-items{
+            a {
+                float: right;
+                margin-left: 10px;
+                font-size: 1em;
+            }
+        }
+        .active {
+            background-color: rgb(102, 206, 238);
+            color: black;
+        }
+    }
+}
+
+

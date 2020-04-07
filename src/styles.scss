@@ -6,11 +6,13 @@ body {
 }
 
 body {
-  background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+  /* background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png); */
+  background-image: url(assets/apBg.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+  min-width: 100vw;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -101,9 +103,11 @@ body {
 }
 
 .login-wrapper .mat-stroked-button {
-  border: 1px solid currentColor;
+  border: 1px solid #8c96cf;
   line-height: 54px;
-  background: #FFF7FA;
+  font-size: 1.7rem;
+  color: rgb(22, 38, 119);
+  background: rgb(202, 220, 248);
 }
 
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
