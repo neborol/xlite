@@ -23,6 +23,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { MissionComponent } from './components/mission/mission.component';
 
 
 
@@ -34,7 +35,8 @@ import { HomeComponent } from './components/home/home.component';
     RegisterComponent,
     LogInComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    MissionComponent
   ],
   imports: [
     BrowserModule,

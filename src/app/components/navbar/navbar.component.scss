@@ -4,10 +4,21 @@
         float: left;
         width: 180px;
         font-size: 1.2em;
+        .user-account {
+            mat-icon{
+               font-size: 1.2em; 
+            }
+            .user-id-text {
+                display: inline-block;
+                font-size: 0.8em; 
+                margin-left: 10px;
+                transform: translate(3px, -7px);
+            }
+        }
     }
     .nav-links {
         float: right;
-        width: 500px;
+        width: 800px;
         .nav-tool-items{
             a {
                 float: right;

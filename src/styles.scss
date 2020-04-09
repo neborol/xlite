@@ -1,3 +1,6 @@
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/default.min.css';
+
 html,
 body {
   height: 100%;
@@ -14,6 +17,7 @@ body {
   min-height: 100vh;
   min-width: 100vw;
   font-family: 'Roboto', sans-serif;
+  margin-top: 65px;
 }
 
 .app-header {
@@ -112,4 +116,13 @@ body {
 
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
+}
+
+.alertify-notifier.ajs-bottom {
+  top: 54px;
+}
+
+.standard-page {
+  background-color: white; 
+  height: 100%;
 }

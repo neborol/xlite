@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { Router} from '@angular/router';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-log-in',
@@ -11,7 +12,7 @@ export class LogInComponent implements OnInit {
 
   model: object = {};
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) { }
 
   ngOnInit() {
     // this.authService.isLoggedIn ? this.router.navigateByUrl('/text') : this.router.navigateByUrl('/login') ;
@@ -20,9 +21,9 @@ export class LogInComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(next => {
       this.router.navigateByUrl('/home');
-      console.log('Logged in successfully');
+      this.alertify.success('Logged in successfully');
     }, error => {
-      console.log('Failed to login');
+      this.alertify.error('Failed to login');
     });
   }
 
