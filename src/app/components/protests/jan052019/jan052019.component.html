@@ -1,0 +1,34 @@
+<!-- <div class="jan05-protests">
+        <p>
+            Total images displayed: 
+            <strong>{{ totalImagesShown }}</strong>
+        </p>
+
+    <div class="imgg-container" *ngFor="let image of protestListJan052019" (deferLoad)="image.show = true">
+        <ng-container *ngIf="image.show">
+            <img [src]="image.url"
+                class="rounded  hide-on-init"
+                animateOnScroll animationName="animated zoomInDown"/>
+                <div class="img-caption" animateOnScroll animationName="animated zoomInDown">{{ image.caption }}</div>
+                <div class="dark_bg" animateOnScroll animationName="animated zoomInDown"></div>
+        </ng-container>
+    </div>
+</div> -->
+
+<div class="jan05-protests">
+    <p class="test-pos">
+        <strong>{{ totalImagesShown }}</strong> Images being displayed of <strong>{{ totalImages }}</strong> 
+    </p>
+
+    <div class="imgg-container" *ngFor="let image of protestListJan052019" (deferLoad)="image.show = true">
+        <ng-container *ngIf="image.show">
+            <img src="{{ image.url }}"
+                class="rounded hide-on-init"
+                animateOnScroll animationName="animated zoomInDown"/>
+                <div class="img-caption" animateOnScroll animationName="animated zoomInDown">{{ image.caption }}</div>
+                <div class="dark_bg" animateOnScroll animationName="animated zoomInDown"></div>
+        </ng-container>
+    </div>
+</div>
+
+

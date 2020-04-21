@@ -5,13 +5,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { MissionComponent } from './components/mission/mission.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RelieveComponent } from './components/relieve/relieve.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'mission', component: MissionComponent, canActivate: [AuthGuard]},
+  { path: 'relieve', component: RelieveComponent},
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', redirectTo: '' },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

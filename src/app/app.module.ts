@@ -1,9 +1,10 @@
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { JwtModule } from '@auth0/angular-jwt';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
-
-import { AppComponent } from './app.component';
 
 /* Angular Material */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +25,13 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { MissionComponent } from './components/mission/mission.component';
+import { RelieveComponent } from './components/relieve/relieve.component';
+import { Jan052019Component } from './components/protests/jan052019/jan052019.component';
+import { ImagesService } from './services/images.service';
 
+export function tokenGetter() {
+  return localStorage.getItem('eliteToken');
+}
 
 
 @NgModule({
@@ -36,7 +43,9 @@ import { MissionComponent } from './components/mission/mission.component';
     LogInComponent,
     NavbarComponent,
     HomeComponent,
-    MissionComponent
+    MissionComponent,
+    RelieveComponent,
+    Jan052019Component
   ],
   imports: [
     BrowserModule,
@@ -46,10 +55,20 @@ import { MissionComponent } from './components/mission/mission.component';
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:5001'],
+        blacklistedRoutes: ['localhost:5001/api/auth']
+      }
+    }),
+    AnimateOnScrollModule.forRoot(),
+    DeferLoadModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    ImagesService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

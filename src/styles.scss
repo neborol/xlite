@@ -1,6 +1,13 @@
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/default.min.css';
 
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import './assets/animate.css';
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
 html,
 body {
   height: 100%;
@@ -125,4 +132,6 @@ body {
 .standard-page {
   background-color: white; 
   height: 100%;
+  padding: 15px;
 }
+
