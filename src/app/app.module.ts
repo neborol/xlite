@@ -28,6 +28,12 @@ import { MissionComponent } from './components/mission/mission.component';
 import { RelieveComponent } from './components/relieve/relieve.component';
 import { Jan052019Component } from './components/protests/jan052019/jan052019.component';
 import { ImagesService } from './services/images.service';
+import { MemberEditComponent } from './components/membership/edit/memberEdit.component';
+import { MemberEditResolver } from './resolvers/member-edit-resolver';
+import { CockpitComponent } from './components/cockpit/cockpit.component';
+import { PhotoUploadComponent } from './components/cockpit/photo-upload/photo-upload.component';
+import { MembersListComponent } from './components/cockpit/members-list/members-list.component';
+import { EditamountComponent } from './components/cockpit/editamount/editamount.component';
 
 export function tokenGetter() {
   return localStorage.getItem('eliteToken');
@@ -45,7 +51,12 @@ export function tokenGetter() {
     HomeComponent,
     MissionComponent,
     RelieveComponent,
-    Jan052019Component
+    Jan052019Component,
+    MemberEditComponent,
+    CockpitComponent,
+    PhotoUploadComponent,
+    MembersListComponent,
+    EditamountComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +79,8 @@ export function tokenGetter() {
   ],
   providers: [
     AuthService,
-    ImagesService
+    ImagesService,
+    MemberEditResolver
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

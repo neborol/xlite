@@ -1,0 +1,44 @@
+.example-container {
+  width: 100%;
+  min-height: 800px;
+}
+
+mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.side-drawer-menu-btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 45px;
+  padding: 3px;
+}
+
+.side-drawer-menu-btn-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.mat-mini-fab:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.cockp-menu-list {
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    margin: 5px 10px;
+    border: solid 1px #dddddd;
+    padding: 2px 5px;
+    background-color: #eaeced;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+  }
+}

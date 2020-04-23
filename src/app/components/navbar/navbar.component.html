@@ -19,7 +19,8 @@
         </span>
         <span *ngIf="authService.isLoggedIn()">
             <a mat-button mat-raised-button (click)="logout()" routerLinkActive="active">Logout</a>
-            <a mat-button mat-raised-button routerLink="validate" routerLinkActive="active">Validate Payment</a>           
+            <a mat-button mat-raised-button routerLink="member/edit" routerLinkActive="member/edit">Edit Profile</a>
+            <a mat-button mat-raised-button routerLink="cockpit" routerLink="cockpit" routerLinkActive="active">Cockpit Functions</a>           
         </span>
         <a mat-button mat-raised-button routerLink="mission" routerLinkActive="active">Our Mission</a>
         <a mat-button mat-raised-button routerLink="home" routerLinkActive="active">

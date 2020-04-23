@@ -24,7 +24,7 @@ body {
   min-height: 100vh;
   min-width: 100vw;
   font-family: 'Roboto', sans-serif;
-  margin-top: 65px;
+  padding-top: 15px;
 }
 
 .app-header {
@@ -131,7 +131,15 @@ body {
 
 .standard-page {
   background-color: white; 
+  margin-top: 50px;
   height: 100%;
-  padding: 15px;
+  width: 100%;
 }
 
+mat-drawer-container {
+  mat-drawer {
+    .mat-drawer-inner-container {
+        background-color: #3f89b5;
+    }    
+  }
+}

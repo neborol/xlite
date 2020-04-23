@@ -1,0 +1,40 @@
+<div class="standard-page">
+  <div class>
+    <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value">
+      <mat-drawer #drawer mode="push">
+        <ul class="cockp-menu-list">
+          <li (click)="loadChildRoute('uploadphotos', drawer)">Upload Photos</li>
+          <li (click)="loadChildRoute('memberslist', drawer)">Edit Member List</li>
+          <li (click)="loadChildRoute('editamount', drawer)">Edit Amount</li>
+        </ul>
+      </mat-drawer>
+
+      <mat-drawer-content>
+        <mat-form-field>
+          <mat-select #hasBackdrop>
+          </mat-select>
+        </mat-form-field>
+        <div class="side-drawer-menu-btn-wrapper">
+          <div class="side-drawer-menu-btn-container">
+            <button (click)="drawer.toggle()" mat-mini-fab color="primary"
+              aria-label="Example icon button with a menu icon">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- All the nested routes will be loaded in this element -->
+        <router-outlet></router-outlet>
+
+        <mat-form-field>
+          <mat-select #mode value="side">
+          </mat-select>
+        </mat-form-field>
+
+
+
+
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </div>
+</div>
