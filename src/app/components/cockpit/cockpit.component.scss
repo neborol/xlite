@@ -42,3 +42,13 @@ mat-drawer-content {
     font-weight: bold;
   }
 }
+
+.spacing {
+  padding-top: 63px;
+}
+
+.cockpit-container {
+  .cockpit-formf-1, .cockpit-formf-2 {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
-export class MemberDto {
-    public memberId: number;
+export class UserDto {
+    public UserId: number;
     public codeNr: string;
     public firstName: string;
     public lastName: string;
@@ -8,5 +8,4 @@ export class MemberDto {
     public city: string;
     public status: string;
     public subscrptions: string[];
-
 }

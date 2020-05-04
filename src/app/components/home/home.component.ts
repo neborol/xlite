@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MembersService } from './../../services/members.service';
-import { MemberDto } from './MemberDto';
+import { MembersService } from '../../services/users.service';
+import { UserDto } from './UserDto';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +8,16 @@ import { MemberDto } from './MemberDto';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  members: MemberDto[];
-  constructor(private memberService: MembersService) { }
+  users: UserDto[];
+  constructor(private userService: MembersService) { }
 
   ngOnInit() {
     this.getAllMembers();
   }
 
   getAllMembers() {
-    this.memberService.getMembers().subscribe((zz: MemberDto[]) => {
-      this.members = zz;
+    this.userService.getUsers().subscribe((zz: UserDto[]) => {
+      this.users = zz;
       console.log('Expecting');
       console.log(zz);
     }, error => console.error(error));

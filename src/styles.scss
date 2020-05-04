@@ -4,7 +4,9 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 @import './assets/animate.css';
 
-.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+.mat-sidenav-container,
+.mat-sidenav-content,
+.mat-tab-body-content {
   transform: none !important;
 }
 
@@ -24,7 +26,7 @@ body {
   min-height: 100vh;
   min-width: 100vw;
   font-family: 'Roboto', sans-serif;
-  padding-top: 15px;
+  // padding-top: 63px;
 }
 
 .app-header {
@@ -92,7 +94,7 @@ body {
   width: 100%;
 }
 
-.login-wrapper .example-full-width,
+.login-wrapper .register-control,
 .login-wrapper .btn-block {
   width: 100%;
 }
@@ -109,9 +111,7 @@ body {
   margin: 0;
 }
 
-.login-wrapper .mat-card {
-  padding: 40px 70px 50px;
-}
+
 
 .login-wrapper .mat-stroked-button {
   border: 1px solid #8c96cf;
@@ -122,7 +122,7 @@ body {
 }
 
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
-  padding: 0.8375em 0;
+  padding: 0.4375em 0;
 }
 
 .alertify-notifier.ajs-bottom {
@@ -130,16 +130,98 @@ body {
 }
 
 .standard-page {
-  background-color: white; 
-  margin-top: 50px;
+  background-color: white;
   height: 100%;
   width: 100%;
+}
+
+.registerContainer {
+  .mat-card {
+    padding: 15px 35px 10px;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0.5em !important;
+  }
+
+  .mat-form-field {
+    line-height: 0.8 !important;
+  }
+
+  .mat-card-content,
+  .mat-card-subtitle {
+    font-size: 17px;
+  }
+
+  .mat-form-field-infix {
+    border-top: .24375em solid transparent;
+  }
+
+  .login-wrapper .mat-stroked-button {
+    line-height: 42px;
+  }
+
+
+  .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label {
+    font-size: 20px;
+  }
+
+  .mat-card-content {
+    .mat-form-field-infix {
+      font-size: 22px;
+    }
+  }
+}
+
+
+
+.loginContainer {
+  .mat-card {
+    padding: 40px 70px 65px !important;
+  }
+
+  .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label {
+    font-size: 20px;
+  }
+
+  .mat-card-content {
+    .mat-form-field-infix {
+      font-size: 22px;
+    }
+  }
 }
 
 mat-drawer-container {
   mat-drawer {
     .mat-drawer-inner-container {
-        background-color: #3f89b5;
-    }    
+      background-color: #3f89b5;
+    }
   }
 }
+
+
+.error-controlled:after {
+  content: attr(data-line);
+  float: right;
+  width: 20px;
+  height: 20px;
+  color: #ed1c24;
+  background: url("/assets/images/chevron.svg") no-repeat;
+  background-size: 20px 20px, cover;
+  position: absolute;
+  top: 15px;
+  right: -7px;
+}
+
+// .mat-form-field-infix:after {
+//   content: "";
+//   float: right;
+//   width: 20px;
+//   height: 20px;
+//   color: red;
+//   background: url("/assets/images/chevron.svg") no-repeat;
+//   background-size: 20px 20px, cover;
+//   position: absolute;
+//   top: 10px;
+//   right: -7px;
+// }

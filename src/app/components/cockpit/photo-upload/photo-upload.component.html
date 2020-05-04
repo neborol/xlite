@@ -1,3 +1,43 @@
 <div style="padding: 10px 20px;">
-    <span>photo-upload works!</span>
+  <h1>SCEF File Upload Page</h1>
+
+  <form #uploadForm="ngForm">
+
+    <div class="preview-image-container">
+      <img [src]="image2bUploaded" alt="image-preview" width="250px">
+      <!-- <input type="file" (change)="handleFileInput($event.target.files)" #Image accept="image/*"> -->
+    </div>
+
+    <div>
+      <textarea type="text" #caption [(ngModel)]="model.caption" name="caption" placeholder="Image Caption" rows="4" cols="33" required>
+        </textarea>
+    </div>
+
+    <!-- file to be uploaded -->
+    <div style="margin-bottom: 15px">
+      <!-- <input type="file" #file placeholder="choose file" (change)="uploadFile(file.files)" style="display: none"> -->
+      <input type="file" #file placeholder="choose file" accept="image/*" (change)="handleFileInput(file.files)"
+        style="display: none">
+      <!-- <input type="file" #file placeholder="choose file" accept="image/*" (change)="handleFileInput($event.target.files)"
+        style="display: none"> -->
+      <button (click)="file.click()" class="upload-btn">Upload File</button>
+
+
+      <!-- Progress placeholder -->
+      <span class="upload-progress" *ngIf="progress > 0">
+        {{ progress }}%
+      </span>
+      <span class="upload-message" *ngIf="message">
+        {{ message }}
+      </span>
+    </div>
+
+    <button class="file-submit-btn" (click)="uploadFile(uploadForm)" [disabled]="file.value==='' || !uploadForm.valid">Submit Form</button>
+  </form>
+
+
+  <!-- http://localhost:5001/Resources/Images/design.jpg -->
+
+  <img [src]="rootUrl + 'Resources/Images/design.jpg'" alt="uploaded image">
+  
 </div>

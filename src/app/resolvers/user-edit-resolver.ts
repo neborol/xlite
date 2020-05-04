@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { MemberDto } from '../components/home/MemberDto';
-import { MembersService } from './../services/members.service';
+import { UserDto } from '../components/home/UserDto';
+import { MembersService } from '../services/users.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -35,9 +35,9 @@ import { AuthService } from 'src/app/services/auth.service';
 // }
 
 
-export class MemberEditResolver implements Resolve<string> {
+export class UserEditResolver implements Resolve<string> {
     constructor(
-        private memberService: MembersService,
+        private userService: MembersService,
         private router: Router,
         private alertify: AlertifyService,
         private location: Location,
@@ -46,6 +46,7 @@ export class MemberEditResolver implements Resolve<string> {
 
     // When this method gets called by Angular, angular will provide us the ActivatedRouteSnapshot and the RouterStateSnapShot
        resolve(routeSnapShot: ActivatedRouteSnapshot, state: RouterStateSnapshot): string {
-        return this.memberService.getMember();
+        return this.userService.getUser();
+
     }
 }

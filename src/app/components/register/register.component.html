@@ -1,35 +1,65 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div class="login-wrapper registerContainer" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
 
-    <form class="register-form" #registerForm="ngForm" (ngSubmit)="register()">
+    <form [formGroup]="registerMembersForm" class="register-form" (ngSubmit)="register()">
 
       <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input type="text" name="username" matInput required [(ngModel)]="model.username" placeholder="Username">
+        <mat-form-field class="register-control" 
+              [ngClass]="{'error-controlled': userName.errors && userName.touched}">
+          <input type="text" formControlName="userName" matInput placeholder="User Name">
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input type="email" matInput placeholder="Email">
+        <mat-form-field class="register-control" [ngClass]="{'error-controlled': userEmail.errors && userEmail.touched }">
+          <span *ngIf="(userEmail.dirty || userEmail.touched) && userEmail.errors?.required" class="error-message">The Email field is required!</span>
+          <span *ngIf="(userEmail.dirty || userEmail.touched) && (userEmail.invalid && !userEmail.errors?.required)"
+            class="error-message">The Email must be valid and be between 8 and 25.</span>
+          <input type="email" matInput formControlName="userEmail" placeholder="Email">
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input type="password" name="password" matInput required [(ngModel)]="model.password" placeholder="Password">
+        <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': password.errors && password.touched }">
+          <input type="password" formControlName="password" matInput placeholder="Password">
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': passwordConf.errors && passwordConf.touched }">
+          <input type="password" formControlName="passwordConf" matInput placeholder="Confirm Password">
+        </mat-form-field>
+
+        <mat-form-field class="register-control" 
+            [ngClass]="{'error-controlled': firstName.errors && firstName.touched }">
+          <input type="text" formControlName="firstName" matInput placeholder="First Name">
+        </mat-form-field>
+
+        <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': lastName.errors && lastName.touched }">        
+          <input type="text" formControlName="lastName" matInput placeholder="Last Name">
+        </mat-form-field>
+
+        <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': phone.errors && phone.touched }">
+          <input type="text" formControlName="phone" matInput placeholder="Phone">
+        </mat-form-field>
+
+        <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': city.errors && city.touched }">
+          <input type="text" formControlName="city" matInput placeholder="City">
+        </mat-form-field>
+
+        <!-- <mat-form-field class="register-control">
           <mat-label>Choose a role...</mat-label>
           <mat-select [(value)]="selected">
             <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
       </mat-card-content>
 
-      <button mat-stroked-button color="accent" type="submit" class="btn-block">Register</button>
+      <button [disabled]="registerMembersForm.status==='INVALID'" mat-stroked-button color="accent" type="submit" class="btn-block register_btn">Register</button>
       <div class="cancel-bt-container">
         <button class="cancel-bt" mat-fab type="button" (click)="cancel()">Cancel</button>
       </div>

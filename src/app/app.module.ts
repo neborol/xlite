@@ -12,7 +12,8 @@ import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 /* FormsModule */
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -28,11 +29,11 @@ import { MissionComponent } from './components/mission/mission.component';
 import { RelieveComponent } from './components/relieve/relieve.component';
 import { Jan052019Component } from './components/protests/jan052019/jan052019.component';
 import { ImagesService } from './services/images.service';
-import { MemberEditComponent } from './components/membership/edit/memberEdit.component';
-import { MemberEditResolver } from './resolvers/member-edit-resolver';
+import { MemberEditComponent } from './components/membership/edit/userEdit.component';
+import { UserEditResolver } from './resolvers/user-edit-resolver';
 import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { PhotoUploadComponent } from './components/cockpit/photo-upload/photo-upload.component';
-import { MembersListComponent } from './components/cockpit/members-list/members-list.component';
+import { UsersListComponent } from './components/cockpit/users-list/users-list.component';
 import { EditamountComponent } from './components/cockpit/editamount/editamount.component';
 
 export function tokenGetter() {
@@ -55,7 +56,7 @@ export function tokenGetter() {
     MemberEditComponent,
     CockpitComponent,
     PhotoUploadComponent,
-    MembersListComponent,
+    UsersListComponent,
     EditamountComponent
   ],
   imports: [
@@ -63,7 +64,6 @@ export function tokenGetter() {
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
     HttpClientModule,
@@ -75,12 +75,13 @@ export function tokenGetter() {
       }
     }),
     AnimateOnScrollModule.forRoot(),
-    DeferLoadModule
+    DeferLoadModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
     ImagesService,
-    MemberEditResolver
+    UserEditResolver
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
