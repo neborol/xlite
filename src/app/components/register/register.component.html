@@ -25,7 +25,8 @@
         </mat-form-field>
 
         <mat-form-field class="register-control"
-            [ngClass]="{'error-controlled': passwordConf.errors && passwordConf.touched }">
+            [ngClass]="{'error-controlled': passwordConf.touched && registerMembersForm.errors }">
+            <span class="error-message" *ngIf="registerMembersForm.errors">The Passwords do not match!</span>
           <input type="password" formControlName="passwordConf" matInput placeholder="Confirm Password">
         </mat-form-field>
 
@@ -59,7 +60,13 @@
 
       </mat-card-content>
 
-      <button [disabled]="registerMembersForm.status==='INVALID'" mat-stroked-button color="accent" type="submit" class="btn-block register_btn">Register</button>
+      <div class="submit-btn-container">
+        <span *ngIf="registerMembersForm.status==='INVALID'">Disabled Until Form is Valid</span>
+        <button [disabled]="registerMembersForm.status==='INVALID'" mat-stroked-button color="accent" type="submit" class="btn-block register_btn">
+            Register
+        </button>
+      </div>
+
       <div class="cancel-bt-container">
         <button class="cancel-bt" mat-fab type="button" (click)="cancel()">Cancel</button>
       </div>

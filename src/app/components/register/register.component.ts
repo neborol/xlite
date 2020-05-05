@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   registerMembersForm: FormGroup;
   emailRegex = '[a-zA-Z0-9.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}';
   alphaNRegex = '^[0-9a-zA-Z]+$';
-  phonenoRegex = '^\d{10}$';
+  phonenoRegex = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
 
   constructor(
     private router: Router,
@@ -71,15 +71,19 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(this.phonenoRegex)]),
-      city: new FormControl('', [Validators.minLength(0), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)])
+      city: new FormControl('', [Validators.minLength(4), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)])
     }, this.passwordMatchValidator);
+  }
+
+  passwordMatchValidator(rForm: FormGroup) {
+    return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
   }
 
   // ngOnInit() {
   //   this.registerMembersForm = this.fb.group({
-  //     userName: ['', [Validators.required, this.customValService.userNameValidator()]],
+  //     userName: ['', [Validators.required, this.customValService.userNameValidator(), Validators.pattern(this.alphaNRegex)]],
   //     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-  //     passwordConf: ['', Validators.required],
+  //     passwordConf: ['', Validators.required, this.customValService.passwordMatchValidator],
   //     userEmail: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
   //       Validators.pattern(this.emailRegex)]],
   //     firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]],
@@ -92,9 +96,6 @@ export class RegisterComponent implements OnInit {
   //   });
   // }
 
-  passwordMatchValidator(rForm: FormGroup) {
-    return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
-  }
 
   register() {
     console.log('MyRegForm', this.registerMembersForm);

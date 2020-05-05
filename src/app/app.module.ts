@@ -60,7 +60,7 @@ export function tokenGetter() {
     EditamountComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,

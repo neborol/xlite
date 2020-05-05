@@ -29,6 +29,13 @@ export class CustomvalidationService {
     };
   }
 
+  urlValidator(control: AbstractControl): { [key: string]: any } {
+    if (!control.value.startsWith('https') || !control.value.includes('.io')) {
+        return { validUrl: true }; // If Validation fails, we can reference "validUrl" at the formControl so as to show validation errors.
+      }
+    return null; // If validation passes, we return null.
+  }
+
   MatchPassword(password: string, passwordConf: string) {
     return (formGroup: FormGroup) => {
       const passwordControl = formGroup.controls[password];
@@ -49,6 +56,11 @@ export class CustomvalidationService {
       }
     };
   }
+
+  passwordMatchValidator(rForm: FormGroup) {
+    return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
+  }
+
 
 //   userNameValidator(userControl: AbstractControl) {
 //     return new Promise(resolve => {

@@ -10,11 +10,23 @@
     }
 }
 
-
-
-.register_btn:disabled {
-    background-color: grey;
+.submit-btn-container {
+    position: relative;
+    span {
+        display: inline-block;
+        font-size: 12px;
+        color: white;
+        position: absolute;
+        top: 2px;
+        text-align: center;
+        z-index: 5;
+        width: 100%;
+    }
+    .register_btn:disabled {
+        background-color: grey;
+    }
 }
+
 
 .register-control {
     position: relative;
