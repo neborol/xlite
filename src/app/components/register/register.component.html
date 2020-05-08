@@ -25,8 +25,8 @@
         </mat-form-field>
 
         <mat-form-field class="register-control"
-            [ngClass]="{'error-controlled': passwordConf.touched && registerMembersForm.errors }">
-            <span class="error-message" *ngIf="registerMembersForm.errors">The Passwords do not match!</span>
+            [ngClass]="{'error-controlled': passwordConf.touched && registerMembersForm?.errors.mismatch }">
+            <span class="error-message" *ngIf="passwordConf.touched && registerMembersForm.errors?.mismatch === true">The Passwords do not match!</span>
           <input type="password" formControlName="passwordConf" matInput placeholder="Confirm Password">
         </mat-form-field>
 

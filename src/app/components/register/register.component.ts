@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertifyService } from './../../services/alertify.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { UserDto } from './../home/UserDto';
 import { CustomvalidationService } from './../../services/custom-validation.service';
 
@@ -63,21 +63,22 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerMembersForm = new FormGroup({
-      userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
-      passwordConf: new FormControl('', Validators.required),
-      userEmail: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
+      'userName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
+      'password': new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      'passwordConf': new FormControl('', Validators.required),
+      'userEmail': new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
         Validators.pattern(this.emailRegex)]),
-      firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-      phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(this.phonenoRegex)]),
-      city: new FormControl('', [Validators.minLength(4), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)])
+      'firstName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
+      'lastName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
+      'phone': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(this.phonenoRegex)]),
+      'city': new FormControl('', [Validators.minLength(4), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)])
     }, this.passwordMatchValidator);
   }
 
   passwordMatchValidator(rForm: FormGroup) {
     return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
   }
+
 
   // ngOnInit() {
   //   this.registerMembersForm = this.fb.group({
