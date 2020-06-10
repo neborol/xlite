@@ -1,0 +1,271 @@
+  <div class="custom-tabs-container news_edit_container">
+    <mat-tab-group mat-align-tabs="start">
+
+      <mat-tab label="Add a News Article">
+
+
+        <div class="news-edit-container">
+          <mat-card class="parent-card-container">
+            <mat-card-content class="container">
+              <form [formGroup]="newsAddForm" novalidate>
+                <div class="news-item-container">
+                  <mat-card>
+                    <div><span class="item-title">Enter the News Title:</span></div>
+                    <mat-form-field>
+                      <input matInput formControlName="newsTitle" placeholder="News Title" type="text">
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+
+                <div class="news-item-container">
+                  <mat-card>
+                    <div><span class="item-title">Enter the News Summary:</span></div>
+                    <mat-form-field>
+                      <textarea matInput formControlName="newsSummary" placeholder="News Summary"></textarea>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+
+                <div class="news-item-container">
+                  <mat-card>
+                    <div><span class="item-title">Enter the full News Story:</span></div>
+                    <mat-form-field>
+                      <textarea matInput formControlName="newsFullStory" placeholder="Full story"></textarea>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+
+                <div class="news-item-container">
+                  <mat-card>
+                    <div><span class="item-title">Enter the News Summary:</span></div>
+                    <mat-form-field class="option-field">
+                      <mat-label>Select an option</mat-label>
+                      <mat-select matSelect [(value)]="selected" formControlName="newsCategory">
+                        <mat-option value="">None</mat-option>
+                        <mat-option value="diplomatic">Diplomatic</mat-option>
+                        <mat-option value="home-away">Home-Away</mat-option>
+                        <mat-option value="general">General</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <p>You selected: {{selected}}</p>
+
+                  </mat-card>
+                </div>
+
+
+                <div class="news-item-container padding-container">
+                  <mat-card>
+                    <div *ngIf="image2bUploaded" class="preview-image-container">
+                      <img style="max-width: 250px" [src]="image2bUploaded" alt="image-preview">
+                    </div>
+                    <div><span class="item-title">Enter the News Title:</span></div>
+
+                    <!-- file to be uploaded -->
+                    <div>
+                      <!-- The handleFileInput method gets called each time a file gets selected from the file system -->
+                      <input type="file" #file placeholder="choose file" accept="image/*"
+                        (change)="handleFileInput(file.files)" style="display: none">
+                      <!-- <input type="file" #file placeholder="choose file" accept="image/*" (change)="handleFileInput($event.target.files)"
+                                    style="display: none"> -->
+                      <button (click)="file.click()" class="upload-btn">Upload News Photo</button> <span
+                        class="file-name"> {{ fileToUpload }} </span>
+
+                      <!-- Progress placeholder -->
+                      <span class="upload-progress" *ngIf="progress > 0">
+                        {{ progress }}%
+                      </span>
+                      <span class="upload-message" *ngIf="message">
+                        {{ message }}
+                      </span>
+                    </div>
+                  </mat-card>
+                </div>
+              </form>
+            </mat-card-content>
+
+            <div class="news-form-submit-btn-container">
+              <button (click)="postNewsArticle()" [disabled]="file.value==='' || !newsAddForm.valid" mat-raised-button
+                color="primary">
+                Submit News Item
+              </button>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+
+
+
+
+      <mat-tab label="Edit Scrolling News">
+        <div class="news-edit-container">
+          <mat-card class="parent-card-container">
+
+            <div class="news-item-container padding-container">
+              <form [formGroup]="newsScrollbarForm" novalidate>
+                <div class="news-item-container">
+                  <mat-card>
+                    <div>
+                      <span class="item-title">Enter New Scrolling Text:</span>
+                      <!-- <mat-slide-toggle [checked]="setActive" [labelPosition]="pos">Make this Active</mat-slide-toggle> -->
+                    </div>
+                    <mat-form-field>
+                      <textarea matInput formControlName="newsScrollbar" placeholder="Scrolling News"></textarea>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+              </form>
+            </div>
+
+            <div class="news-form-submit-btn-container">
+              <button (click)="postScrollingMessage()" [disabled]="!newsScrollbarForm.valid" mat-raised-button
+                color="primary">
+                Submit News Item
+              </button>
+            </div>
+
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Edit A News Article">
+        <!-- Edit a specific article -->
+        <div class="news-edit-container">
+          <button *ngIf="loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
+            color="accent">Select A Category</button>
+          <button *ngIf="!loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
+            color="accent">Load current Articles</button>
+          <mat-card class="parent-card-container">
+
+            <div *ngIf="!loadArticles" class="news-item-container padding-container">
+              <form [formGroup]="editingCategoriesForm" novalidate>
+                <div class="news-item-container">
+                  <mat-card>
+                    <h3 style="color: #1276a6;">Select a news category and get all the news items for that category.
+                    </h3>
+
+                    <div><span class="item-title">Enter the News Summary:</span></div>
+                    <mat-form-field class="option-field">
+                      <mat-label>Select an option</mat-label>
+                      <mat-select (selectionChange)="selectionChanged(selected)" matSelect [(value)]="selected"
+                        formControlName="newsEditingCategory">
+                        <mat-option value="">None</mat-option>
+                        <mat-option value="diplomatic">Diplomatic</mat-option>
+                        <mat-option value="home-away">Home-Away</mat-option>
+                        <mat-option value="general">General</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+                <p>You selected: <span style="font-weight: 600">{{selected}}</span> </p>
+
+              </form>
+            </div>
+
+            <div *ngIf="loadArticles" class="news-item-container padding-container">
+              <div class="news-item-container">
+                <div *ngFor="let article of articlesArrayForEditing" class="article-edit-card-container">
+                  <mat-card>
+                    <span> {{ article.newsTitle }} </span>
+                    <span (click)="editSelectedArticle(editArticleModalContents, article)" class="edit-icon-container">
+                      <mat-icon class="edit-article-button">edit</mat-icon>
+                    </span>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
+
+
+
+  <ng-template #editArticleModalContents>
+      <!-- <div class="modal-content-wrapper" style="padding: 10px;">
+        <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
+        <h2 class="news_item">{{ currentArticle.newsTitle }}</h2>
+        <div class="news_item"> 
+          <div class="modal-text">{{ currentArticle.newsFullStory }}</div> 
+        </div>
+        <div class="news_item"><img class="modal-image" [src]="currentItem.imagePath" alt="news image"/></div>
+        
+      </div> -->
+
+      
+      
+      <div class="news-edit-container article-edit-container">
+        <mat-card class="parent-card-container">
+            <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
+            <mat-card-content class="container">
+              <form name="updateArticleform" #f="ngForm" novalidate>
+                <div class="news-item-container">
+                  <mat-card>
+                    <mat-form-field>
+                        <textarea matInput name="editNewsTitle" [(ngModel)]="currentUpdateArticle.newsTitle" placeholder="News Title" type="text"></textarea>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+
+                <div class="news-item-container">
+                  <mat-card>
+                    <div><span class="item-title">Enter the News Summary:</span></div>
+                    <mat-form-field>
+                      <textarea matInput name="editNewsSummary" [(ngModel)]="currentUpdateArticle.newsSummary" placeholder="News Summary"></textarea>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+
+                <div class="news-item-container">
+                  <mat-card>
+                    <div><span class="item-title">Enter the full News Story:</span></div>
+                    <mat-form-field>
+                      <textarea matInput name="editNewsFullStory" [(ngModel)]="currentUpdateArticle.newsFullStory" placeholder="Full story"></textarea>
+                    </mat-form-field>
+                  </mat-card>
+                </div>
+
+                <div class="news-item-container padding-container">
+                  <mat-card>
+                    <div *ngIf="image2bUploaded" class="preview-image-container">
+                      <img style="max-width: 250px" [src]="image2bUploaded" alt="image-preview">
+                    </div>
+                    <div><span class="item-title">Enter the News Title:</span></div>
+
+                    <!-- file to be uploaded -->
+                    <div>
+                      <!-- The handleFileInput method gets called each time a file gets selected from the file system -->
+                      <!-- <input type="file" #fileEdit placeholder="choose file" accept="image/*"
+                        (change)="handleFileInput(file.files)" style="display: none"> -->
+                      <input type="file" #fileEdit placeholder="choose file" accept="image/*" (change)="handleFileInput($event.target.files)"
+                                    style="display: none">
+                      <button (click)="file.click()" class="upload-btn">Upload News Photo</button> <span
+                        class="file-name"> {{ fileToUpload }} </span>
+
+                      <!-- Progress placeholder -->
+                      <span class="upload-progress" *ngIf="progress > 0">
+                        {{ progress }}%
+                      </span>
+                      <span class="upload-message" *ngIf="message">
+                        {{ message }}
+                      </span>
+                    </div>
+                  </mat-card>
+                </div>
+              </form>
+            </mat-card-content>
+
+            <div class="news-form-submit-btn-container">
+              <button (click)="updateNewsArticle()" mat-raised-button color="primary">
+                Submit Article
+              </button>
+            </div>
+          </mat-card>
+        </div>
+
+
+  </ng-template>

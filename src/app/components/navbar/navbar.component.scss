@@ -2,23 +2,37 @@
     width: 100%;
     .nav-label {
         float: left;
-        width: 180px;
+        width: 215px;
         font-size: 1.2em;
+        padding-left: 105px;
         .user-account {
             mat-icon{
                font-size: 1.2em; 
             }
             .user-id-text {
-                display: inline-block;
                 font-size: 0.8em; 
-                margin-left: 10px;
                 transform: translate(3px, -7px);
             }
+            .user-menu-group { 
+                line-height: 25px !important;
+                padding: 0;
+                display: inline;
+                float: left;
+                .user-icon {
+                    font-size: 35px !important;
+                }
+                .user-menu-dropdown-icon {
+                    font-size: 30px !important; 
+                }
+            }
+        }
+        .elite-force-dropdown {
+            font-size: 21px;
         }
     }
     .nav-links {
         float: right;
-        width: 800px;
+        width: 300px;
         .nav-tool-items{
             a {
                 float: right;
@@ -35,6 +49,22 @@
 
 .mat-toolbar-row, .mat-toolbar-single-row {
     width: 100%;
+}
+
+.logo-container {
+    background-image: url(../../../assets/sceflogo2.png);
+    height: 71px;
+    width: 114px;
+    position: relative;
+    background-size: 115px 71px;
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    background-repeat: no-repeat;
+}
+
+.menu-icon {
+    color: #096d84;
 }
 
 

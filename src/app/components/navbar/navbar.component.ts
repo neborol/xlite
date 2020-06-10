@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -9,12 +11,26 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private alertify: AlertifyService) { }
+  // Routes that if navigated to, would highlight the main menu button.
+  mainMenuRoutes: string[] = ['about', 'news', 'donations', 'activities', 'relieve'];
 
-  ngOnInit() {}
+  inMainMenu = false;
+
+
+  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe(() => {
+      if (this.mainMenuRoutes.includes(location.pathname.substr(1))) {
+        this.inMainMenu = true;
+      } else {
+        this.inMainMenu = false;
+      }
+    });
+  }
 
   logout() {
     this.authService.logOut();
-    this.alertify.warning('You are currently not logged in.');
+    this.alertify.warning('You are currently logged out.');
   }
 }

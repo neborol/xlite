@@ -1,0 +1,33 @@
+<div class="standard-page faq-page">
+    <br>
+  
+    <div class="unit_container">
+      <div class="headlines-inner-container">
+        <div style="flex: 2" class="tab-description">
+          
+            <span class="tab-header">Frequently Asked Questions</span>
+
+            <mat-accordion>
+
+                <mat-expansion-panel *ngFor="let faq of listOfFaqs" class="accordion-title-panel">
+                  <mat-expansion-panel-header style="height: 36px">
+                    <mat-panel-title>
+                      {{ faq.faqQuestion }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="accordion-body">
+                        {{ faq.faqAnswer }}
+                  </div>
+                </mat-expansion-panel>
+
+
+                
+              </mat-accordion>
+          
+        </div>
+
+      </div>
+    </div>
+  
+
+  </div>

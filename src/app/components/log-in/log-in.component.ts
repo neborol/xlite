@@ -10,7 +10,7 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 })
 export class LogInComponent implements OnInit {
 
-  model: object = {};
+  model = {userEmail: '', password: ''};
 
   constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) { }
 
@@ -19,9 +19,13 @@ export class LogInComponent implements OnInit {
   }
 
   login() {
+    // if (this.authService.decodedToken.unique_name) {
+    //   this.model.username = this.authService.decodedToken.unique_name;
+    // }
     this.authService.login(this.model).subscribe(next => {
       this.router.navigateByUrl('/home');
       this.alertify.success('Logged in successfully');
+      console.log('TestLog', this.model);
     }, error => {
       this.alertify.error('Failed to login');
     });

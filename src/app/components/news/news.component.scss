@@ -1,0 +1,13 @@
+.headlines-inner-container {
+    margin: 15px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+.inner-flash-container {
+    position: relative;
+}
+.flash-header {
+    position: absolute;
+    left: 0px;
+    top: -1px;
+}

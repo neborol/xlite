@@ -4,7 +4,7 @@
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="registerMembersForm" class="register-form" (ngSubmit)="register()">
+    <form [formGroup]="registerMembersForm" novalidate class="register-form" (ngSubmit)="register()">
 
       <mat-card-content>
         <mat-form-field class="register-control" 
@@ -24,11 +24,25 @@
           <input type="password" formControlName="password" matInput placeholder="Password">
         </mat-form-field>
 
+        <!-- <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': passwordConf.touched && registerMembersForm?.errors }">
+            <span class="error-message" *ngIf="passwordConf.touched && registerMembersForm.errors">The Passwords do not match!</span>
+          <input type="password" formControlName="passwordConf" matInput placeholder="Confirm Password">
+        </mat-form-field> -->
+
         <mat-form-field class="register-control"
+            [ngClass]="{'error-controlled': (registerMembersForm?.get('passwordConf').touched && registerMembersForm?.get('passwordConf').errors?.required) || 
+            (registerMembersForm?.get('passwordConf').touched && registerMembersForm?.get('passwordConf').errors?.mismatch) }">
+            <span class="error-message" *ngIf="registerMembersForm?.get('passwordConf').touched && registerMembersForm?.get('passwordConf').errors?.required">This Field is Mandatory!</span>
+            <span class="error-message" *ngIf="registerMembersForm?.get('passwordConf').touched && registerMembersForm?.get('passwordConf').errors?.mismatch">The Passwords do not match!</span>
+          <input type="password" formControlName="passwordConf" matInput placeholder="Confirm Password">
+        </mat-form-field>
+
+        <!-- <mat-form-field class="register-control"
             [ngClass]="{'error-controlled': passwordConf.touched && registerMembersForm?.errors.mismatch }">
             <span class="error-message" *ngIf="passwordConf.touched && registerMembersForm.errors?.mismatch === true">The Passwords do not match!</span>
           <input type="password" formControlName="passwordConf" matInput placeholder="Confirm Password">
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="register-control" 
             [ngClass]="{'error-controlled': firstName.errors && firstName.touched }">

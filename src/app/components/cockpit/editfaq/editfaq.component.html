@@ -1,0 +1,112 @@
+<div class="edit-faq-form-container">
+  <span class="page-title">Edit Frequently asked Questions</span>
+  <div class="add-edit-toggle-buttons-container">
+    <span *ngIf="editMode">
+      <button (click)="toggleAddEditMode()" class="toggle_btn add-btn" mat-raised-button>Add an FAQ</button>
+    </span>
+    <span *ngIf="!editMode">
+      <button (click)="toggleAddEditMode()" class="toggle_btn" mat-raised-button color="primary">Edit an FAQ</button>
+    </span>
+  </div>
+
+  <div *ngIf="!editMode" class="add-new-faq-container">
+    <mat-card>
+      <mat-card-content class="register-container">
+        <form [formGroup]="faqAddForm" (ngSubmit)="submit()">
+          <div class="aq-container">
+            <h3>Enter the Question:</h3>
+            <mat-form-field>
+              <input matInput formControlName="faqQuestion" placeholder="Question" type="text">
+            </mat-form-field>
+          </div>
+
+          <div class="aq-container">
+            <h3>Enter the Answer:</h3>
+            <mat-form-field>
+              <textarea matInput formControlName="faqAnswer" ng-model="data.description"
+                placeholder="Answer"></textarea>
+            </mat-form-field>
+          </div>
+          <div>
+            <button type="submit" class="faq-btn" mat-raised-button color="primary">Add FAQ</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+
+  <div *ngIf="editMode">
+    <div class="unit_container">
+      <div class="headlines-inner-container">
+        <div style="flex: 2" class="tab-description">
+
+          <span class="tab-header">Frequently Asked Questions</span>
+
+          <mat-accordion>
+
+            <mat-expansion-panel *ngFor="let faq of listOfFaqs" class="accordion-title-panel">
+                <button (click)="deleteFaq(myDialog, faq)" class="faqAdminDeleteBtn" mat-stroked-button color="warn">Delete</button>
+                <button (click)="editFaq(myDialog, faq)" class="faqAdminEditBtn" mat-stroked-button color="primary">Edit</button>
+              <mat-expansion-panel-header style="height: 36px">
+                <mat-panel-title>
+                  {{ faq.faqQuestion }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-body">
+                {{ faq.faqAnswer }}
+              </div>
+            </mat-expansion-panel>
+
+          </mat-accordion>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <ng-template #myDialog>
+        <h2 *ngIf="!deleteMode" matDialogTitle>Edit and Submit the displayed FAQ</h2>
+        <h2 *ngIf="deleteMode" matDialogTitle>Permanently delete the displayed FAQ</h2>
+        <form [formGroup]="faqEditForm">
+            <mat-dialog-content *ngIf="!deleteConfirmed" class="contents-container">
+                <div class="q_and_a">
+                    <span class="editFAQ-title">FAQ Question</span>
+                    <mat-form-field>
+                        <textarea matInput formControlName="editQuestion"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="q_and_a">
+                   <span class="editFAQ-title">FAQ Answer</span>
+                    <mat-form-field>
+                        <textarea matInput formControlName="editAnswer" ng-model="data.description"
+                            placeholder="Answer"></textarea>
+                    </mat-form-field>
+                </div>
+            </mat-dialog-content>
+
+            <mat-dialog-content *ngIf="deleteConfirmed" class="contents-container">
+                <p>
+                    Are you very sure that you want to permanently delete this FAQ item?
+                </p>
+                <div>
+                    <button *ngIf="deleteMode" (click)="deleteSelectedFaq()" class="editB" mat-button matDialogClose color="warn">Confirm Delete </button>
+                    <button *ngIf="deleteMode" (click)="deleteConfirmed = false" class="editB" mat-button style="margin-left: 15px;">Cancel Instead </button>
+                </div>
+            </mat-dialog-content>
+
+            <mat-dialog-actions *ngIf="!deleteConfirmed" align="end">
+                <button *ngIf="!deleteMode" (click)="submitEdited()" class="editB" mat-button matDialogClose color="primary">Save</button>
+                <button *ngIf="deleteMode" (click)="deleteConfirmed = true" class="editB" mat-button color="warn">Delete</button>
+                <button class="editB" mat-button matDialogClose color="other">Dismiss</button>
+            </mat-dialog-actions>
+        </form>
+
+    </ng-template>
+
+
+
+
+  </div>

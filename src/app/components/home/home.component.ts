@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MembersService } from '../../services/users.service';
+import { UserService } from '../../services/users.service';
 import { UserDto } from './UserDto';
 
 @Component({
@@ -9,7 +9,7 @@ import { UserDto } from './UserDto';
 })
 export class HomeComponent implements OnInit {
   users: UserDto[];
-  constructor(private userService: MembersService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getAllMembers();

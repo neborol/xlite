@@ -28,7 +28,7 @@ export class PhotoUploadComponent implements OnInit {
     };
   }
 
-  uploadFile = () => {
+  uploadOne = (caption) => {
     // If there is no file, stop and get out.
 /*    if (files.length === 0) {
       return;
@@ -40,7 +40,9 @@ export class PhotoUploadComponent implements OnInit {
     formData.append('file', fileToUpload, fileToUpload.name); */
 
 //    this.http.post(this.baseUrl + 'upload', this.model.formData, { reportProgress: true, observe: 'events' })
-    this.http.post(this.baseUrl + 'upload', this.model.formData, { reportProgress: true, observe: 'events' })
+    this.model.caption = caption;
+
+    this.http.post(this.baseUrl + 'uploadOne', this.model.formData, { reportProgress: true, observe: 'events' })
     .subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.progress = Math.round(100 * event.loaded / event.total);

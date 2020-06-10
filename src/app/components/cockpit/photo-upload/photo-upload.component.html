@@ -32,7 +32,7 @@
       </span>
     </div>
 
-    <button class="file-submit-btn" (click)="uploadFile(uploadForm)" [disabled]="file.value==='' || !uploadForm.valid">Submit Form</button>
+    <button class="file-submit-btn" (click)="uploadOne(uploadForm.value)" [disabled]="file.value==='' || !uploadForm.valid">Submit Form</button>
   </form>
 
 

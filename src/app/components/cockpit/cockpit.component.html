@@ -1,12 +1,46 @@
 <div class="standard-page cockpit-container">
-  <div class>
+  <div class="cockpit-inner-container">
     <mat-drawer-container class="example-container spacing" [hasBackdrop]="hasBackdrop.value">
-      <mat-drawer class="spacing" #drawer mode="push">
-        <ul class="cockp-menu-list">
+      <mat-drawer class="spacing" #drawer mode="push">   
+        <div class="cockp-menu-list">
+          <span >
+            <span *ngIf="funcs.isSuper === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('functions', drawer)">
+                <mat-icon class="menu-icon" aria-label="login icon">policy</mat-icon>
+                Higher Functions
+              </a>
+            </span>
+            <a mat-menu-item (click)="loadChildRoute('uploadphotos', drawer)">
+              <mat-icon class="menu-icon" aria-label="upload photos">insert_photo</mat-icon>
+              Upload Photos
+            </a>
+            <a mat-menu-item (click)="loadChildRoute('userslist', drawer)">
+              <mat-icon class="menu-icon" aria-label="edit user list">supervised_user_circle</mat-icon>
+              Edit Users
+            </a>                       
+            <a mat-menu-item (click)="loadChildRoute('editamount', drawer)">
+              <mat-icon class="menu-icon" aria-label="Edit amount">attach_money</mat-icon>
+              Edit Amount
+            </a>                       
+            <a mat-menu-item (click)="loadChildRoute('editnews', drawer)">
+              <mat-icon class="menu-icon" aria-label="edit news">radio</mat-icon>
+              Edit News
+            </a>                       
+            <a mat-menu-item (click)="loadChildRoute('editfaq', drawer)">
+              <mat-icon class="menu-icon" aria-label="edit faq">help</mat-icon>
+              Edit FAQs
+            </a>                       
+        </span>
+
+        </div>
+
+
+        <!-- <ul class="cockp-menu-list">
           <li (click)="loadChildRoute('uploadphotos', drawer)">Upload Photos</li>
           <li (click)="loadChildRoute('userslist', drawer)">Edit User List</li>
           <li (click)="loadChildRoute('editamount', drawer)">Edit Amount</li>
-        </ul>
+          <li (click)="loadChildRoute('editnews', drawer)">Edit News</li>
+        </ul> -->
       </mat-drawer>
 
       <mat-drawer-content>
@@ -24,8 +58,9 @@
         </div>
 
         <!-- All the nested routes will be loaded in this element -->
-        <router-outlet></router-outlet>
-
+        <div class="padding-container">
+          <router-outlet></router-outlet>
+        </div>
         <mat-form-field class="cockpit-formf-2">
           <mat-select #mode value="side">
           </mat-select>

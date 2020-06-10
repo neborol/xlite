@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UserDto } from '../components/home/UserDto';
-import { MembersService } from '../services/users.service';
+import { UserService } from '../services/users.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 // export class MemberEditResolver implements Resolve<{ unique_name: string }> {
 //     constructor(
-//         private memberService: MembersService,
+//         private memberService: UserService,
 //         private router: Router,
 //         private alertify: AlertifyService,
 //         private location: Location,
@@ -37,7 +37,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class UserEditResolver implements Resolve<string> {
     constructor(
-        private userService: MembersService,
+        private userService: UserService,
         private router: Router,
         private alertify: AlertifyService,
         private location: Location,

@@ -1,0 +1,38 @@
+.main-wrapper {
+    width: 100%;
+}
+
+.users-list-container {
+    width: 455px;
+    margin: 0 auto;
+}
+
+.hedt {
+   text-align: center; 
+   font-weight: bold;
+}
+
+.bodt {
+   padding: 6px 63px;
+   min-width: 139px;
+   border-bottom: solid 1px #cccccc;
+  .mat-mini-fab {
+    background-color: #0ca099;
+    width: 24px;
+    height: 24px;
+    line-height: 28px;
+  }
+}
+
+.list-item {
+    min-width: 139px;
+    display: inline-block;
+    color: black;
+    border-right: solid 1px gray;
+    border-left: solid 1px white;
+    border-top: solid 2px white;
+    border-bottom: solid 2px gray;
+    background-color: #d6dfdf;
+    padding: 5px;
+}
+

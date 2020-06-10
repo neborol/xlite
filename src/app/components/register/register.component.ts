@@ -41,9 +41,7 @@ export class RegisterComponent implements OnInit {
     return this.registerMembersForm.get('password');
   }
 
-  get passwordConf() {
-    return this.registerMembersForm.get('passwordConf');
-  }
+
 
   get firstName() {
     return this.registerMembersForm.get('firstName');
@@ -64,7 +62,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerMembersForm = new FormGroup({
       'userName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-      'password': new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      'password': new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
       'passwordConf': new FormControl('', Validators.required),
       'userEmail': new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
         Validators.pattern(this.emailRegex)]),
@@ -75,8 +73,36 @@ export class RegisterComponent implements OnInit {
     }, this.passwordMatchValidator);
   }
 
+  // ngOnInit() {
+  //   this.registerMembersForm = new FormGroup({
+  //     'userName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
+  //     'password': new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
+  //     'passwordConf': new FormControl('', Validators.required),
+  //     'userEmail': new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
+  //       Validators.pattern(this.emailRegex)]),
+  //     'firstName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
+  //     'lastName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
+  //     'phone': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(this.phonenoRegex)]),
+  //     'city': new FormControl('', [Validators.minLength(4), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)])
+  //   }, this.passwordMatchValidator);
+  // }
+
+
+  // passwordMatchValidator(rForm: FormGroup) {
+  //   return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
+  // }
+
   passwordMatchValidator(rForm: FormGroup) {
-    return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
+    const confirmPswrdCtrl = rForm.get('passwordConf');
+    if (confirmPswrdCtrl.errors === null || 'mismatch' in confirmPswrdCtrl.errors) {
+      if (rForm.get('password').value !== confirmPswrdCtrl.value) {
+        confirmPswrdCtrl.setErrors({mismatch: true});
+        return {mismatch: true};
+      } else {
+        confirmPswrdCtrl.setErrors(null);
+        return null;
+      }
+    }
   }
 
 
@@ -102,9 +128,9 @@ export class RegisterComponent implements OnInit {
     console.log('MyRegForm', this.registerMembersForm);
     this.user = Object.assign({}, this.registerMembersForm.value);
     this.authService.register(this.user).subscribe((data: any) => {
-      console.log('Registration Successful');
+      console.log('TestData', data);
       if (data.success) {
-        this.alertify.success('Great! You are now registered');
+        this.alertify.success(data.message);
         this.router.navigateByUrl('/login');
       }
     }, error => {

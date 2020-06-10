@@ -1,7 +1,7 @@
 // import { Injectable } from '@angular/core';
 // import { Resolve, Router, ActivatedRoute } from '@angular/router';
 // import { MemberDto } from './MemberDto';
-// import { MembersService } from './../../services/members.service';
+// import { UserService } from './../../services/members.service';
 // import { AlertifyService } from 'src/app/services/alertify.service';
 // import { Observable, of } from 'rxjs';
 // import { catchError } from 'rxjs/operators';
@@ -13,14 +13,14 @@
 // // alternative to the "safe navigation operator" or "Elvis operator" (?) or optional operator.
 // export class MemberDetailResolver implements Resolve<MemberDto> {
 //     constructor(
-//         private memberServ: MembersService,
+//         private userServ: UserService,
 //         private router: Router,
 //         private alertify: AlertifyService,
 //         private location: Location
 //     ) {}
 
 //     resolve(route: ActivatedRoute): Observable<MemberDto> {
-//         return this.memberServ.getMember(route.params['id']).pipe( // **Note: getMember is subcribed
+//         return this.userServ.getMember(route.params['id']).pipe( // **Note: getMember is subcribed
 // //already, so all we can do is handle the errors:
 //             catchError(error => {
 //                 this.alertify.error('Problem retrieving data');

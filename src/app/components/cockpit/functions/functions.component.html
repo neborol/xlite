@@ -1,0 +1,20 @@
+<div class="main-wrapper">
+  <div class="users-list-container">
+    <p *ngIf="!users"><em>Loading...</em></p>
+    <span style="font-size: 19px; font-weight: bold;">Select A User to Assign a Function to:</span>
+    <div><span class="list-item hedt">Name</span> <span class="list-item hedt">Code Number</span><span class="list-item hedt">Assign A Function</span></div>
+    <div *ngFor="let user of users" class="member-box">
+
+      <div>
+        <span class="list-item bodt">{{ user.firstName }} {{ user.lastName }} </span> 
+        <span class="list-item bodt">{{ user.codeNr }}</span>  
+        <span class="bodt">
+            <button (click)="getUserClaims(user)" mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+                <mat-icon>lock_open</mat-icon>
+            </button> 
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>

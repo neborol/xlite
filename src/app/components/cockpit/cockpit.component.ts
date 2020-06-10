@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { MatDrawer } from '@angular/material';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-cockpit',
@@ -9,9 +10,16 @@ import { Router } from '@angular/router';
 })
 export class CockpitComponent implements OnInit {
 
+  funcs = {};
+
   constructor(private router: Router) { }
 
   ngOnInit() {
+    let storedFuncs = localStorage.getItem('eliteFuncs');
+    if (storedFuncs) {
+      storedFuncs = JSON.parse(storedFuncs);
+      this.funcs = storedFuncs;
+    }
   }
 
   loadChildRoute(childrt, drawer) {

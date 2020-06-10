@@ -1,32 +1,137 @@
 <div class="navbar-container">
   <div class="nav-label">
-    <span *ngIf="!authService.isLoggedIn() || !authService.userName">
-        <a href="https://www.positronx.io" target="_blank" class="positronx">Elite Force (SCEF)</a>
+    <div class="logo-container"></div>
+    <span class="user-account">
+      <a *ngIf="!authService.isLoggedIn() || !authService.userName" mat-button [matMenuTriggerFor]="userMenu"
+        class="elite-force-dropdown">
+        Elite Force (SCEF)
+        <mat-icon class="user-menu-dropdown-icon">arrow_drop_down</mat-icon>
+      </a>
+      <a *ngIf="authService.isLoggedIn() && authService.userName" class="user-menu-group" mat-button
+        [matMenuTriggerFor]="userMenu">
+        <mat-icon class="user-icon" aria-hidden="false" aria-label="user icon">account_circle</mat-icon>
+        <mat-icon class="user-menu-dropdown-icon">arrow_drop_down</mat-icon>
+      </a>
+      <mat-menu class="custom-menu-dropdown" #userMenu="matMenu">
+        <span *ngIf="!authService.isLoggedIn()">
+          <a mat-menu-item routerLink="login">
+            Log in
+            <mat-icon class="menu-icon" aria-label="login icon">vpn_key</mat-icon>
+          </a>
+          <a mat-menu-item routerLink="register">
+            Register
+            <mat-icon class="menu-icon" aria-label="register icon">how_to_reg</mat-icon>
+          </a>
+        </span>
+
+        <span *ngIf="authService.isLoggedIn()">
+          <a mat-menu-item (click)="logout()">
+            Logout
+            <mat-icon class="menu-icon" aria-label="logout icon">exit_to_app</mat-icon>
+          </a>
+          <a mat-menu-item routerLink="cockpit">
+            Cockpit
+            <mat-icon class="menu-icon" aria-label="admin icon">supervisor_account</mat-icon>
+          </a>
+          <a mat-menu-item routerLink="member/edit">
+            Edit Profile
+            <mat-icon class="menu-icon" aria-label="edit profile icon">edit_attributes</mat-icon>
+          </a>
+        </span>
+        <a mat-menu-item>
+          Settings
+          <mat-icon class="menu-icon" aria-label="settings icon">settings</mat-icon>
+        </a>
+      </mat-menu>
+
+      <span *ngIf="authService.isLoggedIn() && authService.userName" class="user-id-text">
+        Logged in as:
+        <span style="color: #65d3f4">
+          {{ authService.userName | titlecase }} </span>
+      </span>
     </span>
-    <span class="user-account" *ngIf="authService.isLoggedIn() && authService.userName">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
-        <span class="user-id-text"> Logged in as: <span style="color: #65d3f4"> {{ authService.userName | titlecase }} </span></span>
-    </span>  
-    
+
   </div>
+
+
+
+  <!-- <div class="nav-links">
+      <a mat-button mat-raised-button routerLink="about" routerLinkActive="active">About</a>            
+      <a mat-button mat-raised-button routerLink="news" routerLinkActive="active">News</a>            
+      <a mat-button mat-raised-button routerLink="donations" routerLinkActive="active">Donations</a>            
+      <a mat-button mat-raised-button routerLink="activities" routerLinkActive="active">Activities</a>            
+      <a mat-button mat-raised-button routerLink="relieve" routerLinkActive="active">Relieve Projects</a> 
+    <span class="nav-tool-items">
+      <span *ngIf="!authService.isLoggedIn()">
+          <a mat-button mat-raised-button routerLink="login" routerLinkActive="active">Log in</a>
+          <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>                       
+      </span>
+      <span *ngIf="authService.isLoggedIn()">
+          <a mat-button mat-raised-button (click)="logout()" routerLinkActive="active">Logout</a>
+          <a mat-button mat-raised-button routerLink="member/edit" routerLinkActive="member/edit">Edit Profile</a>
+          <a mat-button mat-raised-button routerLink="cockpit" routerLink="cockpit" routerLinkActive="active">Cockpit Functions</a>           
+      </span>
+      <a mat-button mat-raised-button routerLink="mission" routerLinkActive="active">Our Mission</a>
+      <a mat-button mat-raised-button routerLink="home" routerLinkActive="active">
+          Home 
+          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+      </a> 
+    </span>
+  </div> -->
+
   <div class="nav-links">
     <span class="nav-tool-items">
 
-        <span *ngIf="!authService.isLoggedIn()">
-            <a mat-button mat-raised-button routerLink="login" routerLinkActive="active">Log in</a>
-            <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>            
-            <a mat-button mat-raised-button routerLink="relieve" routerLinkActive="active">Relieve Projects</a>            
-        </span>
-        <span *ngIf="authService.isLoggedIn()">
-            <a mat-button mat-raised-button (click)="logout()" routerLinkActive="active">Logout</a>
-            <a mat-button mat-raised-button routerLink="member/edit" routerLinkActive="member/edit">Edit Profile</a>
-            <a mat-button mat-raised-button routerLink="cockpit" routerLink="cockpit" routerLinkActive="active">Cockpit Functions</a>           
-        </span>
-        <a mat-button mat-raised-button routerLink="mission" routerLinkActive="active">Our Mission</a>
-        <a mat-button mat-raised-button routerLink="home" routerLinkActive="active">
-            Home 
-            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-        </a> 
+
+
+      <a mat-button [matMenuTriggerFor]="mainMenu" mat-raised-button [ngClass]="{'active': inMainMenu===true}">
+        Main Menu
+        <mat-icon>arrow_drop_down</mat-icon>
+      </a>
+      <!--     
+      <span *ngIf="!authService.isLoggedIn()">
+          <a mat-button mat-raised-button routerLink="login" routerLinkActive="active">Log in</a>
+          <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>                       
+      </span> -->
+
+      <a mat-button mat-raised-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        true}">
+        Home
+        <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+      </a>
+
+      <!-- <span *ngIf="authService.isLoggedIn()">
+          <a mat-button mat-raised-button routerLink="cockpit" routerLink="cockpit">Cockpit Functions</a>           
+      </span> -->
+
+      <mat-menu class="custom-menu-dropdown" #mainMenu="matMenu">
+        <a mat-menu-item routerLink="about">
+          About
+          <mat-icon class="menu-icon" aria-label="user icon">account_circle</mat-icon>
+        </a>
+        <a mat-menu-item routerLink="news">
+          News
+          <mat-icon class="menu-icon" aria-label="announcement icon">info</mat-icon>
+        </a>
+        <a mat-menu-item routerLink="donations">
+          Donations
+          <mat-icon class="menu-icon" aria-label="donation icon">monetization_on</mat-icon>
+        </a>
+        <a mat-menu-item routerLink="activities">
+          Activities
+          <mat-icon class="user-menu-dropdown-icon menu-icon">event</mat-icon>
+        </a>
+        <a mat-menu-item routerLink="relieve">
+          Projects
+          <mat-icon class="user-menu-dropdown-icon menu-icon">assistant</mat-icon>
+        </a>
+
+        <a mat-menu-item routerLink="faq">
+          FAQ
+          <mat-icon class="user-menu-dropdown-icon menu-icon">help</mat-icon>
+        </a>
+      </mat-menu>
+
     </span>
   </div>
 </div>

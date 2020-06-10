@@ -1,3 +1,4 @@
+@import '../../../variables.scss';
 .example-container {
   width: 100%;
   min-height: 800px;
@@ -29,17 +30,12 @@ mat-drawer-content {
 
 .cockp-menu-list {
   padding: 0;
-
-  li {
-    list-style-type: none;
-    margin: 5px 10px;
-    border: solid 1px #dddddd;
-    padding: 2px 5px;
-    background-color: #eaeced;
-    border-radius: 5px;
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
+  a {
+    color: #ffffff;
+  }
+  .menu-icon {
+    color: #18f9ef;
+    margin-right: 5px;
   }
 }
 
@@ -48,7 +44,21 @@ mat-drawer-content {
 }
 
 .cockpit-container {
+  background-color: $cockpitBackgroundColor;
+  width: 100%;
+  box-sizing: border-box;
   .cockpit-formf-1, .cockpit-formf-2 {
     display: none;
   }
+}
+.cockpit-inner-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+.padding-container {
+  background-color: $cockpitBackgroundColor;
+  // padding: 0 15px;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }

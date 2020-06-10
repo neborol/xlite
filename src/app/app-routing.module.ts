@@ -12,6 +12,16 @@ import { UserEditResolver } from './resolvers/user-edit-resolver';
 import { PhotoUploadComponent } from './components/cockpit/photo-upload/photo-upload.component';
 import { UsersListComponent } from './components/cockpit/users-list/users-list.component';
 import { EditamountComponent } from './components/cockpit/editamount/editamount.component';
+import { EditnewsComponent } from './components/cockpit/editnews/editnews.component';
+import { NewsComponent } from './components/news/news.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { DonationsComponent } from './components/donations/donations.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { FunctionsComponent } from './components/cockpit/functions/functions.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { EditfaqComponent } from './components/cockpit/editfaq/editfaq.component';
 
 
 const routes: Routes = [
@@ -22,12 +32,23 @@ const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'cockpit', component: CockpitComponent, children: [
     { path: 'uploadphotos', component: PhotoUploadComponent },
+    { path: 'functions', component: FunctionsComponent },
     { path: 'userslist', component: UsersListComponent },
-    { path: 'editamount', component: EditamountComponent }
+    { path: 'editamount', component: EditamountComponent },
+    { path: 'editnews', component: EditnewsComponent },
+    { path: 'editfaq', component: EditfaqComponent },
+    { path: '', pathMatch: 'full', component: PhotoUploadComponent }
   ] },
   { path: 'register', component: RegisterComponent },
+  { path: 'news', component: NewsComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'donations', component: DonationsComponent },
+  { path: 'activities', component: ActivitiesComponent },
+  { path: 'faq', component: FaqComponent },
   { path: 'home', redirectTo: '' },
-  { path: '**', pathMatch: 'full', redirectTo: '' }
+  // { path: '**', pathMatch: 'full', redirectTo: '' }
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];
 
 @NgModule({

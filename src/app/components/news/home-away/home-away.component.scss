@@ -1,0 +1,32 @@
+@import '../../../../variables.scss';
+
+
+.modal-image {
+    max-width: 550px;
+}
+
+.news_item {
+    margin-bottom: 10px;
+    border-bottom: solid 2px $blueDesignBorderColor;
+}
+
+.modal-text {
+    padding: 15px;
+}
+
+.modal-content-wrapper {
+    position: relative;
+}
+.close-Icon-wrapper {
+    position: absolute;
+    right: 10px;
+    top: -19px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    .close-icon {
+        font-size: 45px;
+        width: 43px;
+        height: 43px;
+    }
+}

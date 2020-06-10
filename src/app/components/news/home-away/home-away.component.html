@@ -1,0 +1,36 @@
+<div class="unit_container">
+  <div class="tab-description-header">
+    <div class="inner-container">
+
+        <div class="news-cards-container">
+
+            <div (click)="displayModal(modalContents, newsthumb)" *ngFor="let newsthumb of homeAwayArray" class="individual-card-wrapper">
+                <div class="news-thumbnail-card">
+                  <div [ngStyle]="{'background-image':'url(' + newsthumb.imagePath + ')'}" class="news-image-container"></div>
+                  <div class="news-summary"> 
+                      <div class="caption"> {{ newsthumb.newsTitle }}</div>
+                      <div class="summary"> {{ newsthumb.newsSummary }} </div>
+                      <div class="date-released"> {{ newsthumb.datePublished }} </div>
+                  </div>
+                </div>
+            </div>
+    
+          </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #modalContents>
+    <div class="modal-content-wrapper" style="padding: 10px;">
+        <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
+      <h2 class="news_item">{{ currentItem.newsTitle }}</h2>
+      <div class="news_item"> 
+        <div class="modal-text">{{ currentItem.newsFullStory }}</div> 
+      </div>
+      <div class="news_item"><img class="modal-image" [src]="currentItem.imagePath" alt="news image"/></div>
+      <div class="news_item">Published {{ currentItem.datePublished | date:'medium' }}</div>
+    </div>
+  </ng-template>
