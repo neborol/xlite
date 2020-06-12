@@ -1,0 +1,110 @@
+[
+  {
+  "id": 0,
+ "title": "Working with Ayah Ayah Abine",
+  "description": "Ayah Ayah Abine reports how the help from SCEF was well received.",
+  "rating": 3,
+  "category": "Relief",
+  "img": "./assets/video-assets/ayah-abine.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 1,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 4,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR3,0,182,268_AL_.jpg",
+  "videoSource" : "http://static.videogular.com/assets/videos/videogular.mp4"
+  },
+  {
+  "id": 2,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 5,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_UX182_CR0,0,182,268_AL_.jp",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 3,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 5, 
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR3,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 4,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 3,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 5,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 4,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR1,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 6,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 3,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 7,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 5,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 8,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 5,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 9,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 4,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 10,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 3,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BMjJmYTNkNmItYjYyZC00MGUxLWJhNWMtZDY4Nzc1MDAwMzU5XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  },
+  {
+  "id": 11,
+  "title": "The Godfather (1972)",
+  "description": "When the aging head of a famous crime family decides to transfer...",
+  "rating": 4,
+  "category": "Crime | Drama",
+  "img": "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UY268_CR1,0,182,268_AL_.jpg",
+  "videoSource" : "./assets/video-assets/ayah-video.mp4"
+  }
+]

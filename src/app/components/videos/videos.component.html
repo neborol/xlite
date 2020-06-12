@@ -1,0 +1,72 @@
+<div class="standard-page">
+  <br>
+  <br>
+  <br>
+  <div class="videos-contents-envelop">
+        
+    <mat-card style="width: 250px; padding: 12px;"> 
+        <span style="font-weight: 500;margin-top: 5px;display: inline-block;padding-left: 25px;">
+            Review our Mission Videos
+        </span> 
+    </mat-card>
+
+    <div class="std-card-design-container">
+
+      <mat-card class="parent-card-container">
+        <mat-card-content>
+
+          <div class="cards-immediate-wrapper">
+
+            <div *ngFor="let video of videoData" class="single-card-wrapper">
+                <div class="play-icon"></div>
+                <mat-icon (click)="playVideo(eliteVideoDialog, video)" class="video-play-icon menu-icon">play_circle_outline</mat-icon>
+              <mat-card class="card-itself">
+                <mat-card-header>
+                  <mat-card-title style="font-size: 13px;">{{video.title}}</mat-card-title>
+                  <mat-card-subtitle>{{ video.category}}</mat-card-subtitle>
+                </mat-card-header>
+                <div (click)="playVideo(eliteVideoDialog, video)" class="image-container">
+                    <img class="video-image" mat-card-image src="{{ video.img}}" alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                  <p>{{ video.description }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>Rate</button>
+                  <div class="rating-stars">
+                    <app-rating [rating]='video.rating' [itemId]='video.id'
+                      (ratingClick)='ratingComponentClick($event)'></app-rating>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- video modal contents -->
+<ng-template #eliteVideoDialog>
+    <div class="modal-inner-container">
+        <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
+        <!-- <span matDialogTitle>Now Playing {{ currentVideoItem.title }}</span> -->
+        <mat-video #eliteVideo 
+            src="{{currentVideoItem.videoSource}}"
+            [autoplay]="true" 
+            [preload]="true"
+            [download]="false"
+            [overlay]="true"
+            title="{{currentVideoItem.title}}">
+            <track matVideoTrack src="{{currentVideoItem.title}}" kind="subtitles" srclang="en" label="English">
+        </mat-video>
+    </div>
+</ng-template>
+

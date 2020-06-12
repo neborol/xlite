@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { FunctionsComponent } from './components/cockpit/functions/functions.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { EditfaqComponent } from './components/cockpit/editfaq/editfaq.component';
+import { VideosComponent } from './components/videos/videos.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   ] },
   { path: 'register', component: RegisterComponent },
   { path: 'news', component: NewsComponent },
+  { path: 'videos', component: VideosComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'donations', component: DonationsComponent },

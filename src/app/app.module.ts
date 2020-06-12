@@ -58,6 +58,10 @@ import { FaqService } from './services/faq.service';
 import { MaterialFileInputModule, NGX_MAT_FILE_INPUT_CONFIG } from 'ngx-material-file-input';
 import { NgxMaterialConfig } from './ngx-file-upload-config';
 import { NewsService } from './services/news.service';
+import { VideosComponent } from './components/videos/videos.component';
+import { VideoService } from './components/videos/video.service';
+import { RatingComponent } from './components/rating/rating.component';
+import { MatVideoModule } from 'mat-video';
 
 export function tokenGetter() {
   return localStorage.getItem('eliteToken');
@@ -95,7 +99,9 @@ export function tokenGetter() {
     FunctionsComponent,
     GenericModalComponent,
     FaqComponent,
-    EditfaqComponent
+    EditfaqComponent,
+    VideosComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +121,8 @@ export function tokenGetter() {
     }),
     AnimateOnScrollModule.forRoot(),
     DeferLoadModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatVideoModule
   ],
   providers: [
     AuthService,
@@ -125,7 +132,8 @@ export function tokenGetter() {
     ErrorInterceptor,
     CockpitFaqService,
     FaqService,
-    NewsService
+    NewsService,
+    VideoService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

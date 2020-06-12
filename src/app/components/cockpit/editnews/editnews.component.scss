@@ -28,7 +28,7 @@
 
 .news-edit-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     position: relative;
     .mat-form-field {
@@ -37,8 +37,8 @@
 
     .close-Icon-wrapper {
         position: absolute;
-        right: -19px;
-        top: -28px;
+        right: -11px;
+        top: -34px;
         cursor: pointer;
         .close-icon {
             font-size: 35px;
@@ -91,7 +91,6 @@
 }
 
 .article-edit-card-container {
-    margin: 5px 0;
-    padding-right: 30px; 
+    margin: 5px 0; 
     position: relative;
 }

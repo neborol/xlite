@@ -167,7 +167,7 @@
               <div class="news-item-container">
                 <div *ngFor="let article of articlesArrayForEditing" class="article-edit-card-container">
                   <mat-card>
-                    <span> {{ article.newsTitle }} </span>
+                    <span style="padding-right: 30px;"> {{ article.newsTitle }} </span>
                     <span (click)="editSelectedArticle(editArticleModalContents, article)" class="edit-icon-container">
                       <mat-icon class="edit-article-button">edit</mat-icon>
                     </span>
@@ -186,18 +186,6 @@
 
 
   <ng-template #editArticleModalContents>
-      <!-- <div class="modal-content-wrapper" style="padding: 10px;">
-        <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
-        <h2 class="news_item">{{ currentArticle.newsTitle }}</h2>
-        <div class="news_item"> 
-          <div class="modal-text">{{ currentArticle.newsFullStory }}</div> 
-        </div>
-        <div class="news_item"><img class="modal-image" [src]="currentItem.imagePath" alt="news image"/></div>
-        
-      </div> -->
-
-      
-      
       <div class="news-edit-container article-edit-container">
         <mat-card class="parent-card-container">
             <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>

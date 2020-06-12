@@ -35,13 +35,20 @@ body {
   // padding-top: 63px;
 }
 
+.mat-tab-body-content {
+  padding: 0 3%;
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .app-header {
   justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 20;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
 
@@ -435,6 +442,9 @@ mat-drawer-container {
   }
 }
 
+.mat-dialog-container {
+  width: 80vw !important;
+}
 
 .news_edit_container {
   min-height: 688px;
@@ -449,6 +459,13 @@ mat-drawer-container {
       color: black !important;
     }
   }
+}
+
+// style the video image in the videoplayer
+.video {
+  width: 100%;
+  max-height: 800px;
+  margin: 0 auto;
 }
 
 @keyframes example {
