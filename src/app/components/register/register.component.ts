@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertifyService } from './../../services/alertify.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
-import { UserDto } from './../home/UserDto';
+import { IUser } from '../../interfaces/User-creation.interface';
 import { CustomvalidationService } from './../../services/custom-validation.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { CustomvalidationService } from './../../services/custom-validation.serv
 export class RegisterComponent implements OnInit {
 
   Roles: any = ['Admin', 'Author', 'Reader'];
-  user: UserDto;
+  user: IUser;
   registerMembersForm: FormGroup;
   emailRegex = '[a-zA-Z0-9.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}';
   alphaNRegex = '^[0-9a-zA-Z]+$';
@@ -128,10 +128,9 @@ export class RegisterComponent implements OnInit {
     console.log('MyRegForm', this.registerMembersForm);
     this.user = Object.assign({}, this.registerMembersForm.value);
     this.authService.register(this.user).subscribe((data: any) => {
-      console.log('TestData', data);
       if (data.success) {
-        this.alertify.success(data.message);
-        this.router.navigateByUrl('/login');
+        this.alertify.message(data.message);
+        // this.router.navigateByUrl('/login');
       }
     }, error => {
       this.alertify.error('Registration failed');
@@ -140,24 +139,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
-  // register() {
-  //   if (this.model.passwordconf !== this.model.password) {
-  //     this.alertify.error('The Passwords do not match.');
-  //     return;
-  //   }
-  //   this.authService.register(this.model).subscribe((data: any) => {
-  //     console.log('Registration Successful');
-  //     if (data.success) {
-  //       this.alertify.success('Great! You are now registered');
-  //       this.router.navigateByUrl('/login');
-  //     }
-  //   }, error => {
-  //     this.alertify.error('Registration failed');
-  //     console.log(this.model);
-  //     console.error(error);
-  //   });
-  // }
 
   cancel() {
     this.router.navigateByUrl('/login');

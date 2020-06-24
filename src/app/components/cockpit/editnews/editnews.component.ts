@@ -7,11 +7,11 @@ import { IResponse } from 'src/app/interfaces/response.interface';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { CockpitNewsService } from 'src/app/services/cockpit-news.service';
 import { HttpEventType } from '@angular/common/http';
-import { PhotoUploadService } from 'src/app/services/photo-upload.service';
 import { TabDescr } from '../../news/news.component';
 import { INewsArticlesGet } from 'src/app/interfaces/news-article-get.interface';
 import { NewsService } from 'src/app/services/news.service';
 import { IArticleUpdate } from 'src/app/interfaces/article-update.interface';
+import { CockpitSharedService } from 'src/app/services/cockpit-shared.service';
 
 @Component({
   selector: 'app-editnews',
@@ -60,7 +60,7 @@ export class EditnewsComponent implements OnInit {
   constructor(
     private alertify: AlertifyService,
     private cockpitNewsService: CockpitNewsService,
-    private photoService: PhotoUploadService,
+    private sharedService: CockpitSharedService,
     private newsService: NewsService,
     public dialog: MatDialog
     ) { }
@@ -139,7 +139,7 @@ export class EditnewsComponent implements OnInit {
 
   postNewsArticle = () => {
     // Save the news image first, and if successful, save the rest of the data.
-    this.photoService.uploadImage(this.files).subscribe(event => {
+    this.sharedService.uploadNewsImage(this.files).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.progress = Math.round(100 * event.loaded / event.total);
       } else if (event.type === HttpEventType.Response) {
@@ -208,7 +208,7 @@ export class EditnewsComponent implements OnInit {
 
   updateNewsArticle() {
     if (this.files) {
-      this.photoService.uploadImage(this.files).subscribe(event => {
+      this.sharedService.uploadNewsImage(this.files).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
         } else if (event.type === HttpEventType.Response) {

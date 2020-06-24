@@ -27,7 +27,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'auth/tryLogin', model)
+    return this.http.post(this.baseUrl + 'auth/login', model)
       .pipe(map((response: any) => {
         const tokenObject = response;
         this.currentToken = tokenObject.token;
@@ -35,7 +35,6 @@ export class AuthService {
           let uniqueName;
           localStorage.setItem('eliteToken', tokenObject.token);
           this.decodedToken = this.jwtHelper.decodeToken(tokenObject.token);
-          console.log('TDecodedToken', this.decodedToken);
           uniqueName = this.decodedToken.unique_name;
           this.functions.isNews = this.decodedToken.news;
           this.functions.isPilot = this.decodedToken.pilot;

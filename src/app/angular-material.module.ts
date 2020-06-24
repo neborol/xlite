@@ -16,7 +16,10 @@ import {
    MatRadioModule,
    MatCheckboxModule,
    MatExpansionModule,
-   MatSlideToggleModule
+   MatSlideToggleModule,
+   MatDatepickerModule,
+   MatTableModule,
+   MatChipsModule
 } from '@angular/material';
 
 @NgModule({
@@ -36,7 +39,10 @@ import {
       MatRadioModule,
       MatCheckboxModule,
       MatExpansionModule,
-      MatSlideToggleModule
+      MatSlideToggleModule,
+      MatDatepickerModule,
+      MatTableModule,
+      MatChipsModule
    ],
    exports: [
       MatButtonModule,
@@ -53,7 +59,10 @@ import {
       MatRadioModule,
       MatCheckboxModule,
       MatExpansionModule,
-      MatSlideToggleModule
+      MatSlideToggleModule,
+      MatDatepickerModule,
+      MatTableModule,
+      MatChipsModule
    ],
    providers: [
       // MatDatepickerModule,

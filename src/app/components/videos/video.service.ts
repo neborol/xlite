@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IVideo } from '../../interfaces/video-get.interface';
+import { IVideoGet } from '../../interfaces/video-get.interface';
 
 
 
@@ -15,7 +15,7 @@ export class VideoService {
 
     constructor(private http: HttpClient) {}
 
-    getJSON(): Observable<IVideo[]> {
-        return this.http.get<IVideo[]>(this.dataURL);
+    getJSON(): Observable<IVideoGet[]> {
+        return this.http.get<IVideoGet[]>(this.dataURL);
     }
 }

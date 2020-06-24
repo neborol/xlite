@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService, ClaimObject } from './../../../services/users.service';
-import { UserDto } from '../../home/UserDto';
+import { IUser } from '../../../interfaces/User-creation.interface';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GenericModalComponent } from '../../generic-modal/generic-modal.component';
 import { AlertifyService } from './../../../services/alertify.service';
@@ -18,7 +18,7 @@ export interface StdResponseObject {
   styleUrls: ['./functions.component.scss']
 })
 export class FunctionsComponent implements OnInit, OnDestroy {
-  users: UserDto[];
+  users: IUser[];
   claimsSubscription: Subscription;
 
 
@@ -39,7 +39,7 @@ export class FunctionsComponent implements OnInit, OnDestroy {
   }
 
   getAllMembers() {
-    this.userService.getUsersSuper().subscribe((usersList: UserDto[]) => {
+    this.userService.getUsersSuper().subscribe((usersList: IUser[]) => {
       this.users = usersList;
       console.log(usersList);
     }, error => console.error(error));

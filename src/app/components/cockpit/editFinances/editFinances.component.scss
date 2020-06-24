@@ -1,0 +1,120 @@
+@import '../../../../variables.scss';
+.member-box {
+    border-bottom: solid 1px #abc8e2;
+    padding: 10px;
+}
+
+
+.design-standard-container { // design-standard-container
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    .mat-form-field {
+        width: 100%;
+    }
+
+    .close-Icon-wrapper {
+        position: absolute;
+        right: -11px;
+        top: -23px;
+        cursor: pointer;
+        .close-icon {
+            font-size: 35px;
+        }
+    }
+}
+
+.design-item-container { // design-item-container
+    background-color: $designGray;
+    padding-top: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.article-edit-container {
+    .parent-card-container {
+        background-color: #ded4c7;
+    }
+}
+.parent-card-container {
+    margin: 10px 0;
+}
+
+.spacer {
+    height: 9px;
+}
+.search-container {
+    position: relative;
+    margin-left: 30px;
+    box-sizing: border-box;
+}
+.person-search-icon {
+    font-size: 33px;
+    color: #3f51b5;
+    position: absolute;
+    left: -31px;
+    top: 16px;
+    cursor: pointer;
+}
+
+.user-item {
+    margin: 0 5px;
+    border: solid 1px rgb(226, 224, 224);
+    padding: 2px 5px;
+    display: inline-block;
+}
+
+.search-field {
+    width: 200px;
+}
+
+.amount-icon-container {
+    border: solid 1px #99cef1;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: absolute;
+    right: 30px;
+    top: 2px;
+    cursor: pointer;
+}
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+  }
+  
+.example-month-picker .mat-calendar-arrow {
+    display: none;
+}
+
+.form-control-title {
+    position: relative;
+    span {
+        position: absolute;
+        left: 29px;
+        top: 0px;
+    }
+}
+
+table {
+    width: 100%;
+}
+  
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.amount-container {
+    padding-left: 10px;
+    .total-amounts {
+        font-weight: 500;
+        min-width: 170px;
+        display: inline-block;
+    }
+    mat-chip {
+        padding: 0px 10px;
+    }
+}
+

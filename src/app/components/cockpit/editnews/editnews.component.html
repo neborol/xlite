@@ -1,14 +1,14 @@
-  <div class="custom-tabs-container news_edit_container">
+  <div class="custom-tabs-container cockpit_edit_container">
     <mat-tab-group mat-align-tabs="start">
 
       <mat-tab label="Add a News Article">
 
 
-        <div class="news-edit-container">
+        <div class="design-standard-container">
           <mat-card class="parent-card-container">
             <mat-card-content class="container">
               <form [formGroup]="newsAddForm" novalidate>
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <div><span class="item-title">Enter the News Title:</span></div>
                     <mat-form-field>
@@ -17,7 +17,7 @@
                   </mat-card>
                 </div>
 
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <div><span class="item-title">Enter the News Summary:</span></div>
                     <mat-form-field>
@@ -26,7 +26,7 @@
                   </mat-card>
                 </div>
 
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <div><span class="item-title">Enter the full News Story:</span></div>
                     <mat-form-field>
@@ -35,9 +35,9 @@
                   </mat-card>
                 </div>
 
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
-                    <div><span class="item-title">Enter the News Summary:</span></div>
+                    <div><span class="item-title">Select a News Category:</span></div>
                     <mat-form-field class="option-field">
                       <mat-label>Select an option</mat-label>
                       <mat-select matSelect [(value)]="selected" formControlName="newsCategory">
@@ -54,12 +54,11 @@
                 </div>
 
 
-                <div class="news-item-container padding-container">
+                <div class="design-item-container padding-container">
                   <mat-card>
                     <div *ngIf="image2bUploaded" class="preview-image-container">
                       <img style="max-width: 250px" [src]="image2bUploaded" alt="image-preview">
                     </div>
-                    <div><span class="item-title">Enter the News Title:</span></div>
 
                     <!-- file to be uploaded -->
                     <div>
@@ -99,12 +98,12 @@
 
 
       <mat-tab label="Edit Scrolling News">
-        <div class="news-edit-container">
+        <div class="design-standard-container">
           <mat-card class="parent-card-container">
 
-            <div class="news-item-container padding-container">
+            <div class="design-item-container padding-container">
               <form [formGroup]="newsScrollbarForm" novalidate>
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <div>
                       <span class="item-title">Enter New Scrolling Text:</span>
@@ -131,16 +130,16 @@
 
       <mat-tab label="Edit A News Article">
         <!-- Edit a specific article -->
-        <div class="news-edit-container">
+        <div class="design-standard-container">
           <button *ngIf="loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
             color="accent">Select A Category</button>
           <button *ngIf="!loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
             color="accent">Load current Articles</button>
           <mat-card class="parent-card-container">
 
-            <div *ngIf="!loadArticles" class="news-item-container padding-container">
+            <div *ngIf="!loadArticles" class="design-item-container padding-container">
               <form [formGroup]="editingCategoriesForm" novalidate>
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <h3 style="color: #1276a6;">Select a news category and get all the news items for that category.
                     </h3>
@@ -163,8 +162,8 @@
               </form>
             </div>
 
-            <div *ngIf="loadArticles" class="news-item-container padding-container">
-              <div class="news-item-container">
+            <div *ngIf="loadArticles" class="design-item-container padding-container">
+              <div class="design-item-container">
                 <div *ngFor="let article of articlesArrayForEditing" class="article-edit-card-container">
                   <mat-card>
                     <span style="padding-right: 30px;"> {{ article.newsTitle }} </span>
@@ -186,12 +185,12 @@
 
 
   <ng-template #editArticleModalContents>
-      <div class="news-edit-container article-edit-container">
+      <div class="design-standard-container article-edit-container">
         <mat-card class="parent-card-container">
             <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
             <mat-card-content class="container">
               <form name="updateArticleform" #f="ngForm" novalidate>
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <mat-form-field>
                         <textarea matInput name="editNewsTitle" [(ngModel)]="currentUpdateArticle.newsTitle" placeholder="News Title" type="text"></textarea>
@@ -199,7 +198,7 @@
                   </mat-card>
                 </div>
 
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <div><span class="item-title">Enter the News Summary:</span></div>
                     <mat-form-field>
@@ -208,7 +207,7 @@
                   </mat-card>
                 </div>
 
-                <div class="news-item-container">
+                <div class="design-item-container">
                   <mat-card>
                     <div><span class="item-title">Enter the full News Story:</span></div>
                     <mat-form-field>
@@ -217,7 +216,7 @@
                   </mat-card>
                 </div>
 
-                <div class="news-item-container padding-container">
+                <div class="design-item-container padding-container">
                   <mat-card>
                     <div *ngIf="image2bUploaded" class="preview-image-container">
                       <img style="max-width: 250px" [src]="image2bUploaded" alt="image-preview">

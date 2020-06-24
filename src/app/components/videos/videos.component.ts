@@ -1,8 +1,13 @@
 import { Component, OnInit, TemplateRef, ViewChild, Renderer2 } from '@angular/core';
-import { IVideo } from 'src/app/interfaces/video-get.interface';
-import { HttpClient } from '@angular/common/http';
+import { IVideoGet } from 'src/app/interfaces/video-get.interface';
 import { MatDialog } from '@angular/material';
 import { MatVideoComponent } from 'mat-video/lib/video.component';
+import { VideosService } from './../../services/videos.service';
+import { environment } from 'src/environments/environment';
+import { IRatingsObjectPost } from 'src/app/interfaces/video-rating.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { IResponse } from 'src/app/interfaces/response.interface';
+import { AlertifyService } from './../../services/alertify.service';
 
 @Component({
   selector: 'app-videos',
@@ -11,14 +16,25 @@ import { MatVideoComponent } from 'mat-video/lib/video.component';
 })
 export class VideosComponent implements OnInit {
   pageTitle = 'Video List';
-  private dataURL = 'assets/videos.json';
-  videoData: IVideo[] = [];
-  currentVideoItem: IVideo;
+  serverUrl = environment.serverUrl;
+  videoData: IVideoGet[] = [];
+  currentVideoItem: IVideoGet;
+
+  ratingsObj: IRatingsObjectPost = {
+    videoId: 0,
+    rating: 0
+  };
 
   @ViewChild('eliteVideo', {static: false}) matVideo: MatVideoComponent;
   videoElement: HTMLVideoElement;
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private renderer: Renderer2) { }
+  constructor(
+    public dialog: MatDialog,
+    private renderer: Renderer2,
+    private videosService: VideosService,
+    private authService: AuthService,
+    private alertify: AlertifyService
+  ) { }
 
   // ngOnInit() {
   //   this.movieService.getJSON().subscribe((data: IMovie[]) => {
@@ -28,13 +44,14 @@ export class VideosComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.http.get<IVideo[]>(this.dataURL).subscribe((data: IVideo[]) => {
-      this.videoData = data;
-      this.videoElement = this.matVideo.getVideoTag();
+    this.videosService.getVideos().subscribe((videos: IVideoGet[]) => {
+      this.videoData = videos.map(vid => {
+        vid.posterPath = this.serverUrl + vid.posterPath;
+        vid.videoPath = this.serverUrl + vid.videoPath;
+        return vid;
+      });
 
-      // Use Angular renderer or addEventListener to listen for standard HTML5 video events
-      this.renderer.listen(this.videoElement, 'ended', () => console.log('video ended'));
-      this.videoElement.addEventListener('ended', () => console.log('video ended'));
+      // this.videoElement = this.matVideo.getVideoTag();
     });
   }
 
@@ -44,6 +61,23 @@ export class VideosComponent implements OnInit {
     // Now open the modal dialog and pass to it the templateRef, and this templateRef would need dislay data, which
     //       should be provided by the "this.currentVideoItem".
     this.dialog.open(templateRef);
+  }
+
+  ratingComponentClick(evt) {
+    this.ratingsObj.videoId = evt.videoId;
+    this.ratingsObj.rating = evt.rating;
+  }
+
+  submitRating() {
+    this.videosService.postVideoRating(this.ratingsObj).subscribe((resp: IResponse) => {
+      if (resp.success) {
+        this.alertify.success(resp.message);
+      }
+    }, error => { this.alertify.error(error.message); });
+  }
+
+  unRate(video) {
+    video.rating = 0;
   }
 
   closeModal() {

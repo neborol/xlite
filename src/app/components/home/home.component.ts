@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/users.service';
-import { UserDto } from './UserDto';
 
 @Component({
   selector: 'app-home',
@@ -8,21 +6,11 @@ import { UserDto } from './UserDto';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  users: UserDto[];
-  constructor(private userService: UserService) { }
+
+  constructor() { }
 
   ngOnInit() {
-    this.getAllMembers();
   }
 
-  getAllMembers() {
-    this.userService.getUsers().subscribe((zz: UserDto[]) => {
-      this.users = zz;
-      console.log('Expecting');
-      console.log(zz);
-    }, error => console.error(error));
-    // .pipe(map((response: any) => {
-    //   const members = response;
-    //   }))
-  }
+
 }

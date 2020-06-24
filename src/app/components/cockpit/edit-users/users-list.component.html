@@ -1,0 +1,192 @@
+<div class="std-flex-box">
+    <div style="width: 250px;">
+        <h3 style="width: 100%;">List of dedicated members:</h3>
+    </div>
+    <div class="search-container">
+        <mat-icon (click)="searchMember(query)" class="person-search-icon">person_search</mat-icon>
+        <mat-form-field class="search-field">
+        <mat-label>Search By Code Number</mat-label>
+        <input matInput type="text" #query placeholder="Search A Member" (keyup.enter)="reactToEnterKey(query)">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="cockpit_edit_container">
+  <div class="design-standard-container">
+    <p *ngIf="!members"><em>Loading...</em></p>
+    <mat-card class="parent-card-container">
+      <mat-card-content class="container">
+
+        <div *ngFor="let user of members; let i = index" class="design-item-container">
+          <mat-card>
+            <div>
+              <div class="item-title">
+                <span class="user-item">{{ user.firstName }}</span>
+                <span class="user-item">{{ user.lastName }}</span>
+                <span style="background-color: rgb(224, 240, 247);" class="user-item">{{ user.codeNr }}</span>
+                <span (click)="editSelectedUser(userModal, user)" class="edit-icon-container">
+                  <mat-icon class="edit-article-button">edit</mat-icon>
+                </span>
+              </div>
+            </div>
+          </mat-card>
+          <div *ngIf="i === members.length-1" class="spacer"></div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+<ng-template #userModal>
+  <div class="design-standard-container article-edit-container">
+    <span (click)="closeModal()" class="close-Icon-wrapper">
+      <mat-icon class="close-icon">highlight_off</mat-icon>
+    </span>
+    <div><span class="item-title"> About to make changes on the User: <span
+          style="color: blue;">{{ selectedUser.firstName }} {{ selectedUser.lastName }}.</span> </span></div>
+    <mat-card class="parent-card-container">
+      <mat-card-content class="container">
+        <div class="design-item-container">
+          <mat-card class="std-flex-box">
+            <div><span class="item-title">Delete Selected User:</span></div>
+            <div>
+              <button *ngIf="!deleteRequested" class="image-delete-btn" (click)="deleteRequestDialogue()"
+                mat-raised-button color="basic">
+                Delete User
+              </button>
+              <span *ngIf="deleteRequested"
+                class="std-flex-box"
+                style="width: 200px;">
+                <button class="action-btn" (click)="deleteSelectedUser()" mat-raised-button color="warn">
+                  Delete User ?
+                </button>
+                <button class="action-btn regular-btn" (click)="deleteRequestDialogue()" mat-raised-button
+                  color="basic">
+                  Cancel
+                </button>
+              </span>
+            </div>
+
+          </mat-card>
+        </div>
+        <div class="design-item-container">
+          <mat-card class="std-flex-box">
+            <div><span class="item-title">Set Active / InActive:</span></div>
+            <div>
+              <button *ngIf="!activateRequested" class="action-btn" (click)="activateRequestDialogue()"
+                mat-raised-button color="primary">
+                Set User Status
+              </button>
+              <div *ngIf="activateRequested" class="std-flex-box"
+                style=" width: 195px;">
+                <button *ngIf="selectedUser.status==='ACTIVE'" class="yellow-btn" (click)="UpdateStatusInActive()"
+                  mat-raised-button>
+                  InActive
+                </button> <br>
+
+                <button *ngIf="selectedUser.status==='INACTIVE'" class="green-btn" (click)="UpdateStatusActive()"
+                  mat-raised-button>
+                  Active
+                </button> <br>
+
+                <button class="regular-btn" (click)="activateRequestDialogue()" mat-raised-button color="basic">
+                  Cancel
+                </button> <br>
+              </div>
+            </div>
+
+          </mat-card>
+          <div class="spacer"></div>
+        </div>
+
+      </mat-card-content>
+
+      <div>
+        <button (click)="closeModal()" mat-raised-button color="primary">
+          Close
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+</ng-template>
+
+
+
+
+<ng-template #contributionsModal>
+  <div class="design-standard-container article-edit-container">
+    <span (click)="closeModal()" class="close-Icon-wrapper">
+      <mat-icon class="close-icon">highlight_off</mat-icon>
+    </span>
+    <div><span class="item-title"> Edit Contributions for: <span style="color: blue;">{{ selectedUser.firstName }}
+          {{ selectedUser.lastName }}.</span> </span></div>
+    <mat-card class="parent-card-container">
+      <mat-card-content class="container">
+        <form [formGroup]="contributionsForm" novalidate>
+
+            <div class="design-item-container padding-container">
+                <mat-card>
+                <div class="form-control-title">
+                    <mat-icon class="edit-article-button">event_note</mat-icon>
+                    <span style="margin: 4px;">Select the Month</span>
+                </div>
+                <mat-form-field style="width: 193px;">
+                        <mat-label>Select a Month and Year</mat-label>
+                        <input readonly matInput [matDatepicker]="dp" formControlName="date" >
+                        <mat-datepicker-toggle matSuffix [for]="dp" style="font-size: 24px;"></mat-datepicker-toggle>
+                        <mat-datepicker #dp
+                            startView="multi-year"
+                            panelClass="example-month-picker">
+                        </mat-datepicker>
+                      </mat-form-field>
+                </mat-card>
+            </div>
+
+          <div class="design-item-container">
+            <mat-card>
+              <div class="form-control-title">
+                <mat-icon class="edit-article-button">monetization_on</mat-icon>
+                <span style="margin: 4px;">Contribution Amount</span>
+              </div>
+              <mat-form-field style="width: 152px;">
+                <input matInput name="amount" formControlName="amount" placeholder="Amount" type="text" />
+              </mat-form-field>
+            </mat-card>
+          </div>
+
+          <div class="design-item-container">
+            <mat-card>
+              <div class="form-control-title">
+                <mat-icon class="edit-article-button">comment</mat-icon>
+                <span style="margin: 4px;">Enter A Comment</span>
+              </div>
+              <mat-form-field style="width: 100%;">
+                <textarea matInput name="comments" formControlName="comments" placeholder="Comments if any"></textarea>
+              </mat-form-field>
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <div class="news-form-submit-btn-container">
+        <button 
+            (click)="sumbmitMonthlyContribution()" 
+            mat-raised-button color="primary"
+            [disabled]="!contributionsForm.valid"
+        >
+          Submit Amount
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+</ng-template>

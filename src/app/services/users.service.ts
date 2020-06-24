@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { UserDto } from '../components/home/UserDto';
+import { IUser } from '../interfaces/User-creation.interface';
 import { Subject } from 'rxjs';
 import { Claim } from '../components/generic-modal/generic-modal.component';
 
@@ -26,11 +26,11 @@ export class UserService {
   }
 
   getUsers() {
-    return this.http.get<UserDto[]>(this.baseUrl + 'users/getusers');
+    return this.http.get<IUser[]>(this.baseUrl + 'users/getusers');
   }
 
   getUsersSuper() {
-    return this.http.get<UserDto[]>(this.baseUrl + 'users/getuserssuper');
+    return this.http.get<IUser[]>(this.baseUrl + 'users/getuserssuper');
   }
 
   getUserClaims(id) {
@@ -41,10 +41,6 @@ export class UserService {
     return this.http.put(this.baseUrl + 'users/updateclaims/' + id, obj);
   }
 
-  getUser() {
-     return 'Takang';
-    // return this.http.get<UserDto>(this.baseUrl + 'members' + id);
-  }
 }
 
 

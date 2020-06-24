@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDto } from '../../home/UserDto';
+import { IUser } from '../../../interfaces/User-creation.interface';
 import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({

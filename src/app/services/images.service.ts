@@ -1,35 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImagesService {
 
-  ngoSources = [
-    {url: '../assets/images/cry.jpg', caption: 'Cry our beloved country Ambazonia!'},
-    {url: '../assets/images/scro-group.jpg', caption: 'Cross-section of some SCRO members during one of the town hall meetings'},
-    {url: '../assets/images/scro-town-hall.jpg', caption: 'SCRO Townhall Session in Toronto, Canada.'},
-    {url: '../assets/images/country.jpg', caption: ''},
-    {url: '../assets/images/map4.jpg', caption: 'The orange section was called The Cameroons(Northern & Southern)'},
-    {url: '../assets/images/map2.jpg', caption: 'Map of Southern Cameroons, showing all the 13 counties.'},
-    {url: '../assets/images/map3.jpg', caption: 'Map of Southern Cameroons, showing the important towns.'}
-  ];
-
-  protestSources = [
-    {url: '../assets/protests/IMG-W90.jpg', caption: 'Ottawa protests, at the Cameroon embassy.'},
-    {url: '../assets/protests/IMG-W91.jpg', caption: 'Ottawa protests, at the Cameroon embassy.'},
-    {url: '../assets/protests/IMG-W92.jpg', caption: 'Simulating the burial of this wicked regime.'},
-    {url: '../assets/protests/IMG-W93.jpg', caption: 'Our able Secretary General, taking it on.'},
-    {url: '../assets/protests/IMG-W94.jpg', caption: 'Ottawa protests, at the Cameroon embassy.'},
-    {url: '../assets/protests/IMG-W95.jpg', caption: 'Ottawa protests, with protection from Canadian Police.'},
-    {url: '../assets/protests/IMG-W96.jpg', caption: 'Ottawa protests, at the Cameroon embassy.'},
-    {url: '../assets/protests/IMG-W97.jpg', caption: 'Simulating the burial of this wicked regime.'},
-    {url: '../assets/protests/IMG-W98.jpg', caption: 'Simulating the burial of this wicked regime.'},
-    {url: '../assets/protests/IMG-W99.jpg', caption: 'Ottawa protests, despite snow and freezing temperatures.'},
-    {url: '../assets/protests/IMG-W100.jpg', caption: 'Ottawa protests, despite snow and freezing temperatures.'},
-    {url: '../assets/protests/IMG-W101.jpg', caption: 'SCRO attending a networking and fundraising event'},
-    {url: '../assets/protests/IMG-W102.jpg', caption: 'SCRO in a Southern Cameroons awarness programme.'}
-  ];
+  baseUrl = environment.apiUrl;
 
   protestSourcesJan052019 = [
     {url: '../assets/protests/Jan052019/img-1.jpg',
@@ -87,66 +65,38 @@ export class ImagesService {
     caption: 'Supporting the people of Southern Cameroons in saying No to the burning down of villages, is the right thing to do.'}
   ];
 
+  constructor(private http: HttpClient) { }
 
-  leftSources = [
-    {url: '../assets/brutality1.jpg',
-        caption: '(1) Even women were brutalized for protesting peacefully, which is the constitutional right of everybody.'},
-    {url: '../assets/brutality2.jpg', caption: '(2) We also treat and care for victims of military brutality.'},
-    {url: '../assets/protest1.jpg',
-        caption: '(3) Southern Cameroons Lawyers protesting against injustice by Cameroon Goverment.'},
-    {url: '../assets/protest2.jpg',
-        caption: '(4) Protesting Lawyers were molested by the Cameroon Police and Military.'},
-    {url: '../assets/police-force.jpg',
-       // tslint:disable-next-line:max-line-length
-       caption: '(5) A Southern Cameroons Lawyer being rough-handled by the French Cameroon unprofessional and lawless Police, in total violation of the law.  This alone caused the people to rise up against this lawless government.'},
-    {url: '../assets/university-students.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(6) Young University Students rose up in peaceful protest against the lawlessness and injustice, and were all picked up and put in jails till today.'},
-    {url: '../assets/southern-cameroons.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(7) The people could not tolerate the lawlessness, and rose up in peaceful protest indicated by the green plants, but the lawless military shot down dozens of them.'},
-    {url: '../assets/mancho3.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(8) The young man in Yellow, by name Mancho Bibixy, lead a protest against the poor situation of roads in the locality, but was arrested and detained.'}
-  ];
-
-  rightSources = [
-    {url: '../assets/mancho2.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(9) Mancho Bibixy seen here being taken to the French Cameroon military tribunal (which according to the law, is not meant for civilians) for condemning the poor state of roads.'},
-    {url: '../assets/reserve4.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(10) Women lead by a Political Opposition leader Kah Walla, rose up in a peaceful protest, each holding a broom as a sign of peace.'},
-    {url: '../assets/reserve3.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(11) The Opposition leader Kah Walla, seen here in a peaceful protest, but some of them were arrested by the lawless French Cameroon police.'},
-    {url: '../assets/reserve2.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(12) Due to the rise of armed conflicts against the lawless French Cameroon Government, the citizens started leaving to safer destinations.'},
-    {url: '../assets/reserve1.jpg',
-        caption: '(13) Many citizens of Southern Cameroons had no where safe to hide, and were living in the open bushes, how sad?'},
-    {url: '../assets/refugees1.jpg',
-        caption: '(14) Many of the people escaped through the bushes to Nigeria, and became refugees.'},
-    {url: '../assets/burning.jpg',
-        caption: '(15) Lawless French Cameroon military caught on camera burning down buildings and civilian homes.'},
-    {url: '../assets/independence.jpg',
-        // tslint:disable-next-line:max-line-length
-        caption: '(16) No people in this world can live in a Federation with another group of people who support barbarism, corruption and lawlessness, so all that Southern Cameroons now wants, is full independence'},
-
-  ];
-
-  constructor() { }
+  // setAnimation(sourceArray, destinationArray) {
+  //   for (let i = 0; i < sourceArray.length; i++) {
+  //     const url = sourceArray[i].url;
+  //     const caption = sourceArray[i].caption;
+  //     destinationArray[i] = {
+  //       url,
+  //       show: false,
+  //       caption
+  //     };
+  //   }
+  // }
 
   setAnimation(sourceArray, destinationArray) {
     for (let i = 0; i < sourceArray.length; i++) {
-      const url = sourceArray[i].url;
-      const caption = sourceArray[i].caption;
+      const url = sourceArray[i].uniquePhotoName;
+      const caption = sourceArray[i].imageCaption;
       destinationArray[i] = {
         url,
         show: false,
         caption
       };
     }
+  }
+
+  postMissionImages(imgObj) {
+    return this.http.post(this.baseUrl + 'Image/uploadMulti', imgObj, { reportProgress: true, observe: 'events' });
+  }
+
+  getMissionImages() {
+    return this.http.get(this.baseUrl + 'Image/getAllImages');
   }
 
 }

@@ -23,19 +23,20 @@
               <mat-card class="card-itself">
                 <mat-card-header>
                   <mat-card-title style="font-size: 13px;">{{video.title}}</mat-card-title>
-                  <mat-card-subtitle>{{ video.category}}</mat-card-subtitle>
+                  <mat-card-subtitle>Category: {{ video.category | titlecase}}</mat-card-subtitle>
                 </mat-card-header>
                 <div (click)="playVideo(eliteVideoDialog, video)" class="image-container">
-                    <img class="video-image" mat-card-image src="{{ video.img}}" alt="Photo of a Shiba Inu">
+                    <img class="video-image" mat-card-image src="{{ video.posterPath}}" alt="Video Poster">
                 </div>
                 <mat-card-content>
                   <p>{{ video.description }}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>Rate</button>
+                  <button *ngIf="video.rating === 0" (click)="submitRating()" mat-raised-button style="line-height: 25px;">Rate</button>
+                  <button  *ngIf="video.rating > 0" (click)="unRate(video)" mat-raised-button style="line-height: 25px;">Un Rate</button>
                   <div class="rating-stars">
-                    <app-rating [rating]='video.rating' [itemId]='video.id'
-                      (ratingClick)='ratingComponentClick($event)'></app-rating>
+                    <app-rating [rating]="video.rating" [videoId]="video.videoId"
+                      (ratingClick)="ratingComponentClick($event)"></app-rating>
                   </div>
                 </mat-card-actions>
               </mat-card>
@@ -55,11 +56,11 @@
 
 <!-- video modal contents -->
 <ng-template #eliteVideoDialog>
-    <div class="modal-inner-container">
+    <div class="video-modal-inner-container">
         <span (click)="closeModal()" class="close-Icon-wrapper"><mat-icon class="close-icon">highlight_off</mat-icon></span>
         <!-- <span matDialogTitle>Now Playing {{ currentVideoItem.title }}</span> -->
         <mat-video #eliteVideo 
-            src="{{currentVideoItem.videoSource}}"
+            src="{{currentVideoItem.videoPath}}"
             [autoplay]="true" 
             [preload]="true"
             [download]="false"

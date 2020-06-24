@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { UserDto } from '../components/home/UserDto';
+import { IUser } from '../interfaces/User-creation.interface';
 import { UserService } from '../services/users.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Observable, of } from 'rxjs';
@@ -46,7 +46,7 @@ export class UserEditResolver implements Resolve<string> {
 
     // When this method gets called by Angular, angular will provide us the ActivatedRouteSnapshot and the RouterStateSnapShot
        resolve(routeSnapShot: ActivatedRouteSnapshot, state: RouterStateSnapshot): string {
-        return this.userService.getUser();
-
+        // return this.userService.getUsers();
+        return 'xxx';
     }
 }

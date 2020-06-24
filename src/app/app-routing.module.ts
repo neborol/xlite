@@ -9,9 +9,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { RelieveComponent } from './components/relieve/relieve.component';
 import { MemberEditComponent } from './components/membership/edit/userEdit.component';
 import { UserEditResolver } from './resolvers/user-edit-resolver';
-import { PhotoUploadComponent } from './components/cockpit/photo-upload/photo-upload.component';
-import { UsersListComponent } from './components/cockpit/users-list/users-list.component';
-import { EditamountComponent } from './components/cockpit/editamount/editamount.component';
+import { EditPhotosComponent } from './components/cockpit/edit-photos/edit-photos.component';
+import { UsersListComponent } from './components/cockpit/edit-users/users-list.component';
+import { EditFinancesComponent } from './components/cockpit/editFinances/editFinances.component';
 import { EditnewsComponent } from './components/cockpit/editnews/editnews.component';
 import { NewsComponent } from './components/news/news.component';
 import { AboutComponent } from './components/about/about.component';
@@ -23,6 +23,7 @@ import { FunctionsComponent } from './components/cockpit/functions/functions.com
 import { FaqComponent } from './components/faq/faq.component';
 import { EditfaqComponent } from './components/cockpit/editfaq/editfaq.component';
 import { VideosComponent } from './components/videos/videos.component';
+import { EditvideosComponent } from './components/cockpit/editvideos/editvideos.component';
 
 
 const routes: Routes = [
@@ -32,13 +33,14 @@ const routes: Routes = [
   { path: 'user/edit', component: MemberEditComponent, resolve: {uniqueXX: UserEditResolver}},
   { path: 'login', component: LogInComponent },
   { path: 'cockpit', component: CockpitComponent, children: [
-    { path: 'uploadphotos', component: PhotoUploadComponent },
+    { path: 'editphotos', component: EditPhotosComponent },
     { path: 'functions', component: FunctionsComponent },
     { path: 'userslist', component: UsersListComponent },
-    { path: 'editamount', component: EditamountComponent },
+    { path: 'editFinances', component: EditFinancesComponent },
     { path: 'editnews', component: EditnewsComponent },
+    { path: 'editvideos', component: EditvideosComponent },
     { path: 'editfaq', component: EditfaqComponent },
-    { path: '', pathMatch: 'full', component: PhotoUploadComponent }
+    { path: '', pathMatch: 'full', component: EditPhotosComponent }
   ] },
   { path: 'register', component: RegisterComponent },
   { path: 'news', component: NewsComponent },

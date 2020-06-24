@@ -27,14 +27,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { MissionComponent } from './components/mission/mission.component';
 import { RelieveComponent } from './components/relieve/relieve.component';
-import { Jan052019Component } from './components/protests/jan052019/jan052019.component';
+import { Jan052019Component } from './components/mission-photographs/photos.component';
 import { ImagesService } from './services/images.service';
 import { MemberEditComponent } from './components/membership/edit/userEdit.component';
 import { UserEditResolver } from './resolvers/user-edit-resolver';
 import { CockpitComponent } from './components/cockpit/cockpit.component';
-import { PhotoUploadComponent } from './components/cockpit/photo-upload/photo-upload.component';
-import { UsersListComponent } from './components/cockpit/users-list/users-list.component';
-import { EditamountComponent } from './components/cockpit/editamount/editamount.component';
+import { UsersListComponent } from './components/cockpit/edit-users/users-list.component';
+import { EditFinancesComponent } from './components/cockpit/editFinances/editFinances.component';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { EditnewsComponent } from './components/cockpit/editnews/editnews.component';
@@ -62,6 +61,9 @@ import { VideosComponent } from './components/videos/videos.component';
 import { VideoService } from './components/videos/video.service';
 import { RatingComponent } from './components/rating/rating.component';
 import { MatVideoModule } from 'mat-video';
+import { EditvideosComponent } from './components/cockpit/editvideos/editvideos.component';
+import { EditPhotosComponent } from './components/cockpit/edit-photos/edit-photos.component';
+import { CockpitPhotoService } from './services/cockpit-photos.service';
 
 export function tokenGetter() {
   return localStorage.getItem('eliteToken');
@@ -82,9 +84,9 @@ export function tokenGetter() {
     Jan052019Component,
     MemberEditComponent,
     CockpitComponent,
-    PhotoUploadComponent,
+    EditPhotosComponent,
     UsersListComponent,
-    EditamountComponent,
+    EditFinancesComponent,
     EditnewsComponent,
     NewsComponent,
     AboutComponent,
@@ -101,7 +103,8 @@ export function tokenGetter() {
     FaqComponent,
     EditfaqComponent,
     VideosComponent,
-    RatingComponent
+    RatingComponent,
+    EditvideosComponent
   ],
   imports: [
     BrowserModule,
@@ -133,7 +136,8 @@ export function tokenGetter() {
     CockpitFaqService,
     FaqService,
     NewsService,
-    VideoService
+    VideoService,
+    CockpitPhotoService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

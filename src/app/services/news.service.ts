@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { UserDto } from '../components/home/UserDto';
+import { IUser } from '../interfaces/User-creation.interface';
 import { Subject } from 'rxjs';
 import { Claim } from '../components/generic-modal/generic-modal.component';
 import { IFaqGet } from '../interfaces/faqs-get.interface';

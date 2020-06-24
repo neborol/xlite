@@ -41,3 +41,12 @@
 .rating > label:hover ~ input:checked ~ label {
     color: #ea0;
 }
+
+.rating-stars-container {
+    position: relative;
+}
+.rating-value {
+    position: absolute;
+    top: -7px;
+    right: -25px;
+}

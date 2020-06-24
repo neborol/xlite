@@ -42,6 +42,10 @@ body {
   margin: 0 auto;
 }
 
+.padding-container {
+  padding: 0 20px;
+}
+
 .app-header {
   justify-content: space-between;
   position: fixed;
@@ -446,7 +450,7 @@ mat-drawer-container {
   width: 80vw !important;
 }
 
-.news_edit_container {
+.cockpit_edit_container {
   min-height: 688px;
   .mat-tab-label-container {
     background-color: #3f51b5 !important;
@@ -461,12 +465,79 @@ mat-drawer-container {
   }
 }
 
-// style the video image in the videoplayer
-.video {
-  width: 100%;
-  max-height: 800px;
-  margin: 0 auto;
+.edit-icon-container {
+  border: solid 1px #99cef1;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  cursor: pointer;
 }
+
+.item-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+@mixin spec-btn {
+  min-width: 87px !important;
+  margin: 10px 5px !important;
+  text-align: center !important;
+  padding: 0 4px !important;
+}
+.yellow-btn {
+  background-color: rgb(255, 187, 0);
+  @include spec-btn;
+}
+.green-btn {
+  background-color: green;
+  color: white;
+  @include spec-btn;
+}
+.regular-btn {
+  background-color: rgb(185, 187, 185);
+  @include spec-btn;
+}
+
+
+.search-container {
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background-color: rgb(63, 81, 181);
+      height: 2px!important;
+  }
+}
+
+.std-flex-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.parent-card-container {
+  padding: 4px !important;
+}
+
+// style the video image in the videoplayer
+.video-modal-inner-container {
+  .video {
+    width: 100%;
+    max-height: 800px;
+    margin: 0 auto;
+  }  
+}
+.video-upload-container {
+  .video {
+    width: 250px !important;
+    max-height: 200px !important;
+  }  
+  .videoplayer {
+    width: 230px !important;
+  }  
+}
+
 
 @keyframes example {
   from {
@@ -475,5 +546,43 @@ mat-drawer-container {
 
   to {
     top: 0;
+  }
+}
+
+
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
   }
 }

@@ -1,9 +1,10 @@
-export interface IVideo {
-    name: string;
-    description: string;
-    rating: number;
-    category: string;
-    actor: string;
-    img: string;
-    videoSource: string;
+export interface IVideoGet {
+    videoId: number;
+    videoTitle: string;
+    videoDescription: string;
+    videoCategory: string;
+    posterPath: string;
+    videoPath: string;
+    dataCreated: Date;
+    Rating: number;
 }

@@ -1,0 +1,60 @@
+
+.jan05-protests {
+    width: 100%;
+    max-width: 900px;
+    margin: 85px auto;
+    .img-caption {
+        border: solid 1px #ddd;
+        border-radius: 0 0 0.25rem 0.25rem;
+        background-color: #e3dddf;
+        font-size: 16px;
+        text-align: left;
+        margin-top: -5px;
+        max-width: 665px;
+        padding-left: 15px;
+    }
+
+    .imgg-container {
+        height: 557px; // Note that in order for the images to lazy load, this height must be set.
+        img {
+            // width: 100%;
+            max-width: 900px;
+            max-height: 500px;
+        }
+    }
+
+    .rounded {
+        border-radius: .25rem .25rem 0 0 !important; 
+    }    
+}
+
+.animated {
+    visibility: visible !important;
+}
+.hide-on-init {
+    visibility: hidden;
+}
+
+.test-pos {
+    position: fixed;
+    right: 0;
+    top: 48px;
+    z-index: 5;
+    background: #c3e2ed;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    height: 27px;
+    padding: 5px;
+}
+
+.mission-image {
+    max-height: 500px;
+}
+
+
+@media(max-width : 730px){
+    .jan05-protests {
+        margin: 4px auto;
+    }
+}

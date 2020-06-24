@@ -1,0 +1,205 @@
+<div class="std-flex-box">
+  <div style="width: 250px;">
+    <h3 style="width: 100%;">Work on Users' Finances:</h3>
+  </div>
+  <div class="search-container">
+    <mat-icon (click)="searchMember(query)" class="person-search-icon">person_search</mat-icon>
+    <mat-form-field class="search-field">
+      <mat-label>Search By Code Number</mat-label>
+      <input matInput type="text" #query placeholder="Search A Member" (keyup.enter)="reactToEnterKey(query)">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+
+<div style="max-width: 250px;">
+  <mat-card>
+    <h4>Total Anual Contributions:</h4>
+    <mat-chip-list aria-label="Totals section">
+      <div class="amount-container">
+        <div *ngIf="grandTotal">
+          <span class="total-amounts">Members:</span>
+          <mat-chip color="primary" selected>{{ grandTotal }} $</mat-chip>
+        </div>
+      </div>
+    </mat-chip-list>
+  </mat-card>
+</div>
+
+<div class="cockpit_edit_container">
+  <div class="design-standard-container">
+    <p *ngIf="!members"><em>Loading...</em></p>
+    <mat-card class="parent-card-container">
+      <mat-card-content class="container">
+
+        <div *ngFor="let user of members; let i = index" class="design-item-container">
+          <mat-card>
+            <div>
+              <div class="item-title">
+                <span class="user-item">{{ user.firstName }}</span>
+                <span class="user-item">{{ user.lastName }}</span>
+                <span style="background-color: rgb(224, 240, 247);" class="user-item">{{ user.codeNr }}</span>
+                <span (click)="addAMonthlyContributions(addContribution, user)" class="amount-icon-container">
+                  <mat-icon class="edit-article-button">plus_one</mat-icon>
+                </span>
+                <span (click)="getUserContributions(listContributionsModal, user)" class="edit-icon-container">
+                  <mat-icon class="edit-article-button">list</mat-icon>
+                </span>
+              </div>
+            </div>
+          </mat-card>
+          <div *ngIf="i === members.length-1" class="spacer"></div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<ng-template #addContribution>
+  <div class="design-standard-container article-edit-container">
+    <span (click)="closeModal()" class="close-Icon-wrapper">
+      <mat-icon class="close-icon">highlight_off</mat-icon>
+    </span>
+    <div><span class="item-title"> Add Contributions for: <span style="color: blue;">{{ selectedUser.firstName }}
+          {{ selectedUser.lastName }}.</span> </span></div>
+    <mat-card class="parent-card-container">
+      <mat-card-content class="container">
+        <form [formGroup]="contributionsForm" novalidate>
+
+          <div class="design-item-container padding-container">
+            <mat-card>
+              <div class="form-control-title">
+                <mat-icon class="edit-article-button">event_note</mat-icon>
+                <span style="margin: 4px;">Select the Month</span>
+              </div>
+              <mat-form-field style="width: 193px;">
+                <mat-label>Select a Month and Year</mat-label>
+                <input readonly matInput [matDatepicker]="dp" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="dp" style="font-size: 24px;"></mat-datepicker-toggle>
+                <mat-datepicker #dp startView="multi-year" panelClass="example-month-picker">
+                </mat-datepicker>
+              </mat-form-field>
+            </mat-card>
+          </div>
+
+          <div class="design-item-container">
+            <mat-card>
+              <div class="form-control-title">
+                <mat-icon class="edit-article-button">monetization_on</mat-icon>
+                <span style="margin: 4px;">Contribution Amount</span>
+              </div>
+              <mat-form-field style="width: 152px;">
+                <input matInput name="amount" formControlName="amount" placeholder="Amount" type="text" />
+              </mat-form-field>
+            </mat-card>
+          </div>
+
+          <div class="design-item-container">
+            <mat-card>
+              <div class="form-control-title">
+                <mat-icon class="edit-article-button">comment</mat-icon>
+                <span style="margin: 4px;">Enter A Comment</span>
+              </div>
+              <mat-form-field style="width: 100%;">
+                <textarea matInput name="comments" formControlName="comments" placeholder="Comments if any"></textarea>
+              </mat-form-field>
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <div>
+        <button (click)="sumbmitMonthlyContribution()" mat-raised-button color="primary"
+          [disabled]="!contributionsForm.valid">
+          Submit Amount
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+</ng-template>
+
+
+
+
+
+
+<ng-template #listContributionsModal>
+  <div class="design-standard-container article-edit-container">
+    <span (click)="closeModal()" class="close-Icon-wrapper">
+      <mat-icon class="close-icon">highlight_off</mat-icon>
+    </span>
+    <div><span class="item-title"> Contributions for the Year, for : <span
+          style="color: blue;">{{ selectedUser.firstName }} {{ selectedUser.lastName }}.</span> </span></div>
+    <mat-card class="parent-card-container">
+      <mat-card-content class="container">
+        <!-- *ngFor="let subsc of userSubscriptions" -->
+        <div class="design-item-container">
+          <mat-card class="std-flex-box">
+            <div><span class="item-title">Delete Selected User:</span></div>
+            <div>
+
+              <table mat-table [dataSource]="userSubscriptions" matSort class="mat-elevation-z8">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                  <td mat-cell *matCellDef="let element"> {{element.subscriptionId}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Month </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="amount">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                  <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="comment">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Comment </th>
+                  <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+            </div>
+          </mat-card>
+          <div class="spacer"></div>
+        </div>
+
+      </mat-card-content>
+      <div class="news-form-submit-btn-container std-flex-box">
+        <button (click)="closeModal()" mat-raised-button color="primary">
+          Close
+        </button>
+        <mat-chip-list aria-label="Totals section">
+            <div class="amount-container">
+                <div>
+                    <span class="total-amounts">Yearly Total for {{ selectedUser.firstName }}: </span>
+                    <mat-chip color="primary" selected>{{userSubscriptions[userSubscriptions.length-1].total}} $</mat-chip>
+                </div>
+            </div>
+        </mat-chip-list>
+      </div>
+    </mat-card>
+  </div>
+
+</ng-template>
