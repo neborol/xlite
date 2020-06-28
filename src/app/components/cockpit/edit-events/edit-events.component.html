@@ -1,0 +1,217 @@
+<div class="custom-tabs-container cockpit_edit_container">
+  <mat-tab-group mat-align-tabs="start">
+
+    <mat-tab label="Add an Event">
+
+      <div class="mission-photo-edit-container">
+        <mat-card class="parent-card-container">
+          <mat-card-content class="container">
+            <form [formGroup]="addEventsForm" novalidate>
+              <!-- title -->
+              <div class="design-item-container">
+                <mat-card>
+                  <div class="form-control-title">
+                    <mat-icon class="icon-lable">info</mat-icon>
+                    <span class="title-content">Enter the title</span>
+                  </div>
+                  <mat-form-field style="width: 100%;">
+                    <textarea matInput name="title" formControlName="title" placeholder="Event Title"></textarea>
+                  </mat-form-field>
+                </mat-card>
+                <div class="spacer"></div>
+              </div>
+              <!-- Event description -->
+              <div class="design-item-container">
+                <mat-card>
+                  <div class="form-control-title">
+                    <mat-icon class="icon-lable">description</mat-icon>
+                    <span class="title-content">Enter the event description</span>
+                  </div>
+                  <mat-form-field style="width: 100%;">
+                    <textarea matInput name="description" formControlName="description"
+                      placeholder="Event Description"></textarea>
+                  </mat-form-field>
+                </mat-card>
+                <div class="spacer"></div>
+              </div>
+              <!-- date picker  -->
+              <div class="design-item-container">
+                <mat-card>
+                  <div class="form-control-title">
+                    <mat-icon class="icon-lable">calendar_today</mat-icon>
+                    <span class="title-content">Chose event date and enter time</span>
+                  </div>
+
+                  <mat-form-field appearance="fill" style="max-width: 170px;">
+                    <mat-label>Choose a date</mat-label>
+                    <input readonly matInput formControlName="eventDate" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker" style="font-size: 19px;"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <mat-form-field style="max-width: 130px;">
+                    <mat-label>Enter event time</mat-label>
+                    <input matInput type="text" formControlName="time" placeholder="Event Time">
+                  </mat-form-field>
+
+                </mat-card>
+                <div class="spacer"></div>
+              </div>
+              <!-- venue -->
+              <div class="design-item-container">
+                <mat-card>
+                  <div class="form-control-title">
+                    <mat-icon class="icon-lable">room</mat-icon>
+                    <span class="title-content">Enter the location address</span>
+                  </div>
+                  <mat-form-field style="width: 60%;">
+                    <textarea matInput name="venue" formControlName="venue" placeholder="Event Venue"></textarea>
+                  </mat-form-field>
+                </mat-card>
+                <div class="spacer"></div>
+              </div>
+              <!-- comments -->
+              <div class="design-item-container">
+                <mat-card>
+                  <div class="form-control-title">
+                    <mat-icon class="icon-lable">comment</mat-icon>
+                    <span class="title-content">Enter a comment</span>
+                  </div>
+                  <mat-form-field style="width: 100%;">
+                    <textarea matInput name="comment" formControlName="comment"
+                      placeholder="Comments if any"></textarea>
+                  </mat-form-field>
+                </mat-card>
+                <div class="spacer"></div>
+              </div>
+
+
+            </form>
+          </mat-card-content>
+
+          <div class="form-submit-btn-container">
+            <button mat-raised-button color="primary" [disabled]="addEventsForm.invalid" class="submit-btn"
+              (click)="creaeEvent()">
+              Submit Event
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+
+    <mat-tab label="Edit an Event" selectedIndex="1">
+      <!-- Edit a specific Event -->
+      <div class="design-standard-container">
+        <p *ngIf="!events2Display"><em>Loading...</em></p>
+        <mat-card class="parent-card-container">
+          <mat-card-content class="container">
+
+            <div *ngFor="let evt of events2Display; let i = index" class="design-item-container">
+              <mat-card>
+                <div>
+                  <div class="item-title">
+                    <span class="item">{{ evt.title }}</span>
+                    <span (click)="editSelectedEvent(eventDetailsModal, evt)" class="edit-icon-container">
+                      <mat-icon class="edit-article-button">edit</mat-icon>
+                    </span>
+                  </div>
+                </div>
+              </mat-card>
+              <div *ngIf="i === events2Display.length-1" class="spacer"></div>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>
+
+
+
+
+
+<!-- Modal contents -->
+<ng-template #eventDetailsModal>
+  <div class="design-standard-container event-edit-container">
+    <mat-card class="parent-card-container">
+      <span (click)="closeModal()" class="close-Icon-wrapper">
+        <mat-icon class="close-icon">highlight_off</mat-icon>
+      </span>
+      <mat-card-content class="container">
+        <form [formGroup]="editEventsForm" novalidate>
+          <!-- title -->
+          <div class="design-item-container">
+            <mat-card>
+              <mat-form-field style="width: 100%;">
+                <textarea matInput name="title" formControlName="title" placeholder="Event Title"></textarea>
+              </mat-form-field>
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+          <!-- Event description -->
+          <div class="design-item-container">
+            <mat-card>
+              <mat-form-field style="width: 100%;">
+                <textarea matInput name="description" formControlName="description"
+                  placeholder="Event Description"></textarea>
+              </mat-form-field>
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+          <!-- date picker  -->
+          <div class="design-item-container">
+            <mat-card>
+
+              <mat-form-field appearance="fill" style="max-width: 170px;">
+                <mat-label>Choose a date</mat-label>
+                <input readonly matInput formControlName="eventDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker" style="font-size: 19px;"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <mat-form-field style="max-width: 130px;">
+                <mat-label>Enter event time</mat-label>
+                <input matInput type="text" formControlName="time" placeholder="Event Time">
+              </mat-form-field>
+
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+          <!-- venue -->
+          <div class="design-item-container">
+            <mat-card>
+              <mat-form-field style="width: 60%;">
+                <textarea matInput name="venue" formControlName="venue" placeholder="Event Venue"></textarea>
+              </mat-form-field>
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+          <!-- comments -->
+          <div class="design-item-container">
+            <mat-card>
+              <mat-form-field style="width: 100%;">
+                <textarea matInput name="comment" formControlName="comment" placeholder="Comments if any"></textarea>
+              </mat-form-field>
+            </mat-card>
+            <div class="spacer"></div>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <div class="form-submit-btn-container">
+        <button (click)="updateAnEventItem()" [disabled]="editEventsForm.invalid" mat-raised-button color="primary">
+          Submit Edited Data
+        </button> 
+
+        <button style="margin-left: 10px;" (click)="deleteAnEventItem()" mat-raised-button color="basic">
+          Delete this Event <mat-icon>arrow_upward</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+
+</ng-template>

@@ -16,6 +16,7 @@
     <label title="Sucks big time" (click)='onClick(1)'>1 star</label>
   </fieldset>
   <span class="rating-value">{{ rating }}</span>
+  <span *ngIf="!userLoggedIn" (click)="mustbeLoggedInFirstResponse()" class="rating-cover"></span>
 </div>
 
 

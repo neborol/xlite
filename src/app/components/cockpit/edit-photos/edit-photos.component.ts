@@ -34,8 +34,8 @@ export class EditPhotosComponent implements OnInit {
   photos2Edit: any[] = [];
   currentImage2UpdateForm: FormGroup;
   currentSelectedPhoto;
-  alphaNRegex = '^[0-9a-zA-Z \. \\ \-_,\t\r\n\'\"]+$';
-  editAlphaNRegex = /^[^<>\}\{!=\/]*$/;
+  alphaNRegex = environment.alphaNRegex;
+  editAlphaNRegex = environment.editAlphaNRegex;
   deleteRequested = false;
 
 

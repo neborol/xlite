@@ -1,5 +1,5 @@
 .headlines-inner-container {
-    margin: 15px;
+    margin: 5px;
     display: flex;
     flex-wrap: wrap-reverse;
 }
@@ -10,4 +10,8 @@
     position: absolute;
     left: 0px;
     top: -1px;
+}
+
+.custom-tabs-container {
+    min-height: 650px;
 }

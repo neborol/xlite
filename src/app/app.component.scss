@@ -1,0 +1,9 @@
+@import '../variables.scss';
+
+.footer-container {
+    min-height: 50px;
+    border-top: solid 2px $blueDesignBorderColor;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: $designGray;
+}

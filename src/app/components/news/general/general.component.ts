@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, TemplateRef } from 
 import { INewsArticlesGet } from 'src/app/interfaces/news-article-get.interface';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material';
+import { NewsService } from 'src/app/services/news.service';
 
 @Component({
   selector: 'app-general',
@@ -14,9 +15,18 @@ export class GeneralComponent implements OnInit, OnChanges {
   rootUrl: string = environment.rootUrl;
   currentItem: INewsArticlesGet;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private newsService: NewsService) { }
 
   ngOnInit() {
+    this.newsService.getNewsArticles('general').subscribe((articles: INewsArticlesGet[]) => {
+
+      this.generalItemsArray = articles.sort((a: any, b: any) => {
+        return (new Date(b.datePublished) as any) - (new Date(a.datePublished) as any);
+      }).map(x => {
+        x.imagePath = this.rootUrl + x.imagePath.split('\\').join('/');
+        return x;
+      });
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

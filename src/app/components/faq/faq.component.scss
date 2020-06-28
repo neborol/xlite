@@ -2,7 +2,7 @@
 
 
 .faq-page {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .mat-form-field+.mat-form-field {
@@ -10,9 +10,21 @@
 }
 
 .accordion-body {
-    background-color: white;
-    padding: 10px;
-    color: black;
-    font-size: 16px;
-    border: solid 1px $blueDesignBorderColor;
+  background-color: white;
+  padding: 10px;
+  color: black;
+  font-size: 16px;
+  // border: solid 1px $blueDesignBorderColor;
+}
+
+.inner-main-container {
+  padding: 10px 20px;
+  min-height: 650px;
+}
+
+.accordion-body {
+  background-color: $designGray;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.8);
 }

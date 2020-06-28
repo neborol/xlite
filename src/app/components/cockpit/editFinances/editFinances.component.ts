@@ -21,6 +21,7 @@ import { CockpitFinanceService } from 'src/app/services/cockpit-finance.service'
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { environment } from 'src/environments/environment';
 
 
 export interface IAmountDto {
@@ -79,7 +80,7 @@ export class EditFinancesComponent implements OnInit {
   selectedMonth = 'None';
   contributionsForm: FormGroup;
   numberRegex = '^[0-9]+$';
-  alphaNRegex = '^[0-9a-zA-Z \. \\ \-_,\t\r\n\'\"]+$';
+  alphaNRegex = environment.alphaNRegex;
   // date = new FormControl(moment());
   userSubscriptions: IAmountDto[];
 
@@ -124,13 +125,14 @@ export class EditFinancesComponent implements OnInit {
 
   getAllMembers(search?) {
     this.userService.getUsers().subscribe((allUsers: IUser[]) => {
-      this.members = allUsers.filter(u => {
-        if (search) {
+      this.members = allUsers;
+
+      // If there is a search object, this.members above will be overridden by the filter bellow.
+      if (search) {
+        this.members = allUsers.filter(u => {
           return u.codeNr === search.value;
-        } else {
-          return true;
-        }
-      });
+        });
+      }
     });
   }
 
@@ -138,8 +140,9 @@ export class EditFinancesComponent implements OnInit {
     this.getAllMembers(searchTerm);
   }
 
-  reactToEnterKey(v) {
-    this.searchMember(v);
+  resetSearchResult(query) {
+    query.value = '';
+    this.searchMember('');
   }
 
   addAMonthlyContributions(templateRef: TemplateRef<any>, data) {

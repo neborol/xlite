@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:5001/api/',
   rootUrl: 'http://localhost:5001/',
-  serverUrl: 'http://localhost:5001/'
+  serverUrl: 'http://localhost:5001/',
+  alphaNRegex: '^[0-9a-zA-Z \. \\ \-_,\t\r\n\'\"]+$',
+  editAlphaNRegex: /^[^<>\}\{!=\/]*$/
 };
 
 /*

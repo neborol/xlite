@@ -1,17 +1,15 @@
 <div class="standard-page">
   <br><br><br>
 
-  <div class="unit_container">
-    <div class="headlines-inner-container">
-      <div style="flex: 2" class="tab-description">
-        
+  <div class="news-like_container">
+      <div class="top-header-container">
           <span class="tab-header">{{ tabDescriptionObject[tabIndex].title }}</span>
           <ul style="margin: 0">
             <li *ngFor="let item of tabDescriptionObject[tabIndex].features">{{ item }}</li>
           </ul>
-        
       </div>
-      <div style="flex: 3;" class="news-headlines">
+
+      <div class="news-headlines header-btm-adjust">
         <div class="news-flash-container">
           <div class="inner-flash-container">
             <span class="flash-header">Our Top News Message:</span>
@@ -19,8 +17,8 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
+
 
   <div class="custom-tabs-container">
     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabchange($event)">

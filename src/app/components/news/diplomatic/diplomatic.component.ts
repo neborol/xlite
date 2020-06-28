@@ -23,9 +23,10 @@ export class DiplomaticComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.newsService.getNewsArticles('diplomatic').subscribe((articles: INewsArticlesGet[]) => {
-      console.log('Articles', articles);
 
-      this.newsThumbData = articles.map(x => {
+      this.newsThumbData = articles.sort((a: any, b: any) => {
+        return (new Date(b.datePublished) as any) - (new Date(a.datePublished) as any);
+      }).map(x => {
         x.imagePath = this.rootUrl + x.imagePath.split('\\').join('/');
         return x;
       });

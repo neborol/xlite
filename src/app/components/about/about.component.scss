@@ -1,0 +1,74 @@
+@import '../../../variables.scss';
+
+
+
+.headlines-inner-container {
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.inner-flash-container {
+  position: relative;
+}
+
+
+
+.inner-main-container {
+  width: 100%;
+  height: 100%;
+  padding: 1px 10px 0;
+}
+
+.design-item-container {
+  background-color: $designGray;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
+.parent-card-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 15px auto;
+}
+
+.about-item-container {
+  display: flex;
+}
+
+.about-content {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  .about-text-content {
+    margin-right: 7px;
+  }
+  .about-img-container {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    .about-image {
+      width: 100%;
+      border: solid 2px $designBabyBlue;
+    }
+  }
+}
+
+@media(max-width: 780px) {
+    .about-item-container {
+        flex-wrap: wrap;
+    }
+}
+
+@media(min-width: 780px) {
+    .about-content {
+        .about-text-content {
+            margin-right: 7px;
+            flex: 2;
+        }
+        .about-img-container {
+            flex: 1;
+        }
+    }
+}

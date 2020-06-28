@@ -7,6 +7,7 @@ import { IFaqGet } from 'src/app/interfaces/faqs-get.interface';
 import { FaqService } from 'src/app/services/faq.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -21,7 +22,7 @@ export class EditfaqComponent implements OnInit {
   editMode = false;
   deleteMode = false;
   deleteConfirmed = false;
-  alphaNRegex = '^[0-9a-zA-Z]+$';
+  alphaNRegex = environment.alphaNRegex;
   listOfFaqs: IFaqGet[];
   currentItem: IFaqGet;
 

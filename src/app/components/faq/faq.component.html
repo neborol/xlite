@@ -1,4 +1,56 @@
-<div class="standard-page faq-page">
+  <div class="standard-page">
+      <br><br><br>
+    
+      <div class="unit_container">
+        <div class="top-header-container">
+          <span class="tab-header">Frequently Asked Questions</span>
+        </div>
+    
+        <div class="news-headlines header-btm-adjust">
+          <div class="news-flash-container">
+            <div class="inner-flash-container">
+              <span class="flash-header">Our Top News Message:</span>
+              <app-news-flash></app-news-flash>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+      <div class="main-page-container">
+        <div class="design-bar"></div>
+        <div class="inner-main-container">
+ 
+    
+    
+            <mat-accordion>
+
+                <mat-expansion-panel *ngFor="let faq of listOfFaqs" class="accordion-title-panel">
+                  <mat-expansion-panel-header style="height: 36px">
+                    <mat-panel-title>
+                      {{ faq.faqQuestion }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="accordion-body">
+                        {{ faq.faqAnswer }}
+                  </div>
+                </mat-expansion-panel>
+
+
+                
+              </mat-accordion>
+         
+    
+    
+        </div>
+      </div>
+    </div>
+    
+
+
+
+
+    <!-- <div class="standard-page faq-page">
     <br>
   
     <div class="unit_container">
@@ -30,4 +82,4 @@
     </div>
   
 
-  </div>
+  </div> -->

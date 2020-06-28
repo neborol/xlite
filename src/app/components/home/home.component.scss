@@ -1,0 +1,35 @@
+
+@import '../../../variables.scss';
+
+
+.headlines-inner-container {
+    margin: 5px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+.inner-flash-container {
+    position: relative;
+}
+.flash-header {
+    position: absolute;
+    left: 0px;
+    top: -1px;
+}
+
+.inner-main-container {
+    width: 100%;
+    min-height: 630px;
+    padding: 1px 10px 0;
+}
+.design-item-container {
+    background-color: $designGray;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+.parent-card-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}

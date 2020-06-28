@@ -27,6 +27,7 @@ export class VideosComponent implements OnInit {
 
   @ViewChild('eliteVideo', {static: false}) matVideo: MatVideoComponent;
   videoElement: HTMLVideoElement;
+  userLoggedIn = false;
 
   constructor(
     public dialog: MatDialog,
@@ -52,6 +53,9 @@ export class VideosComponent implements OnInit {
       });
 
       // this.videoElement = this.matVideo.getVideoTag();
+      if (this.authService.isLoggedIn()) {
+        this.userLoggedIn = true;
+      }
     });
   }
 
@@ -68,7 +72,8 @@ export class VideosComponent implements OnInit {
     this.ratingsObj.rating = evt.rating;
   }
 
-  submitRating() {
+  submitRating(val) {
+    if (val === 0) { }
     this.videosService.postVideoRating(this.ratingsObj).subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);

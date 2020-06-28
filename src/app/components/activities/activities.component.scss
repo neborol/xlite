@@ -1,0 +1,79 @@
+@import '../../../variables.scss';
+
+.headlines-inner-container {
+    margin: 5px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+.inner-flash-container {
+    position: relative;
+}
+.flash-header {
+    position: absolute;
+    left: 0px;
+    top: -1px;
+}
+
+
+.inner-main-container {
+    width: 100%;
+    padding: 1px 10px 0;
+    min-height: 675px;
+}
+
+.design-item-container {
+    background-color: $designBabyBlue;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+.parent-card-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.program-list {
+    font-weight: 600;
+    min-width: 81px;
+    display: inline-block;
+}
+
+.design-card-title2 {
+    font-weight: 700;
+    border-bottom: solid 2px $listingDesignColor;
+    border-left: solid 2px $listingDesignColor;
+    padding-bottom: 2px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.description-line {
+    margin: 0px 0px 0px 13px;
+    border-bottom: solid 2px $listingDesignColor;
+    position: relative;
+    padding-left: 4px;
+    border-left: solid 2px $listingDesignColor;
+}
+.list-details {
+    margin: -2px 0 0 30px;
+    padding-left: 14px;
+    border-left: solid 2px $listingDesignColor;
+    background-color: white;
+    position: relative;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    ul li::before {
+        content: "-";
+        color: $listingDesignColor;
+        font-weight: bold;
+        display: inline-block; 
+        width: 1em;
+        margin-left: -1em;
+      }
+}

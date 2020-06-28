@@ -29,8 +29,8 @@ export interface IvideoData {
 export class EditvideosComponent implements OnInit {
   tabIndex = 0;
   tabDescriptionObject: TabDescr[];
-  alphaNRegex = '^[0-9a-zA-Z \. \\ \-_,\t\r\n\'\"]+$';
-  editAlphaNRegex = /^[^<>\}\{!=\/]*$/;
+  alphaNRegex = environment.alphaNRegex;
+  editAlphaNRegex = environment.editAlphaNRegex;
   selected = 'None';
   addVideoForm: FormGroup;
   newsScrollbarForm: FormGroup;

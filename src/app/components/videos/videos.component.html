@@ -32,7 +32,7 @@
                   <p>{{ video.description }}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button *ngIf="video.rating === 0" (click)="submitRating()" mat-raised-button style="line-height: 25px;">Rate</button>
+                  <button *ngIf="video.rating === 0" (click)="submitRating(video.rating)" mat-raised-button style="line-height: 25px;"> <span *ngIf="userLoggedIn">Rate</span></button>
                   <button  *ngIf="video.rating > 0" (click)="unRate(video)" mat-raised-button style="line-height: 25px;">Un Rate</button>
                   <div class="rating-stars">
                     <app-rating [rating]="video.rating" [videoId]="video.videoId"

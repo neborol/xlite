@@ -7,6 +7,7 @@ import { IResponse } from 'src/app/interfaces/response.interface';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { FormControl} from '@angular/forms';
 import 'moment/locale/pt-br';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class UsersListComponent implements OnInit {
   searchTerm = '';
   selectedMonth = 'None';
   numberRegex = '^[0-9]+$';
-  alphaNRegex = '^[0-9a-zA-Z \. \\ \-_,\t\r\n\'\"]+$';
+  alphaNRegex = environment.alphaNRegex;
   // date = new FormControl(moment());
 
 
@@ -45,14 +46,20 @@ export class UsersListComponent implements OnInit {
 
   getAllMembers(search?) {
     this.userService.getUsers().subscribe((allUsers: IUser[]) => {
-      this.members = allUsers.filter(u => {
-        if (search) {
+      this.members = allUsers;
+      // If there is a search object, this.members above will be overridden by the filter bellow.
+      if (search) {
+        this.members = allUsers.filter(u => {
           return u.codeNr === search.value;
-        } else {
-          return true;
-        }
-      });
+        });
+      }
     });
+  }
+
+
+  resetSearchResult(query) {
+    query.value = '';
+    this.getAllMembers('');
   }
 
   searchMember(searchTerm): void {

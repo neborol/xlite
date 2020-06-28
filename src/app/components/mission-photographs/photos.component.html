@@ -1,4 +1,4 @@
-<!-- <div class="jan05-protests">
+<!-- <div class="image-holder">
         <p>
             Total images displayed: 
             <strong>{{ totalImagesShown }}</strong>
@@ -7,7 +7,7 @@
     <div class="imgg-container" *ngFor="let image of missionPhotos" (deferLoad)="image.show = true">
         <ng-container *ngIf="image.show">
             <img [src]="image.url"
-                class="rounded  hide-on-init"
+                class="image-parent  hide-on-init"
                 animateOnScroll animationName="animated zoomInDown"/>
                 <div class="img-caption" animateOnScroll animationName="animated zoomInDown">{{ image.caption }}</div>
                 <div class="dark_bg" animateOnScroll animationName="animated zoomInDown"></div>
@@ -15,23 +15,26 @@
     </div>
 </div> -->
 
-<div class="jan05-protests">
-    <p class="test-pos">
-        <strong>{{ totalImagesShown }}</strong> Images being displayed of <strong>{{ totalImages }}</strong> 
-    </p>
+<div class="image-holder">
+  <p class="img-pos">
+    <strong>{{ totalImagesShown }}</strong> Images being displayed of <strong>{{ totalImages }}</strong>
+  </p>
 
+  <div class="imgg-container" *ngFor="let image of missionPhotos" (deferLoad)="image.show = true">
+    <ng-container *ngIf="image.show">
+      <div class="image-parent hide-on-init" animateOnScroll animationName="animated zoomInDown">
+        <img style="width: auto; height: 100%;" src="{{image.url}}" alt="Mission Photo">
+      </div>
+      <div class="img-caption" animateOnScroll animationName="animated zoomInDown">
+        <span class="caption-holder">{{ image.caption }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <!-- 
     <div class="imgg-container" *ngFor="let image of missionPhotos" (deferLoad)="image.show = true">
         <ng-container *ngIf="image.show">
-            <img class="rounded hide-on-init mission-image" src="{{image.url}}" alt="Mission Photo" animateOnScroll animationName="animated zoomInDown">
-            <div class="img-caption" animateOnScroll animationName="animated zoomInDown">{{ image.caption }}</div>
-            <div class="dark_bg" animateOnScroll animationName="animated zoomInDown"></div>
-        </ng-container>
-    </div>
-<!-- 
-    <div class="imgg-container" *ngFor="let image of missionPhotos" (deferLoad)="image.show = true">
-        <ng-container *ngIf="image.show">
-            <img class="mission-image" src="{{ image.url }}"
-                class="rounded hide-on-init"
+            <img class="image-parent" src="{{ image.url }}"
+                class="image-parent hide-on-init"
                 animateOnScroll animationName="animated zoomInDown"/>
                 <div class="img-caption" animateOnScroll animationName="animated zoomInDown">{{ image.caption }}</div>
                 <div class="dark_bg" animateOnScroll animationName="animated zoomInDown"></div>
@@ -40,3 +43,17 @@
 </div>
 
 
+
+
+
+<!-- <mat-card class="parent-card-container">
+  <mat-card-content class="container">
+    <div class="design-item-container padding-container">
+      <mat-card>
+
+
+      </mat-card>
+      <div class="spacer"></div>
+    </div>
+  </mat-card-content>
+</mat-card> -->

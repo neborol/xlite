@@ -41,7 +41,7 @@ import { NewsComponent } from './components/news/news.component';
 import { AboutComponent } from './components/about/about.component';
 import { DonationsComponent } from './components/donations/donations.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
-import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DiplomaticComponent } from './components/news/diplomatic/diplomatic.component';
 import { GeneralComponent } from './components/news/general/general.component';
@@ -64,6 +64,7 @@ import { MatVideoModule } from 'mat-video';
 import { EditvideosComponent } from './components/cockpit/editvideos/editvideos.component';
 import { EditPhotosComponent } from './components/cockpit/edit-photos/edit-photos.component';
 import { CockpitPhotoService } from './services/cockpit-photos.service';
+import { EditEventsComponent } from './components/cockpit/edit-events/edit-events.component';
 
 export function tokenGetter() {
   return localStorage.getItem('eliteToken');
@@ -92,7 +93,7 @@ export function tokenGetter() {
     AboutComponent,
     DonationsComponent,
     ActivitiesComponent,
-    ContactUsComponent,
+    FooterComponent,
     PageNotFoundComponent,
     DiplomaticComponent,
     GeneralComponent,
@@ -104,7 +105,8 @@ export function tokenGetter() {
     EditfaqComponent,
     VideosComponent,
     RatingComponent,
-    EditvideosComponent
+    EditvideosComponent,
+    EditEventsComponent
   ],
   imports: [
     BrowserModule,
