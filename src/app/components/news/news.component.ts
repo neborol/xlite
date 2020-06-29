@@ -19,6 +19,10 @@ export class NewsComponent implements OnInit {
   homeAwayArray: INewsArticlesGet[] = [];
   generalArray: INewsArticlesGet[] = [];
 
+  diplomatic = true;
+  homeAway = false;
+  general = false;
+
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
@@ -52,6 +56,7 @@ export class NewsComponent implements OnInit {
     this.tabIndex = evt.index;
     switch (evt.index) {
       case 0:
+        this.diplomatic = true;
         if (this.diplomaticArray.length === 0) {
           this.newsService.getNewsArticles('diplomatic').subscribe((diplomaticItems: INewsArticlesGet[]) => {
             this.diplomaticArray = diplomaticItems;
@@ -60,6 +65,7 @@ export class NewsComponent implements OnInit {
         break;
 
       case 1:
+        this.homeAway = true;
         if (this.homeAwayArray.length === 0) {
           this.newsService.getNewsArticles('home-away').subscribe((homeAwayItems: INewsArticlesGet[]) => {
             this.homeAwayArray = homeAwayItems;
@@ -68,6 +74,7 @@ export class NewsComponent implements OnInit {
         break;
 
       case 2:
+        this.general = true;
         if (this.generalArray.length === 0) {
           this.newsService.getNewsArticles('general').subscribe((generalItems: INewsArticlesGet[]) => {
             this.generalArray = generalItems;

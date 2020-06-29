@@ -18,16 +18,8 @@ export class CockpitVideosService {
     return this.http.post(this.baseUrl + 'CockpitVideos/addAVideoItem', videoItemObj);
   }
 
-  updateVideoData(newsItemObj: IArticleUpdate) {
-    const updateArticle: INewsPost = {
-        newsTitle: newsItemObj.editNewsTitle,
-        newsSummary: newsItemObj.editNewsSummary,
-        newsFullStory: newsItemObj.editNewsFullStory,
-        newsCategory: newsItemObj.editNewsCategory,
-        imagePath: !!newsItemObj.editImagePath ? newsItemObj.editImagePath : ''
-    };
-    const newsId = newsItemObj.newsId;
-    return this.http.put(this.baseUrl + 'cockpitVideos/updateVideoData/' + newsId, updateArticle);
+  updateVideoData(videoEditObj: any, id) {
+    return this.http.put(this.baseUrl + 'cockpitVideos/updateVideoData/' + id, videoEditObj);
   }
 
 
@@ -40,5 +32,8 @@ export class CockpitVideosService {
     return this.http.post(this.baseUrl + 'Upload/imageUpload', videoFile, { reportProgress: true, observe: 'events' });
   }
 
+  deleteAVideo(videoId) {
+    return this.http.delete(this.baseUrl + 'cockpitVideos/deletevideo/' + videoId);
+  }
 
 }

@@ -3,6 +3,7 @@
     <mat-drawer-container class="example-container spacing" [hasBackdrop]="hasBackdrop.value">
       <mat-drawer class="spacing" #drawer mode="push">   
         <div class="cockp-menu-list">
+           
           <span >
             <span *ngIf="funcs.isSuper === 'true'">
               <a mat-menu-item (click)="loadChildRoute('functions', drawer)">
@@ -42,13 +43,6 @@
 
         </div>
 
-
-        <!-- <ul class="cockp-menu-list">
-          <li (click)="loadChildRoute('uploadphotos', drawer)">Upload Photos</li>
-          <li (click)="loadChildRoute('userslist', drawer)">Edit User List</li>
-          <li (click)="loadChildRoute('editamount', drawer)">Edit Amount</li>
-          <li (click)="loadChildRoute('editnews', drawer)">Edit News</li>
-        </ul> -->
       </mat-drawer>
 
       <mat-drawer-content>

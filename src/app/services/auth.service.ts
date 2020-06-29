@@ -49,22 +49,6 @@ export class AuthService {
       }));
   }
 
-  // login(model: any) {
-  //   return this.http.post(this.baseUrl + 'auth/login', model)
-  //     .pipe(map((response: any) => {
-  //       const tokenObject = response;
-  //       if (tokenObject) {
-  //         let uniqueName;
-  //         localStorage.setItem('eliteToken', tokenObject.token);
-  //         this.decodedToken = this.jwtHelper.decodeToken(tokenObject.token);
-  //         uniqueName = this.decodedToken.unique_name;
-  //         if (uniqueName) {
-  //           this.userName = uniqueName;
-  //         }
-  //         // this.userName = this.userName.charAt(0).toUpperCase() + this.userName.substr(1);
-  //       }
-  //     }));
-  // }
 
   register(model: any) {
     return this.http.post(this.baseUrl + 'auth/register', model);

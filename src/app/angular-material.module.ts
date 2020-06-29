@@ -20,7 +20,8 @@ import {
    MatDatepickerModule,
    MatTableModule,
    MatChipsModule,
-   MatNativeDateModule
+   MatNativeDateModule,
+   MatBadgeModule
 } from '@angular/material';
 
 @NgModule({
@@ -44,7 +45,8 @@ import {
       MatDatepickerModule,
       MatTableModule,
       MatChipsModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatBadgeModule
    ],
    exports: [
       MatButtonModule,
@@ -65,7 +67,8 @@ import {
       MatDatepickerModule,
       MatTableModule,
       MatChipsModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatBadgeModule
    ],
    providers: [
       // MatDatepickerModule,

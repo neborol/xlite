@@ -11,7 +11,9 @@ export class AppComponent implements OnInit {
   title = 'Elite Force';
   jwtHelper = new JwtHelperService();
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     const currentToken = localStorage.getItem('eliteToken');

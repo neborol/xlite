@@ -22,48 +22,26 @@
     <div class="inner-main-container"> <br/>
       <mat-card class="parent-card-container">
         <mat-card-content class="container">
-
-          <div class="design-item-container padding-container">
+          <div *ngFor="let evt of events2Display; let i = index" class="design-item-container padding-container">
             <mat-card style="padding: 4px;">
-              <span class="design-card-title2">Open Fundraising in Mississauga</span>
+              <span class="design-card-title2">{{ evt.title }}</span>
               <div>
                 <!-- <mat-icon class="edit-article-button">event_note</mat-icon> -->
                 <div class="description-line">
-                        Lorem ipsum dolor sit amet, amet doming ornatus cu has, te eum tempor essent virtute. Sed id definitionem necessitatibus. 
+                        {{ evt.description }}
                 </div>
                 <div class="list-details">
                     <ul>
-                        <li><span class="program-list">Time: </span> <span>6:45 pm</span></li>
-                        <li><span class="program-list">Date: </span> <span>27th Sept/2020</span></li>
-                        <li><span class="program-list">Venue: </span> <span>24 Springfield Avenue, Mississauga, M7w 7L4</span></li>
-                        <li><span class="program-list">Comments: </span> <span>For registered members only.</span></li>
+                        <li><span class="program-list">Time: </span> <span>{{ evt.time }}</span></li>
+                        <li><span class="program-list">Date: </span> <span>{{ evt.eventDate | date}}</span></li>
+                        <li><span class="program-list">Venue: </span> <span>{{ evt.venue }}</span></li>
+                        <li><span class="program-list">Comments: </span> <span>{{ evt.comment }}</span></li>
                     </ul>
                 </div>
               </div>
             </mat-card>
+            <div *ngIf="i === events2Display.length-1" class="spacer"></div>
           </div>
-
-          <div class="design-item-container padding-container">
-            <mat-card style="padding: 4px;">
-              <span class="design-card-title2">Open Fundraising in Mississauga</span>
-              <div>
-                <!-- <mat-icon class="edit-article-button">event_note</mat-icon> -->
-                <div class="description-line">
-                        Lorem ipsum dolor sit amet, amet doming ornatus cu has, te eum tempor essent virtute. Sed id definitionem necessitatibus. 
-                </div>
-                <div class="list-details">
-                    <ul>
-                        <li><span class="program-list">Time: </span> <span>6:45 pm</span></li>
-                        <li><span class="program-list">Date: </span> <span>27th Sept/2020</span></li>
-                        <li><span class="program-list">Venue: </span> <span>24 Springfield Avenue, Mississauga, M7w 7L4</span></li>
-                        <li><span class="program-list">Comments: </span> <span>For registered members only.</span></li>
-                    </ul>
-                </div>
-              </div>
-            </mat-card>
-            <div class="spacer"></div>
-          </div>
-
 
         </mat-card-content>
       </mat-card>

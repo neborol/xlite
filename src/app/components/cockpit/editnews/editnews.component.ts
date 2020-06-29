@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { VERSION, MatDialog } from '@angular/material';
+import { VERSION, MatDialog, MatTabGroup } from '@angular/material';
 import { FileInput } from 'ngx-material-file-input';
 import { environment } from 'src/environments/environment';
 import { IResponse } from 'src/app/interfaces/response.interface';
@@ -12,6 +12,9 @@ import { INewsArticlesGet } from 'src/app/interfaces/news-article-get.interface'
 import { NewsService } from 'src/app/services/news.service';
 import { IArticleUpdate } from 'src/app/interfaces/article-update.interface';
 import { CockpitSharedService } from 'src/app/services/cockpit-shared.service';
+import { Subscription } from 'rxjs';
+import { SpinnerService } from './../../../services/spinner.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editnews',
@@ -57,12 +60,23 @@ export class EditnewsComponent implements OnInit {
     imagePath: '',
   };
 
+  addArticle = true;
+  editScrolling = false;
+  editArticle = false;
+
+  idx = 0;
+  subscr: Subscription;
+  @ViewChild('newsEditTab', {static: true}) tabGroup: MatTabGroup;
+
   constructor(
     private alertify: AlertifyService,
     private cockpitNewsService: CockpitNewsService,
     private sharedService: CockpitSharedService,
     private newsService: NewsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private spinnerService: SpinnerService,
+    private router: Router,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
@@ -81,11 +95,6 @@ export class EditnewsComponent implements OnInit {
       'newsEditingCategory': new FormControl('', [Validators.required])
     });
 
-    // this.articleEditForm = new FormGroup({
-    //   'editNewsTitle': new FormControl('', [Validators.minLength(10), Validators.maxLength(250), Validators.pattern(this.alphaNRegex)]),
-    //   'editNewsSummary': new FormControl('', [Validators.minLength(10), Validators.maxLength(350), Validators.pattern(this.alphaNRegex)]),
-    //   'editNewsFullStory': new FormControl('', [Validators.minLength(10), Validators.maxLength(2000), Validators.pattern(this.alphaNRegex)]),
-    // });
   }
 
 
@@ -121,6 +130,7 @@ export class EditnewsComponent implements OnInit {
   }
 
   postScrollingMessage = () => {
+      this.spinnerService.showSpinner();
       const scrollingData = {
         newsScrollbar: this.newsScrollbarForm.get('newsScrollbar').value
       };
@@ -131,6 +141,12 @@ export class EditnewsComponent implements OnInit {
           this.alertify.success(resp.message);
           // Reset the form back to empty
           this.newsScrollbarForm.reset();
+          this.spinnerService.hideSpinner();
+          this.router.navigate(['cockpit/editnews/', 1]);
+          this.subscr = this.route.params.subscribe(p => {
+            // grab the selected index from the url and pass it to the tab.
+            this.tabGroup.selectedIndex = +p['idx'];
+          });
         }
       }, error => {
         this.alertify.error('The Scolling message did not get added.');
@@ -151,11 +167,18 @@ export class EditnewsComponent implements OnInit {
   }
 
   fileUploadFinished(event) {
+    this.spinnerService.showSpinner();
     this.response = event; // event.body.dbPath is the path to which the image has been saved, so proceed and save the path to the database.
     this.cockpitNewsService.addANewsItem(this.newsAddForm.value, event.body.dbPath)
     .subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editnews/', 2]);
+        this.subscr = this.route.params.subscribe(p => {
+          // grab the selected index from the url and pass it to the tab.
+          this.tabGroup.selectedIndex = +p['idx'];
+        });
       }
       // Reset the form back to empty
       this.newsAddForm.reset();
@@ -208,6 +231,7 @@ export class EditnewsComponent implements OnInit {
 
   updateNewsArticle() {
     if (this.files) {
+      this.spinnerService.showSpinner();
       this.sharedService.uploadNewsImage(this.files).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -215,6 +239,7 @@ export class EditnewsComponent implements OnInit {
           this.message = 'Upload Success';
           this.alertify.success('Image Upload was successful');
           this.updateImageCompleted(event);
+          this.spinnerService.hideSpinner();
         }
       });
     } else {
@@ -231,6 +256,7 @@ export class EditnewsComponent implements OnInit {
   }
 
   updateImageCompleted(event?) {
+    this.spinnerService.showSpinner();
     // this.response = event; // event.body.dbPath is the path to which the image has been saved, so proceed and save the path to the database.
     const objToUpdate: IArticleUpdate = {
       newsId: this.validateText(this.currentUpdateArticle.newsId) ? this.currentUpdateArticle.newsId : 0,
@@ -249,6 +275,12 @@ export class EditnewsComponent implements OnInit {
     .subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editnews/', 2]);
+        this.subscr = this.route.params.subscribe(p => {
+          // grab the selected index from the url and pass it to the tab.
+          this.tabGroup.selectedIndex = +p['idx'];
+        });
       }
       // Reset the form back to empty
       this.articleEditForm.reset();
@@ -256,6 +288,17 @@ export class EditnewsComponent implements OnInit {
     }, error => {
       this.alertify.error('Article update failed.');
     });
+  }
+
+  tabchange(evt) {
+    switch (evt.index) {
+      case 0: this.addArticle = true;
+              break;
+      case 1: this.editScrolling = true;
+              break;
+      case 2: this.editArticle = true;
+              break;
+    }
   }
 
 }

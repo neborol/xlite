@@ -1,13 +1,16 @@
-import { Component, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, Output, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ImagesService } from '../../../services/images.service';
 import { AlertifyService } from '../../../services/alertify.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabGroup } from '@angular/material';
 import { IResponse } from 'src/app/interfaces/response.interface';
 import { IEventPostObject } from 'src/app/interfaces/event-post.interface';
 import { CockpitEventService } from 'src/app/services/cockpit-event.service';
 import { IEventUpdateObject } from 'src/app/interfaces/event-update.interface';
+import { SpinnerService } from './../../../services/spinner.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,19 +24,35 @@ export class EditEventsComponent implements OnInit {
   currentSelectedEvent: IEventUpdateObject;
   alphaNRegex = environment.alphaNRegex;
   editAlphaNRegex = environment.editAlphaNRegex;
-  events2Display: IEventPostObject[];
-  indexer = 1;
+  events2Display: IEventUpdateObject[];
+
+  addEvent = true;
+  editEvent = false;
+
+  idx = 0;
+  subscr: Subscription;
+  @ViewChild('eventEditTab', {static: true}) tabGroup: MatTabGroup;
+
 
 
   constructor(
     private alertify: AlertifyService,
     public dialog: MatDialog,
-    private cockpitEventService: CockpitEventService
+    private cockpitEventService: CockpitEventService,
+    private spinnerService: SpinnerService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.spinnerService.showSpinner();
     this.cockpitEventService.getEvents().subscribe((res: IEventUpdateObject[]) => {
       this.events2Display = res;
+      this.editEvent = true;
+      this.spinnerService.hideSpinner();
+    }, error => {
+      this.alertify.error('Events can not be retrieved.');
+      this.spinnerService.hideSpinner();
     });
 
     this.addEventsForm = new FormGroup({
@@ -47,7 +66,8 @@ export class EditEventsComponent implements OnInit {
   }
 
 
-  creaeEvent = () => {
+  createEvent = () => {
+    this.spinnerService.showSpinner();
     const eventObj: IEventPostObject = {
       title: this.addEventsForm.get('title').value,
       description: this.addEventsForm.get('description').value,
@@ -61,8 +81,17 @@ export class EditEventsComponent implements OnInit {
       if (resp.success) {
         this.alertify.success(resp.message);
         this.addEventsForm.reset();
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editevents/', 1]);
+        this.ngOnInit();
+        this.subscr = this.route.params.subscribe(p => {
+          // grab the selected index from the url and pass it to the tab.
+          this.tabGroup.selectedIndex = +p['idx'];
+        });
       }
-    }, error => this.alertify.error('Event creation failed.'));
+    }, error => {
+      this.alertify.error('Event creation failed.');
+    });
   }
 
 
@@ -82,6 +111,7 @@ export class EditEventsComponent implements OnInit {
   }
 
   updateAnEventItem() {
+    this.spinnerService.showSpinner();
     const eventUpdateObj: IEventUpdateObject = {
       eventId: this.currentSelectedEvent.eventId,
       title: this.editEventsForm.get('title').value,
@@ -95,6 +125,8 @@ export class EditEventsComponent implements OnInit {
     this.cockpitEventService.updateEvent(eventUpdateObj).subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editevents/', 1]);
       }
     }, error => this.alertify.error('Event Update failed.'));
   }
@@ -104,10 +136,20 @@ export class EditEventsComponent implements OnInit {
   }
 
   deleteSelectedEvent() {
+    this.spinnerService.showSpinner();
     this.cockpitEventService.deleteEvent(this.currentSelectedEvent.eventId)
       .subscribe((res: IResponse) => {
           if (res.success) {
             this.alertify.success(res.message);
+            this.spinnerService.hideSpinner();
+            // Redirect to tab index number 1 in the following route.
+            this.router.navigate(['cockpit/editevents/', 1]);
+            // Load the updated user interface
+            this.ngOnInit();
+            this.subscr = this.route.params.subscribe(p => {
+              // grab the selected index from the url and pass it to the tab.
+              this.tabGroup.selectedIndex = +p['idx'];
+            });
           }
       }, error => this.alertify.error('Image was not deleted.'));
 
@@ -121,5 +163,13 @@ export class EditEventsComponent implements OnInit {
     });
   }
 
+  tabchange(evt) {
+    switch (evt.index) {
+      case 0: this.addEvent = true;
+              break;
+      case 1: this.editEvent = true;
+              break;
+    }
+  }
 }
 

@@ -24,15 +24,15 @@
     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabchange($event)">
 
       <mat-tab label="Diplomatic">
-        <app-diplomatic [diplomaticNewsItems]="diplomaticArray"></app-diplomatic>
+        <app-diplomatic *ngIf="diplomatic" [diplomaticNewsItems]="diplomaticArray"></app-diplomatic>
       </mat-tab>
 
       <mat-tab label="Home-Away">
-        <app-home-away [homeAwayNewsItems]="homeAwayArray"></app-home-away>
+        <app-home-away *ngIf="homeAway" [homeAwayNewsItems]="homeAwayArray"></app-home-away>
       </mat-tab>
 
       <mat-tab label="General">
-        <app-general [generalNewsItems]="generalArray"></app-general>
+        <app-general *ngIf="general" [generalNewsItems]="generalArray"></app-general>
       </mat-tab>
 
     </mat-tab-group>

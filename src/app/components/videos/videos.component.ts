@@ -46,7 +46,9 @@ export class VideosComponent implements OnInit {
 
   ngOnInit() {
     this.videosService.getVideos().subscribe((videos: IVideoGet[]) => {
-      this.videoData = videos.map(vid => {
+      this.videoData = videos.sort((a: any, b: any) => {
+        return (new Date(b.dateCreated) as any) - (new Date(a.dateCreated) as any);
+      }).map(vid => {
         vid.posterPath = this.serverUrl + vid.posterPath;
         vid.videoPath = this.serverUrl + vid.videoPath;
         return vid;

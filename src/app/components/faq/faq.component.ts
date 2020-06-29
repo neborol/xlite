@@ -9,8 +9,13 @@ import { IFaqGet } from './../../interfaces/faqs-get.interface';
 })
 export class FaqComponent implements OnInit {
   listOfFaqs: IFaqGet[];
+  hidden = false;
 
   constructor(private faqService: FaqService) { }
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
 
   ngOnInit() {
     this.faqService.getFaqs().subscribe((faqList: IFaqGet[]) => {

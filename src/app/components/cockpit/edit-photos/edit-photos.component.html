@@ -1,9 +1,9 @@
 <div class="custom-tabs-container cockpit_edit_container">
-    <mat-tab-group mat-align-tabs="start">
+    <mat-tab-group mat-align-tabs="start" #photoEditTab (selectedTabChange)="tabchange($event)">
 
       <mat-tab label="Add A Mission Photo">
 
-        <div class="mission-photo-edit-container">
+        <div *ngIf="addPhotoTab" class="mission-photo-edit-container">
           <mat-card class="parent-card-container">
             <mat-card-content class="container">
               <form  #uploadForm="ngForm" novalidate>
@@ -79,7 +79,7 @@
 
       <mat-tab label="Edit A Photo">
         <!-- Edit a specific article -->
-        <div class="mission-photo-edit-container">
+        <div *ngIf="editPhotoTab" class="mission-photo-edit-container">
           <mat-card class="parent-card-container">
 
             <div  class="design-item-container padding-container">

@@ -1,10 +1,9 @@
   <div class="custom-tabs-container cockpit_edit_container">
-    <mat-tab-group mat-align-tabs="start">
+    <mat-tab-group mat-align-tabs="start" #newsEditTab (selectedTabChange)="tabchange($event)">
 
       <mat-tab label="Add a News Article">
 
-
-        <div class="design-standard-container">
+        <div *ngIf="addArticle" class="design-standard-container">
           <mat-card class="parent-card-container">
             <mat-card-content class="container">
               <form [formGroup]="newsAddForm" novalidate>
@@ -98,7 +97,7 @@
 
 
       <mat-tab label="Edit Scrolling News">
-        <div class="design-standard-container">
+        <div *ngIf="editScrolling" class="design-standard-container">
           <mat-card class="parent-card-container">
 
             <div class="design-item-container padding-container">
@@ -130,7 +129,7 @@
 
       <mat-tab label="Edit A News Article">
         <!-- Edit a specific article -->
-        <div class="design-standard-container">
+        <div *ngIf="editArticle" class="design-standard-container">
           <button *ngIf="loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
             color="accent">Select A Category</button>
           <button *ngIf="!loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button

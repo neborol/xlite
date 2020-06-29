@@ -1,19 +1,19 @@
-import { Component, OnInit, EventEmitter, Output, TemplateRef } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { VERSION, MatDialog } from '@angular/material';
-import { FileInput } from 'ngx-material-file-input';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { VERSION, MatDialog, MatTabGroup } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { IResponse } from 'src/app/interfaces/response.interface';
 import { AlertifyService } from 'src/app/services/alertify.service';
-import { CockpitNewsService } from 'src/app/services/cockpit-news.service';
 import { HttpEventType } from '@angular/common/http';
 import { TabDescr } from '../../news/news.component';
-import { INewsArticlesGet } from 'src/app/interfaces/news-article-get.interface';
-import { NewsService } from 'src/app/services/news.service';
-import { IArticleUpdate } from 'src/app/interfaces/article-update.interface';
 import { CockpitVideosService } from 'src/app/services/cockpit-videos.service';
 import { IVideoPost } from 'src/app/interfaces/video-post.interface';
 import { CockpitSharedService } from 'src/app/services/cockpit-shared.service';
+import { IVideoGet } from 'src/app/interfaces/video-get.interface';
+import { VideosService } from 'src/app/services/videos.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SpinnerService } from './../../../services/spinner.service';
 
 export interface IvideoData {
   video: File;
@@ -32,16 +32,13 @@ export class EditvideosComponent implements OnInit {
   alphaNRegex = environment.alphaNRegex;
   editAlphaNRegex = environment.editAlphaNRegex;
   selected = 'None';
+  videoData: IVideoGet[];
   addVideoForm: FormGroup;
+  editVideoForm: FormGroup;
   newsScrollbarForm: FormGroup;
   editingCategoriesForm: FormGroup;
-  articleEditForm: any = {};
   imgPath = 'image.jpg';
-  articlesArrayForEditing: INewsArticlesGet[] = [];
 
-  diplomaticData: INewsArticlesGet[] = [];
-  homeAwayData: INewsArticlesGet[] = [];
-  generalData: INewsArticlesGet[] = [];
 
   photoMessage: string;
   photoProgress: number;
@@ -67,27 +64,34 @@ export class EditvideosComponent implements OnInit {
   files: FormData;
   vidfiles: FormData;
   pos = 'before';
-  loadArticles = false;
-  currentArticle: INewsArticlesGet;
-  currentUpdateArticle: INewsArticlesGet = {
-    newsId: 0,
-    newsTitle: '',
-    newsSummary: '',
-    newsFullStory: '',
-    newsCategory: '',
-    datePublished: new Date(),
-    imagePath: '',
-  };
+
+  addVideo = true;
+  editVideo = false;
+
+  currentSelectedVideo;
+  idx = 0;
+  subscr: Subscription;
+  @ViewChild('videoEditTab', {static: true}) tabGroup: MatTabGroup;
+
 
   constructor(
     private alertify: AlertifyService,
     private cockpitVideosService: CockpitVideosService,
+    private videosService: VideosService,
     private sharedService: CockpitSharedService,
-    private newsService: NewsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private spinnerService: SpinnerService,
+    private router: Router
     ) { }
 
   ngOnInit() {
+    // USE THE URL TO NAVIGATE TO AS SPECIFIC MatTab page.
+    // Pass a handle to unsubscribe from this observable
+/*    this.subscr = this.route.params.subscribe(p => {
+      this.tabGroup.selectedIndex = +p['idx'];
+    });
+*/
     this.addVideoForm = new FormGroup({
       'videoTitle': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(28), Validators.pattern(this.alphaNRegex)]),
       'videoCategory': new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40), Validators.pattern(this.alphaNRegex)]),
@@ -99,11 +103,13 @@ export class EditvideosComponent implements OnInit {
       'newsEditingCategory': new FormControl('', [Validators.required])
     });
 
-    // this.articleEditForm = new FormGroup({
-    //   'editNewsTitle': new FormControl('', [Validators.minLength(10), Validators.maxLength(250), Validators.pattern(this.alphaNRegex)]),
-    //   'editNewsSummary': new FormControl('', [Validators.minLength(10), Validators.maxLength(350), Validators.pattern(this.alphaNRegex)]),
-    //   'editNewsFullStory': new FormControl('', [Validators.minLength(10), Validators.maxLength(2000), Validators.pattern(this.alphaNRegex)]),
-    // });
+    this.videosService.getVideos().subscribe((videos: IVideoGet[]) => {
+      this.videoData = videos.sort((a: any, b: any) => {
+        return (new Date(b.dateCreated) as any) - (new Date(a.dateCreated) as any);
+      });
+      console.log('TestVid', this.videoData);
+    });
+
   }
 
 
@@ -203,6 +209,7 @@ export class EditvideosComponent implements OnInit {
 
 
   SubmitVideoData() {
+    this.spinnerService.showSpinner();
     const videoData: IVideoPost = {
       videoTitle: this.addVideoForm.get('videoTitle').value,
       videoDescription: this.addVideoForm.get('videoDescription').value,
@@ -214,6 +221,13 @@ export class EditvideosComponent implements OnInit {
     .subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editvideos/', 1]);
+        this.ngOnInit();
+        this.subscr = this.route.params.subscribe(p => {
+          // grab the selected index from the url and pass it to the tab.
+          this.tabGroup.selectedIndex = +p['idx'];
+        });
       }
       // Reset the form back to empty
       this.addVideoForm.reset();
@@ -225,112 +239,61 @@ export class EditvideosComponent implements OnInit {
     });
   }
 
-  selectionChanged(option) {
-    this.loadArticles = true;
-    switch (option) {
-      case 'diplomatic':
-            this.newsService.getNewsArticles('diplomatic').subscribe((diplomaticItems: INewsArticlesGet[]) => {
-              this.diplomaticData = diplomaticItems;
-              this.articlesArrayForEditing = this.diplomaticData;
-            });
-            break;
 
-      case 'home-away':
-            this.newsService.getNewsArticles('home-away').subscribe((homeAwayItems: INewsArticlesGet[]) => {
-              this.homeAwayData = homeAwayItems;
-              this.articlesArrayForEditing = this.homeAwayData;
-            });
-            break;
+  editSelectedVideo(templateRef: TemplateRef<any>, data) {
+    this.currentSelectedVideo = data;
 
-      case 'general':
-            this.newsService.getNewsArticles('general').subscribe((generalItems: INewsArticlesGet[]) => {
-              this.generalData = generalItems;
-              this.articlesArrayForEditing = this.generalData;
-            });
-            break;
-    }
-  }
-
-  toggleArticlesDisplay() {
-    this.loadArticles = !this.loadArticles;
-  }
-
-  editSelectedArticle(templateRef: TemplateRef<any>, article) {
-    this.currentUpdateArticle = article;
-    console.log('Testinggg', this.currentUpdateArticle);
+    this.editVideoForm = new FormGroup({
+      'title': new FormControl(data.title, [Validators.required, Validators.minLength(5), Validators.maxLength(60), Validators.pattern(this.alphaNRegex)]),
+      'description': new FormControl(data.description, [Validators.required, Validators.minLength(3), Validators.maxLength(250), Validators.pattern(this.alphaNRegex)]),
+    });
 
     this.dialog.open(templateRef);
   }
 
-  closeModal() {
-    this.dialog.closeAll();
+  deleteVideoRequest() {
+    this.alertify.confirm('Are you really sure you want to delete this video?', () => {
+      this.deleteAVideoItem();
+    });
   }
 
-  // updateNewsArticle() {
-  //   if (this.photoFiles) {
-  //     this.photoUploadService.uploadImage(this.files).subscribe(event => {
-  //       if (event.type === HttpEventType.UploadProgress) {
-  //         this.progress = Math.round(100 * event.loaded / event.total);
-  //       } else if (event.type === HttpEventType.Response) {
-  //         this.message = 'Upload Success';
-  //         this.alertify.success('Image Upload was successful');
-  //         this.updateImageCompleted(event);
-  //       }
-  //     });
-  //   } else {
-  //     this.updateImageCompleted();
-  //   }
-
-
-  //   if (this.videoFiles) {
-  //     this.videoUploadService.uploadImage(this.files).subscribe(event => {
-  //       if (event.type === HttpEventType.UploadProgress) {
-  //         this.progress = Math.round(100 * event.loaded / event.total);
-  //       } else if (event.type === HttpEventType.Response) {
-  //         this.message = 'Upload Success';
-  //         this.alertify.success('Image Upload was successful');
-  //         this.updateImageCompleted(event);
-  //       }
-  //     });
-  //   } else {
-  //     this.updateImageCompleted();
-  //   }
-  // }
-
-  validateText(input) {
-    if (this.editAlphaNRegex.test(input)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  updateImageCompleted(event?) {
-    // this.response = event; // event.body.dbPath is the path to which the image has been saved, so proceed and save the path to the database.
-    const objToUpdate: IArticleUpdate = {
-      newsId: this.validateText(this.currentUpdateArticle.newsId) ? this.currentUpdateArticle.newsId : 0,
-      editNewsTitle: this.validateText(this.currentUpdateArticle.newsTitle) ? this.currentUpdateArticle.newsTitle : '',
-      editNewsSummary: this.validateText(this.currentUpdateArticle.newsSummary) ? this.currentUpdateArticle.newsSummary : '',
-      editNewsFullStory: this.validateText(this.currentUpdateArticle.newsFullStory) ? this.currentUpdateArticle.newsFullStory : '',
-      editNewsCategory: this.validateText(this.editingCategoriesForm.value.newsEditingCategory) ? this.editingCategoriesForm.value.newsEditingCategory : '',
-      editImagePath: ''
-    };
-
-    if (event) {
-      objToUpdate.editImagePath = event.body.dbPath;
-    }
-
-    this.cockpitVideosService.updateVideoData(objToUpdate)
+  deleteAVideoItem() {
+    this.cockpitVideosService.deleteAVideo(this.currentSelectedVideo.videoId)
     .subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);
       }
-      // Reset the form back to empty
-      this.articleEditForm.reset();
-      this.videoPosterImageplaceholderPath = '/assets/images/uploadIco.png';
-    }, error => {
-      this.alertify.error('Article update failed.');
     });
+  }
+
+  updateAVideoItem() {
+    this.spinnerService.showSpinner();
+    this.cockpitVideosService.updateVideoData(this.editVideoForm.value, this.currentSelectedVideo.videoId)
+    .subscribe((resp: IResponse) => {
+      if (resp.success) {
+        this.alertify.success(resp.message);
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editvideos/', 1]);
+        this.ngOnInit();
+        this.subscr = this.route.params.subscribe(p => {
+          // grab the selected index from the url and pass it to the tab.
+          this.tabGroup.selectedIndex = +p['idx'];
+        });
+      }
+      // Reset the form back to empty
+      this.editVideoForm.reset();
+    }, error => {
+      this.alertify.error('Video update failed.');
+    });
+  }
+
+  tabchange(evt) {
+    switch (evt.index) {
+      case 0: this.addVideo = true;
+              break;
+      case 1: this.editVideo = true;
+              break;
+    }
   }
 
 }

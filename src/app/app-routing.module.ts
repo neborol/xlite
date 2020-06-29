@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { MissionComponent } from './components/mission/mission.component';
 import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RelieveComponent } from './components/relieve/relieve.component';
@@ -29,19 +28,23 @@ import { EditEventsComponent } from './components/cockpit/edit-events/edit-event
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'mission', component: MissionComponent, canActivate: [AuthGuard]},
   { path: 'relieve', component: RelieveComponent},
   { path: 'user/edit', component: MemberEditComponent, resolve: {uniqueXX: UserEditResolver}},
   { path: 'login', component: LogInComponent },
   { path: 'cockpit', component: CockpitComponent, children: [
     { path: 'editphotos', component: EditPhotosComponent },
+    { path: 'editphotos/:idx', component: EditPhotosComponent },
     { path: 'functions', component: FunctionsComponent },
     { path: 'userslist', component: UsersListComponent },
     { path: 'editFinances', component: EditFinancesComponent },
+    { path: 'editFinances/:idx', component: EditFinancesComponent },
     { path: 'editnews', component: EditnewsComponent },
+    { path: 'editnews/:idx', component: EditnewsComponent },
     { path: 'editvideos', component: EditvideosComponent },
+    { path: 'editvideos/:idx', component: EditvideosComponent },
     { path: 'editfaq', component: EditfaqComponent },
     { path: 'editevents', component: EditEventsComponent },
+    { path: 'editevents/:idx', component: EditEventsComponent },
     { path: '', pathMatch: 'full', component: EditPhotosComponent }
   ] },
   { path: 'register', component: RegisterComponent },

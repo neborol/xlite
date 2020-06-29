@@ -25,7 +25,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
-import { MissionComponent } from './components/mission/mission.component';
 import { RelieveComponent } from './components/relieve/relieve.component';
 import { Jan052019Component } from './components/mission-photographs/photos.component';
 import { ImagesService } from './services/images.service';
@@ -58,13 +57,13 @@ import { MaterialFileInputModule, NGX_MAT_FILE_INPUT_CONFIG } from 'ngx-material
 import { NgxMaterialConfig } from './ngx-file-upload-config';
 import { NewsService } from './services/news.service';
 import { VideosComponent } from './components/videos/videos.component';
-import { VideoService } from './components/videos/video.service';
 import { RatingComponent } from './components/rating/rating.component';
 import { MatVideoModule } from 'mat-video';
 import { EditvideosComponent } from './components/cockpit/editvideos/editvideos.component';
 import { EditPhotosComponent } from './components/cockpit/edit-photos/edit-photos.component';
 import { CockpitPhotoService } from './services/cockpit-photos.service';
 import { EditEventsComponent } from './components/cockpit/edit-events/edit-events.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 export function tokenGetter() {
   return localStorage.getItem('eliteToken');
@@ -80,7 +79,6 @@ export function tokenGetter() {
     LogInComponent,
     NavbarComponent,
     HomeComponent,
-    MissionComponent,
     RelieveComponent,
     Jan052019Component,
     MemberEditComponent,
@@ -106,7 +104,8 @@ export function tokenGetter() {
     VideosComponent,
     RatingComponent,
     EditvideosComponent,
-    EditEventsComponent
+    EditEventsComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +137,6 @@ export function tokenGetter() {
     CockpitFaqService,
     FaqService,
     NewsService,
-    VideoService,
     CockpitPhotoService
   ],
   bootstrap: [AppComponent],

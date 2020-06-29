@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 export class NavbarComponent implements OnInit {
 
   // Routes that if navigated to, would highlight the main menu button.
-  mainMenuRoutes: string[] = ['about', 'news', 'donations', 'activities', 'relieve'];
+  mainMenuRoutes: string[] = ['about', 'news', 'donations', 'activities', 'relieve', 'faq', 'videos', 'other'];
 
   inMainMenu = false;
 

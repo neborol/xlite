@@ -11,7 +11,23 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <app-root>Loading...</app-root>  
+
+  <app-root>
+      <div id="spinner-element" style="top: 50px; left: 46%" class='processLoaderContainer'>
+          <div class='outerProcessLoader'>
+            <div class='innerProcessLoader'></div>
+          </div>
+        </div>
+  </app-root> 
+  <script>
+    (function starterFunction() {
+      let spinnerElt = document.getElementById('spinner-element');
+      setTimeout(() => {
+        spinnerElt.style.display = 'none';
+      }, 8000);
+      
+    })();
+  </script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
 </body>
 </html>

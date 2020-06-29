@@ -25,8 +25,9 @@
     
             <mat-accordion>
 
-                <mat-expansion-panel *ngFor="let faq of listOfFaqs" class="accordion-title-panel">
-                  <mat-expansion-panel-header style="height: 36px">
+                <mat-expansion-panel *ngFor="let faq of listOfFaqs; let i = index" class="accordion-title-panel">
+                  <mat-expansion-panel-header style="height: 36px; position: relative;">
+                    <span class="index-num" matBadge="{{i}}" matBadgeOverlap="false"></span>
                     <mat-panel-title>
                       {{ faq.faqQuestion }}
                     </mat-panel-title>
@@ -36,9 +37,7 @@
                   </div>
                 </mat-expansion-panel>
 
-
-                
-              </mat-accordion>
+            </mat-accordion>
          
     
     

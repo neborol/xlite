@@ -1,13 +1,16 @@
-import { Component, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, Output, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { EventEmitter } from 'events';
 import { ImagesService } from '../../../services/images.service';
 import { AlertifyService } from '../../../services/alertify.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabGroup } from '@angular/material';
 import { CockpitPhotoService } from './../../../services/cockpit-photos.service';
 import { IResponse } from 'src/app/interfaces/response.interface';
+import { SpinnerService } from './../../../services/spinner.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -37,13 +40,21 @@ export class EditPhotosComponent implements OnInit {
   alphaNRegex = environment.alphaNRegex;
   editAlphaNRegex = environment.editAlphaNRegex;
   deleteRequested = false;
+  addPhotoTab = true;
+  editPhotoTab = false;
 
+  idx = 0;
+  subscr: Subscription;
+  @ViewChild('photoEditTab', {static: true}) tabGroup: MatTabGroup;
 
   constructor(
     private imagesService: ImagesService,
     private alertify: AlertifyService,
     public dialog: MatDialog,
-    private cockpitPhotoService: CockpitPhotoService
+    private spinnerService: SpinnerService,
+    private cockpitPhotoService: CockpitPhotoService,
+    private router: Router,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
@@ -51,9 +62,11 @@ export class EditPhotosComponent implements OnInit {
       this.response = event;
     };
 
+    this.spinnerService.showSpinner();
     this.imagesService.getMissionImages().subscribe((res: any[]) => {
       this.photos2Edit = res.map(ph => {
         ph.uniquePhotoName = this.rootUrl + ph.uniquePhotoName;
+        this.spinnerService.hideSpinner();
         return ph;
       });
     });
@@ -65,14 +78,22 @@ export class EditPhotosComponent implements OnInit {
   }
 
   uploadMultiple = () => {
+    this.spinnerService.showSpinner();
     this.imagesService.postMissionImages(this.multiFormData).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(event.loaded * 100 / event.total);
         } else if (event.type === HttpEventType.Response) {
           this.message = 'Upload Success';
           this.alertify.success('The images were created.');
+          this.spinnerService.hideSpinner();
+          this.router.navigate(['cockpit/editphotos/', 1]);
+          this.ngOnInit();
+          this.subscr = this.route.params.subscribe(p => {
+            // grab the selected index from the url and pass it to the tab.
+            this.tabGroup.selectedIndex = +p['idx'];
+          });
         }
-      });
+      }, error => this.alertify.error('Photo upload multiple failed.'));
   }
 
 
@@ -102,8 +123,6 @@ export class EditPhotosComponent implements OnInit {
     }
 
     this.multiFormData = formData;
-    console.log('WhatIsMultiF', event.target.files);
-
   }
 
   cancelPreviewImages() {
@@ -118,12 +137,14 @@ export class EditPhotosComponent implements OnInit {
   }
 
   updatePhotoRecord() {
+    this.spinnerService.showSpinner();
     this.cockpitPhotoService.UpdateMissionImages(
       this.currentImage2UpdateForm.value,
       this.currentSelectedPhoto.missionPhotoId
     ).subscribe((res: IResponse) => {
       if (res.success) {
         this.alertify.success(res.message);
+        this.spinnerService.hideSpinner();
       }
     }, error => this.alertify.error('Mission photo update failed.'));
     this.closeModal();
@@ -139,17 +160,31 @@ export class EditPhotosComponent implements OnInit {
   }
 
   deleteSelectedMissionPhoto() {
-    this.cockpitPhotoService.deleteSelectedphoto(this.currentSelectedPhoto.missionPhotoId).subscribe((res: IResponse) => {
+    this.spinnerService.showSpinner();
+    this.cockpitPhotoService.deleteSelectedphoto(this.currentSelectedPhoto.missionPhotoId)
+    .subscribe((res: IResponse) => {
       if (res.success) {
         this.alertify.success(res.message);
+        this.spinnerService.hideSpinner();
+        this.router.navigate(['cockpit/editphotos/', 1]);
+        this.ngOnInit();
+        this.subscr = this.route.params.subscribe(p => {
+          // grab the selected index from the url and pass it to the tab.
+          this.tabGroup.selectedIndex = +p['idx'];
+        });
       }
     }, error => this.alertify.error('Image was not deleted.'));
 
     this.closeModal();
   }
 
-  // createImagePath(serverPath: string) {
-  //   return 'http://location:5001/' + serverPath;
-  // }
+  tabchange(evt) {
+    switch (evt.index) {
+      case 0: this.addPhotoTab = true;
+              break;
+      case 1: this.editPhotoTab = true;
+              break;
+    }
+  }
 
 }

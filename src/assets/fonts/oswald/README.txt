@@ -66,3 +66,19 @@ commercial or otherwise. However, you can't sell the fonts on their own.
 
 This isn't legal advice, please consider consulting a lawyer and see the full
 license for all details.
+
+
+
+
+
+Open Fundraising in Mississauga
+There will be a fundraising event for all Canadians, black or white, so bring your friends. 
+24 Springfield Avenue, Mississauga, ON M7W 7L4
+Drinks will be free for the first 20 persons to arrive. 
+
+
+Church service in Scaborough.
+All Southern Cameroonians in the GTA are invited for a church service in honor of Ground Zero.
+23 Oswald street, Scaborough
+Refreshments will be provided by the church.
+

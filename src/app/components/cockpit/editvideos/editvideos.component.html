@@ -1,10 +1,9 @@
 <div class="custom-tabs-container cockpit_edit_container">
-        <mat-tab-group mat-align-tabs="start">
+        <mat-tab-group  #videoEditTab mat-align-tabs="start" (selectedTabChange)="tabchange($event)">
     
           <mat-tab label="Add a Video">
     
-    
-            <div class="design-standard-container">
+            <div *ngIf="addVideo" class="design-standard-container">
               <mat-card class="parent-card-container">
                 <mat-card-content class="container">
                   <form [formGroup]="addVideoForm" novalidate>
@@ -132,55 +131,85 @@
     
           <mat-tab label="Edit A Video">
             <!-- Edit a specific article -->
-            <div class="design-standard-container">
-              <button *ngIf="loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
-                color="accent">Select A Category</button>
-              <button *ngIf="!loadArticles" (click)="toggleArticlesDisplay()" style="margin-top: 5px;" mat-raised-button
-                color="accent">Load current Articles</button>
-              <mat-card class="parent-card-container">
-    
-                <div *ngIf="!loadArticles" class="design-item-container padding-container">
-                  <form [formGroup]="editingCategoriesForm" novalidate>
-                    <div class="design-item-container">
-                      <mat-card>
-                        <h3 style="color: #1276a6;">Select a news category and get all the news items for that category.
-                        </h3>
-    
-                        <div><span class="item-title">Enter the News Summary:</span></div>
-                        <mat-form-field class="option-field">
-                          <mat-label>Select an option</mat-label>
-                          <mat-select (selectionChange)="selectionChanged(selected)" matSelect [(value)]="selected"
-                            formControlName="newsEditingCategory">
-                            <mat-option value="">None</mat-option>
-                            <mat-option value="diplomatic">Diplomatic</mat-option>
-                            <mat-option value="home-away">Home-Away</mat-option>
-                            <mat-option value="general">General</mat-option>
-                          </mat-select>
-                        </mat-form-field>
+            <div *ngIf="editVideo" class="design-standard-container">
+                
+                    <!-- Edit a specific Event -->
+                    <div class="design-standard-container">
+                        <p *ngIf="!videoData"><em>Loading...</em></p>
+                        <mat-card class="parent-card-container">
+                          <mat-card-content class="container">
+                
+                            <div *ngFor="let video of videoData; let i = index" class="design-item-container">
+                              <mat-card>
+                                <div>
+                                  <div class="item-title">
+                                    <span class="item">{{ video.title }}</span>
+                                    <span (click)="editSelectedVideo(videoEditModal, video)" class="edit-icon-container">
+                                      <mat-icon class="edit-article-button">edit</mat-icon>
+                                    </span>
+                                  </div>
+                                </div>
+                              </mat-card>
+                              <div *ngIf="i === videoData.length-1" class="spacer"></div>
+                            </div>
+
+
+                        </mat-card-content>
                       </mat-card>
                     </div>
-                    <p>You selected: <span style="font-weight: 600">{{selected}}</span> </p>
-    
-                  </form>
-                </div>
-    
-                <div *ngIf="loadArticles" class="design-item-container padding-container">
-                  <div class="design-item-container">
-                    <div *ngFor="let article of articlesArrayForEditing" class="article-edit-card-container">
-                      <mat-card>
-                        <span style="padding-right: 30px;"> {{ article.newsTitle }} </span>
-                        <span (click)="editSelectedArticle(editArticleModalContents, article)" class="edit-icon-container">
-                          <mat-icon class="edit-article-button">edit</mat-icon>
-                        </span>
-                      </mat-card>
-                    </div>
-                  </div>
-                </div>
-              </mat-card>
+
+              
             </div>
           </mat-tab>
     
         </mat-tab-group>
       </div>
+
+
+
+<!-- Modal contents -->
+<ng-template #videoEditModal>
+    <div class="design-standard-container event-edit-container">
+      <mat-card class="parent-card-container">
+        <span (click)="closeModal()" class="close-Icon-wrapper">
+          <mat-icon class="close-icon">highlight_off</mat-icon>
+        </span>
+        <mat-card-content class="container">
+          <form [formGroup]="editVideoForm" novalidate>
+            <!-- title -->
+            <div class="design-item-container">
+              <mat-card>
+                <mat-form-field style="width: 100%;">
+                  <textarea matInput name="title" formControlName="title" placeholder="Event Title"></textarea>
+                </mat-form-field>
+              </mat-card>
+              <div class="spacer"></div>
+            </div>
+            <!-- Event description -->
+            <div class="design-item-container">
+              <mat-card>
+                <mat-form-field style="width: 100%;">
+                  <textarea matInput name="description" formControlName="description"
+                    placeholder="Event Description"></textarea>
+                </mat-form-field>
+              </mat-card>
+              <div class="spacer"></div>
+            </div>
+            </form>
+            </mat-card-content>
+
+        <div class="form-submit-btn-container">
+          <button (click)="updateAVideoItem()" [disabled]="editVideoForm.invalid" mat-raised-button color="primary">
+            Submit Edited Data
+          </button> 
+  
+          <button style="margin-left: 10px;" (click)="deleteVideoRequest()" mat-raised-button color="basic">
+            Delete this Video <mat-icon>arrow_upward</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  
+  </ng-template>
     
     

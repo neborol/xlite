@@ -1,9 +1,9 @@
 <div class="custom-tabs-container cockpit_edit_container">
-  <mat-tab-group mat-align-tabs="start">
+  <mat-tab-group mat-align-tabs="start" #eventEditTab (selectedTabChange)="tabchange($event)">
 
     <mat-tab label="Add an Event">
 
-      <div class="mission-photo-edit-container">
+      <div *ngIf="addEvent" class="mission-photo-edit-container">
         <mat-card class="parent-card-container">
           <mat-card-content class="container">
             <form [formGroup]="addEventsForm" novalidate>
@@ -91,7 +91,7 @@
 
           <div class="form-submit-btn-container">
             <button mat-raised-button color="primary" [disabled]="addEventsForm.invalid" class="submit-btn"
-              (click)="creaeEvent()">
+              (click)="createEvent()">
               Submit Event
             </button>
           </div>
@@ -102,10 +102,11 @@
 
     <mat-tab label="Edit an Event" selectedIndex="1">
       <!-- Edit a specific Event -->
-      <div class="design-standard-container">
+      <div *ngIf="editEvent" class="design-standard-container">
         <p *ngIf="!events2Display"><em>Loading...</em></p>
         <mat-card class="parent-card-container">
           <mat-card-content class="container">
+            <app-spinner *ngIf="spinner" [topPos]="'0px'" [leftPos]="'46%'"></app-spinner>
 
             <div *ngFor="let evt of events2Display; let i = index" class="design-item-container">
               <mat-card>

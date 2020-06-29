@@ -5,10 +5,12 @@
   </mat-toolbar>  
 </div>
 
-<router-outlet></router-outlet>
+
+<router-outlet>
+  <app-spinner [topPos]="'350px'" [leftPos]="'46%'"></app-spinner>
+</router-outlet>
 
 <div class="design-bar"></div>
-
 <div class="footer-container">
     <app-footer></app-footer>
 </div>
