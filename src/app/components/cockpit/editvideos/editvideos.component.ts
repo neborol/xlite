@@ -107,7 +107,6 @@ export class EditvideosComponent implements OnInit {
       this.videoData = videos.sort((a: any, b: any) => {
         return (new Date(b.dateCreated) as any) - (new Date(a.dateCreated) as any);
       });
-      console.log('TestVid', this.videoData);
     });
 
   }

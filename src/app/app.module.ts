@@ -108,7 +108,7 @@ export function tokenGetter() {
     SpinnerComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CommonModule,
     BrowserAnimationsModule,

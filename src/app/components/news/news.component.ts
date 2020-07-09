@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from 'src/app/services/news.service';
 import { INewsArticlesGet } from 'src/app/interfaces/news-article-get.interface';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 export interface TabDescr {
   title: string;
@@ -23,7 +24,7 @@ export class NewsComponent implements OnInit {
   homeAway = false;
   general = false;
 
-  constructor(private newsService: NewsService) { }
+  constructor(private newsService: NewsService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
     this.tabDescriptionObject = [
@@ -56,28 +57,36 @@ export class NewsComponent implements OnInit {
     this.tabIndex = evt.index;
     switch (evt.index) {
       case 0:
+        this.spinnerService.showSpinner();
         this.diplomatic = true;
         if (this.diplomaticArray.length === 0) {
           this.newsService.getNewsArticles('diplomatic').subscribe((diplomaticItems: INewsArticlesGet[]) => {
             this.diplomaticArray = diplomaticItems;
+            this.spinnerService.hideSpinner();
+          }, error => {
+            this.spinnerService.hideSpinner();
           });
         }
         break;
 
       case 1:
+        this.spinnerService.showSpinner();
         this.homeAway = true;
         if (this.homeAwayArray.length === 0) {
           this.newsService.getNewsArticles('home-away').subscribe((homeAwayItems: INewsArticlesGet[]) => {
             this.homeAwayArray = homeAwayItems;
+            this.spinnerService.hideSpinner();
           });
         }
         break;
 
       case 2:
+        this.spinnerService.showSpinner();
         this.general = true;
         if (this.generalArray.length === 0) {
           this.newsService.getNewsArticles('general').subscribe((generalItems: INewsArticlesGet[]) => {
             this.generalArray = generalItems;
+            this.spinnerService.hideSpinner();
           });
         }
         break;

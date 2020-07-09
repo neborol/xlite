@@ -69,6 +69,12 @@ export class EditPhotosComponent implements OnInit {
         this.spinnerService.hideSpinner();
         return ph;
       });
+      // Turn off the spinner if there is no image
+      if (this.photos2Edit.length === 0) {
+        this.spinnerService.hideSpinner();
+      }
+    }, error => {
+
     });
 
     this.currentImage2UpdateForm = new FormGroup({

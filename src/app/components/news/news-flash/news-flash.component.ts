@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { timer, from, of } from 'rxjs';
-import { concatMap, delay } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { NewsService } from 'src/app/services/news.service';
 
 @Component({

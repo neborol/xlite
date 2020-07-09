@@ -1,4 +1,8 @@
-
+.registerContainer {
+    // max-height: calc(100vh - 210px);
+    overflow-y: auto;
+    justify-content: center !important;
+}
 
 .cancel-bt-container {
     display: flex;
@@ -10,10 +14,10 @@
     }
 }
 
-.box {
+.animation-box2 {
     max-width: 465px;
     width: 100%;
-    margin: 20px;
+    position: absolute;
 }
 
 .submit-btn-container {

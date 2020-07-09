@@ -73,24 +73,7 @@ export class RegisterComponent implements OnInit {
     }, this.passwordMatchValidator);
   }
 
-  // ngOnInit() {
-  //   this.registerMembersForm = new FormGroup({
-  //     'userName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-  //     'password': new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
-  //     'passwordConf': new FormControl('', Validators.required),
-  //     'userEmail': new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
-  //       Validators.pattern(this.emailRegex)]),
-  //     'firstName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-  //     'lastName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]),
-  //     'phone': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(this.phonenoRegex)]),
-  //     'city': new FormControl('', [Validators.minLength(4), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)])
-  //   }, this.passwordMatchValidator);
-  // }
 
-
-  // passwordMatchValidator(rForm: FormGroup) {
-  //   return rForm.get('password').value === rForm.get('passwordConf').value ? null : {mismatch: true};
-  // }
 
   passwordMatchValidator(rForm: FormGroup) {
     const confirmPswrdCtrl = rForm.get('passwordConf');
@@ -106,23 +89,6 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  // ngOnInit() {
-  //   this.registerMembersForm = this.fb.group({
-  //     userName: ['', [Validators.required, this.customValService.userNameValidator(), Validators.pattern(this.alphaNRegex)]],
-  //     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-  //     passwordConf: ['', Validators.required, this.customValService.passwordMatchValidator],
-  //     userEmail: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25),
-  //       Validators.pattern(this.emailRegex)]],
-  //     firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]],
-  //     lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(this.alphaNRegex)]],
-  //     phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(this.phonenoRegex)]],
-  //     city: ['', [Validators.minLength(0), Validators.maxLength(25), Validators.pattern(this.alphaNRegex)]]
-  //   },
-  //   {
-  //     validator: this.customValService.MatchPassword(this.password.value, this.passwordConf.value)
-  //   });
-  // }
-
 
   register() {
     console.log('MyRegForm', this.registerMembersForm);
@@ -130,7 +96,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.user).subscribe((data: any) => {
       if (data.success) {
         this.alertify.message(data.message);
-        // this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/');
       }
     }, error => {
       this.alertify.error('Registration failed');
@@ -141,7 +107,7 @@ export class RegisterComponent implements OnInit {
 
 
   cancel() {
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/');
   }
 
 }

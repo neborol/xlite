@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 export class SpinnerComponent implements OnInit, OnDestroy {
 
   @Input() topPos: string;
-  @Input() leftPos: string;
+  // @Input() leftPos: string;
   displayValue = 'none';
   subscrition: Subscription;
 

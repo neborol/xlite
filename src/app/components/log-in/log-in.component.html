@@ -1,6 +1,6 @@
 <div class="login-wrapper loginContainer" fxLayout="row" fxLayoutAlign="center center">
 
-    <mat-card class="box">
+    <mat-card class="animation-box1 login-card">
       <mat-card-header>
         <mat-card-title>Log in</mat-card-title>
       </mat-card-header>
@@ -17,6 +17,9 @@
         </mat-card-content>
         <button [disabled]="!loginForm.valid" type="submit" mat-stroked-button color="accent" class="btn-block">Log in</button>
       </form>
+      <span (click)="closeModal()" class="close-icon-login">
+        <mat-icon class="close-icon">highlight_off</mat-icon>
+      </span>
     </mat-card>
   
   </div>

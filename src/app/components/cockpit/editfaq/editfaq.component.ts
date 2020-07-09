@@ -87,7 +87,7 @@ export class EditfaqComponent implements OnInit {
     this.cockpitFaqService.editAnFaq(this.faqEditForm.value, this.currentItem.faqId).subscribe((faqEdited: IResponse) => {
       if (faqEdited.success) {
         this.alertifyService.success(faqEdited.message);
-        // this.router.navigate(['cockpit/editfaq', { page: 'edit'}]);
+        this.router.navigate(['cockpit/editfaq']);
       }
     }, error => {
       this.alertifyService.error('FAQ to be edited failed.');

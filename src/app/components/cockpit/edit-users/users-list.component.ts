@@ -8,6 +8,7 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 import { FormControl} from '@angular/forms';
 import 'moment/locale/pt-br';
 import { environment } from 'src/environments/environment';
+import { SpinnerService } from './../../../services/spinner.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class UsersListComponent implements OnInit {
     private userService: UserService,
     public dialog: MatDialog,
     private cockpituserService: CockpitUserService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private spinnerService: SpinnerService
   ) { }
 
 
@@ -45,6 +47,7 @@ export class UsersListComponent implements OnInit {
   }
 
   getAllMembers(search?) {
+    this.spinnerService.showSpinner();
     this.userService.getUsers().subscribe((allUsers: IUser[]) => {
       this.members = allUsers;
       // If there is a search object, this.members above will be overridden by the filter bellow.
@@ -53,6 +56,7 @@ export class UsersListComponent implements OnInit {
           return u.codeNr === search.value;
         });
       }
+      this.spinnerService.hideSpinner();
     });
   }
 
@@ -88,29 +92,35 @@ export class UsersListComponent implements OnInit {
   }
 
   UpdateStatusActive() {
+    this.spinnerService.showSpinner();
     this.cockpituserService.UpdateStatusActive(this.selectedUser.email).subscribe((res: IResponse) => {
       if (res.success) {
         this.alertify.success(res.message);
         this.closeModal();
       }
+      this.spinnerService.hideSpinner();
     }, error => this.alertify.error('User was not updated.'));
   }
 
   UpdateStatusInActive() {
+    this.spinnerService.showSpinner();
     this.cockpituserService.UpdateStatusInActive(this.selectedUser.email).subscribe((res: IResponse) => {
       if (res.success) {
         this.alertify.success(res.message);
         this.closeModal();
       }
+      this.spinnerService.hideSpinner();
     }, error => this.alertify.error('User was not updated.'));
   }
 
   deleteSelectedUser() {
+    this.spinnerService.showSpinner();
     this.cockpituserService.deleteSelectedUser(this.selectedUser.email).subscribe((res: any) => {
       if (res.success) {
         this.alertify.success(res.message);
         this.closeModal();
       }
+      this.spinnerService.hideSpinner();
     }, error => this.alertify.error('User was not deleted.'));
 
     this.closeModal();

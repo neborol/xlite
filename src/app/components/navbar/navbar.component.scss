@@ -1,10 +1,7 @@
 .navbar-container {
     width: 100%;
     .nav-label {
-        float: left;
-        width: 215px;
         font-size: 1.2em;
-        padding-left: 105px;
         .user-account {
             mat-icon{
                font-size: 1.2em; 
@@ -31,8 +28,6 @@
         }
     }
     .nav-links {
-        float: right;
-        width: 300px;
         .nav-tool-items{
             a {
                 float: right;
@@ -44,6 +39,16 @@
             background-color: rgb(102, 206, 238);
             color: black;
         }
+    }
+}
+
+.home-btn, .main-menu-btn {
+    padding: 4px;
+    min-width: 30px;
+    height: 38px;
+    line-height: 32px;
+    .mat-icon {
+        margin-bottom: 4px;
     }
 }
 
@@ -59,7 +64,7 @@
     background-size: 115px 71px;
     position: absolute;
     top: 2px;
-    left: 10px;
+    left: 1px;
     background-repeat: no-repeat;
 }
 
@@ -67,4 +72,28 @@
     color: #096d84;
 }
 
+@media(max-width: 780px) {
+    .user-account-items {
+        margin-right: -10px;
+        .eliteforce-name {
+            float: right; 
+            overflow: hidden;
+            padding-bottom: 10px;
+        }
+        .user-name-container {
+            float: right;
+            overflow: hidden;
+        }
+    }
+}
 
+@media(min-width: 780px) {
+    // .user-account-items {
+    //     float: right;
+    //     .eliteforce-name {
+    //         float: right; 
+    //         border: solid 1px red;
+    //         overflow: hidden;
+    //     }
+    // }
+}

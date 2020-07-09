@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 // import { MatDrawer } from '@angular/material';
 import { AuthService } from './../../services/auth.service';
 
+
 @Component({
   selector: 'app-cockpit',
   templateUrl: './cockpit.component.html',
@@ -10,7 +11,12 @@ import { AuthService } from './../../services/auth.service';
 })
 export class CockpitComponent implements OnInit {
 
-  funcs = {};
+  funcs: any = {
+    isNews: '',
+    isPilot: '',
+    isManager: '',
+    isSuper: ''
+  };
 
   constructor(private router: Router) { }
 

@@ -94,21 +94,7 @@ body {
   color: #ffffff;
 }
 
-.box {
-  position: relative;
-  top: 0;
-  opacity: 1;
-  float: left;
-  padding: 60px 50px 40px 50px;
-  width: 100%;
-  background: #fff;
-  border-radius: 10px;
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  z-index: 5;
-  max-width: 330px;
-}
+
 
 .box.back {
   transform: scale(.95);
@@ -157,7 +143,10 @@ body {
   margin: 0;
 }
 
-
+.elite-force-dropdown {
+    line-height: 27px !important;
+    padding: 0 3px !important;
+}
 
 .login-wrapper .mat-stroked-button {
   border: 1px solid #8c96cf;
@@ -376,6 +365,10 @@ mat-drawer-container {
 
 
 @mixin header-design {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
   background-color: $newsGray;
   width: 100%;
@@ -419,11 +412,11 @@ mat-drawer-container {
   .unit_container {
     .top-header-container {
       flex: 1;
-    }
-
+    } 
     .news-headlines {
       flex: 1;
       width: 54%;
+      max-width: 1000px;
     }
   }
 }
@@ -496,11 +489,34 @@ mat-drawer-container {
   }
 }
 
-.box {
+@mixin box {
+  position: relative;
+  opacity: 1;
+  float: left;
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;
+}
+
+.animation-box1 {
+  @include box;
   top: 0;
-  animation-name: example;
+  animation-name: example1;
   animation-duration: 1s;
   position: absolute;
+}
+
+.animation-box2 {
+  @include box;
+  top: 85px;
+  animation-name: example2;
+  animation-duration: 1s;
 }
 
 .bodt {
@@ -659,13 +675,24 @@ mat-drawer-container {
 }
 
 
-@keyframes example {
+@keyframes example1 {
   from {
     top: 523px;
   }
 
   to {
     top: 0;
+  }
+}
+
+
+@keyframes example2 {
+  from {
+    top: 523px;
+  }
+
+  to {
+    top: 85px;
   }
 }
 
@@ -720,6 +747,7 @@ mat-drawer-container {
 @media(max-width: 780px) {
   .mat-toolbar-single-row {
     height: 76px !important;
+    padding: 0 11px !important;
   }
   .cockpit-inner-container {
     .mat-drawer-content {
@@ -741,6 +769,29 @@ mat-drawer-container {
         padding-top: 30px;
       }
     }
+  }
+
+  .navbar-container {
+    .nav-links {
+      width: 189px;
+      float: right;
+      margin-left: 107px;
+      overflow: hidden;
+      min-height: 42px;      
+    }
+
+    .main-menu-btn-container {
+      position: absolute;
+      right: 11px;
+      top: 33px;
+    }
+
+  }
+
+  .home-btn {
+    .home-text {
+        display: none;
+      }
   }
 }
 
@@ -764,6 +815,47 @@ mat-drawer-container {
     .video-page-title {
       margin-top: -2px !important;
     }
+  }
+
+  .navbar-container {
+    .nav-links {
+      float: none;
+      position: absolute;
+      width: 300px;
+      margin-left: 0;
+      right: 15px;
+      top: 8px;
+    }
+  }
+
+  .navbar-container {
+    .nav-label {
+      .user-account {
+        position: absolute;
+        top: 8px;
+        left: 120px;
+      }
+    }
+    // .nav-links {
+    //   width: 189px;
+    //   float: right;
+    //   margin-left: 107px;
+    //   overflow: hidden;
+    //   min-height: 42px;      
+    // }
+
+    // .main-menu-btn-container {
+    //   position: absolute;
+    //   right: 11px;
+    //   top: 35px;
+    // }
+  }
+
+  .home-btn {
+    .home-text {
+        display: inherit;
+        margin-bottom: 10px;
+      }
   }
 }
 

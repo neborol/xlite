@@ -1,17 +1,33 @@
 <div class="navbar-container">
   <div class="nav-label">
     <div class="logo-container"></div>
-    <span class="user-account">
-      <a *ngIf="!authService.isLoggedIn() || !authService.userName" mat-button [matMenuTriggerFor]="userMenu"
-        class="elite-force-dropdown">
-        Elite Force (SCEF)
-        <mat-icon class="user-menu-dropdown-icon">arrow_drop_down</mat-icon>
-      </a>
-      <a *ngIf="authService.isLoggedIn() && authService.userName" class="user-menu-group" mat-button
-        [matMenuTriggerFor]="userMenu">
-        <mat-icon class="user-icon" aria-hidden="false" aria-label="user icon">account_circle</mat-icon>
-        <mat-icon class="user-menu-dropdown-icon">arrow_drop_down</mat-icon>
-      </a>
+    <div class="user-account">
+      <span class="user-account-items">
+
+        <span class="eliteforce-name">
+          <a *ngIf="!authService.isLoggedIn() || !authService.userName" mat-button [matMenuTriggerFor]="userMenu"
+            class="elite-force-dropdown">
+            Elite Force (SCEF)
+            <mat-icon class="user-menu-dropdown-icon">arrow_drop_down</mat-icon>
+          </a>          
+        </span>
+
+        <span class="user-name-container">
+          <a *ngIf="authService.isLoggedIn() && authService.userName" class="user-menu-group" mat-button
+            [matMenuTriggerFor]="userMenu">
+            <mat-icon class="user-icon" aria-hidden="false" aria-label="user icon">account_circle</mat-icon>
+            <mat-icon class="user-menu-dropdown-icon">arrow_drop_down</mat-icon>
+          </a>
+          <span *ngIf="authService.isLoggedIn() && authService.userName" class="user-id-text">
+            Logged in as:
+            <span style="color: #65d3f4">
+              {{ authService.userName | titlecase }} </span>
+          </span>          
+        </span>
+
+      </span>
+
+
       <mat-menu class="custom-menu-dropdown" #userMenu="matMenu">
         <span *ngIf="!authService.isLoggedIn()">
           <a mat-menu-item routerLink="login">
@@ -43,30 +59,24 @@
           <mat-icon class="menu-icon" aria-label="settings icon">settings</mat-icon>
         </a>
       </mat-menu>
-
-      <span *ngIf="authService.isLoggedIn() && authService.userName" class="user-id-text">
-        Logged in as:
-        <span style="color: #65d3f4">
-          {{ authService.userName | titlecase }} </span>
-      </span>
-    </span>
+    </div>
 
   </div>
 
   <div class="nav-links">
     <span class="nav-tool-items">
+      <span class="main-menu-btn-container">
+        <a class="main-menu-btn" mat-button [matMenuTriggerFor]="mainMenu" mat-raised-button [ngClass]="{'active': inMainMenu===true}">
+          Main Menu
+          <mat-icon>arrow_drop_down</mat-icon>
+        </a>
 
-      <a mat-button [matMenuTriggerFor]="mainMenu" mat-raised-button [ngClass]="{'active': inMainMenu===true}">
-        Main Menu
-        <mat-icon>arrow_drop_down</mat-icon>
-      </a>
-
-      <a mat-button mat-raised-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-        true}">
-        Home
-        <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-      </a>
-
+        <a class="home-btn" mat-button mat-raised-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+          true}">
+          <span class="home-text">Home</span> 
+          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        </a>        
+      </span>
 
       <mat-menu class="custom-menu-dropdown" #mainMenu="matMenu">
         <a mat-menu-item routerLink="about">

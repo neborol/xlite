@@ -32,7 +32,6 @@ export class Jan052019Component implements OnInit {
         ph.uniquePhotoName = this.rootUrl + ph.uniquePhotoName;
         return ph;
       });
-      console.log('TestMission', this.missionPhotoSources);
 
       this.imgService.setAnimation(this.missionPhotoSources, this.missionPhotos);
       this.totalImages = this.missionPhotoSources.length;

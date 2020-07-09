@@ -2,32 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AngularMaterialLoginTemplate</title>
+  <title>Elite Force (SCEF)</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Southern Cameroons Elite Force: SCEF is a non-profit relief organization headed by women.">
+  
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
 </head>
 <body>
 
-  <app-root>
-      <div id="spinner-element" style="top: 50px; left: 46%" class='processLoaderContainer'>
-          <div class='outerProcessLoader'>
-            <div class='innerProcessLoader'></div>
-          </div>
-        </div>
-  </app-root> 
-  <script>
-    (function starterFunction() {
-      let spinnerElt = document.getElementById('spinner-element');
-      setTimeout(() => {
-        spinnerElt.style.display = 'none';
-      }, 8000);
-      
-    })();
-  </script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
+    <div id="spinner-element" style="top: 75px; left: 46%" class='processLoaderContainer'>
+      <div class='outerProcessLoader'>
+        <div class='innerProcessLoader'></div>
+      </div>
+    </div>
+
+    <app-root></app-root> 
+
+    <script>
+      (function starterFunction() {
+        let spinnerElt = document.getElementById('spinner-element');
+        setTimeout(() => {
+          spinnerElt.style.display = 'none';
+        }, 1000);
+        
+      })();
+    </script> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
 </body>
 </html>

@@ -51,7 +51,7 @@
                     <div class="design-item-container padding-container">
                       <mat-card>
                         <div *ngIf="videoPosterImageplaceholderPath" class="preview-image-container">
-                          <img style="max-height: 250px; max-width: 250px;" [src]="videoPosterImageplaceholderPath" alt="image-preview">
+                          <img style="max-height: 250px; max-width: 250px;" [src]="videoPosterImageplaceholderPath" alt="SCEF image-preview">
                         </div>
     
                         <!-- file to be uploaded -->
@@ -80,7 +80,7 @@
                       <mat-card>
                           <!-- If the video to be uploaded is not available, show the video upload placeholder image -->
                         <div *ngIf="!videoFile2bUploaded" class="preview-image-container">
-                            <img style="max-width: 250px" [src]="videoPhoto2bUploaded" alt="image-preview">
+                            <img style="max-width: 250px" [src]="videoPhoto2bUploaded" alt="SCEF image-preview">
                         </div>
                         <div *ngIf="videoFile2bUploaded" class="preview-image-container">
                             <mat-video #eliteVideo 

@@ -1,5 +1,5 @@
 <div class="login-wrapper registerContainer" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
+  <mat-card class="animation-box2">
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
@@ -21,7 +21,7 @@
 
         <mat-form-field class="register-control"
             [ngClass]="{'error-controlled': password.errors && password.touched }">
-          <input type="password" formControlName="password" matInput placeholder="Password">
+          <input type="password" formControlName="password" matInput placeholder="Password: min 8 characters + special">
         </mat-form-field>
 
         <!-- <mat-form-field class="register-control"

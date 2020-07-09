@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { Router} from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-log-in',
@@ -11,8 +12,14 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 export class LogInComponent implements OnInit {
 
   model = {userEmail: '', password: ''};
+  isStatusActive = false;
 
-  constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private alertify: AlertifyService,
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit() {
     // this.authService.isLoggedIn ? this.router.navigateByUrl('/text') : this.router.navigateByUrl('/login') ;
@@ -25,10 +32,14 @@ export class LogInComponent implements OnInit {
     this.authService.login(this.model).subscribe(next => {
       this.router.navigateByUrl('/home');
       this.alertify.success('Logged in successfully');
-      console.log('TestLog', this.model);
     }, error => {
       this.alertify.error('Failed to login');
     });
+  }
+
+  closeModal() {
+    this.dialog.closeAll();
+    this.router.navigateByUrl('/home');
   }
 
 }

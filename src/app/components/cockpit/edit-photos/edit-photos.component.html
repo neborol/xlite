@@ -11,7 +11,7 @@
                   <mat-card>
                       <div class="preview-image-container">
                           <div style="width: 200px;" *ngIf="imagesUrls.length == 0">
-                              <img [src]="image2bUploaded" alt="image-preview" width="160px">
+                              <img [src]="image2bUploaded" alt="SCEF image-preview" width="160px">
                               <div>Max number of files: 25</div>
                             </div>
                           <div class="multi-files-container" *ngIf="imagesUrls.length > 0">
@@ -89,7 +89,7 @@
                   <mat-card>
                     <div class="photo-edit-list-container">
                       <div *ngFor="let photo of photos2Edit" class="photo-container">
-                        <img src="{{ photo.uniquePhotoName }}" alt="Mission Photo">
+                        <img src="{{ photo.uniquePhotoName }}" alt="SCEF Mission Photo">
                         <div class="icon-contrast"></div>
                         <div (click)="editSelectedPhoto(missionPhotoModal, photo)" class="edit-icon-container"><mat-icon class="edit-article-button">edit</mat-icon></div>
                       </div>
@@ -120,7 +120,7 @@
 
               <div class="design-item-container">
                 <mat-card style="display: flex; justify-content: space-between">
-                  <img class="mission-modal-preview-photo" src="{{currentSelectedPhoto.uniquePhotoName}}" alt="Edit photo">
+                  <img class="mission-modal-preview-photo" src="{{currentSelectedPhoto.uniquePhotoName}}" alt="SCEF Edit photo">
                   <div>
                     <button *ngIf="!deleteRequested" class="image-delete-btn" (click)="deleteRequestDialogue()" mat-raised-button color="basic">
                       Delete Photo

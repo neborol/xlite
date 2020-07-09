@@ -8,6 +8,7 @@ import { IRatingsObjectPost } from 'src/app/interfaces/video-rating.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { IResponse } from 'src/app/interfaces/response.interface';
 import { AlertifyService } from './../../services/alertify.service';
+import { SpinnerService } from './../../services/spinner.service';
 
 @Component({
   selector: 'app-videos',
@@ -34,7 +35,8 @@ export class VideosComponent implements OnInit {
     private renderer: Renderer2,
     private videosService: VideosService,
     private authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private spinnerService: SpinnerService
   ) { }
 
   // ngOnInit() {
@@ -45,6 +47,7 @@ export class VideosComponent implements OnInit {
   // }
 
   ngOnInit() {
+    this.spinnerService.showSpinner();
     this.videosService.getVideos().subscribe((videos: IVideoGet[]) => {
       this.videoData = videos.sort((a: any, b: any) => {
         return (new Date(b.dateCreated) as any) - (new Date(a.dateCreated) as any);
@@ -53,6 +56,8 @@ export class VideosComponent implements OnInit {
         vid.videoPath = this.serverUrl + vid.videoPath;
         return vid;
       });
+
+      this.spinnerService.hideSpinner();
 
       // this.videoElement = this.matVideo.getVideoTag();
       if (this.authService.isLoggedIn()) {
@@ -75,10 +80,12 @@ export class VideosComponent implements OnInit {
   }
 
   submitRating(val) {
+    this.spinnerService.showSpinner();
     if (val === 0) { }
     this.videosService.postVideoRating(this.ratingsObj).subscribe((resp: IResponse) => {
       if (resp.success) {
         this.alertify.success(resp.message);
+        this.spinnerService.hideSpinner();
       }
     }, error => { this.alertify.error(error.message); });
   }

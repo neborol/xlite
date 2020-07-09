@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   inMainMenu = false;
 
 
-  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) {}
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe(() => {

@@ -64,7 +64,6 @@ export class AuthService {
     localStorage.removeItem('eliteToken');
     localStorage.removeItem('eliteFuncs');
     this.router.navigateByUrl('/');
-    console.log('logged out');
   }
 
 }
