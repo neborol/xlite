@@ -1,0 +1,36 @@
+<div class="login-wrapper loginContainer" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="animation-box1 login-card">
+    <span (click)="closeModal()" class="close-icon-login">
+      <mat-icon class="close-icon">highlight_off</mat-icon>
+    </span>
+
+    <mat-card-header>
+      <mat-card-title>Reset Password</mat-card-title>
+    </mat-card-header>
+
+    <form #pwResetForm="ngForm" (ngSubmit)="startPasswReset()" class="example-form">
+      <mat-card-content>
+        <mat-form-field class="register-control">
+          <input [(ngModel)]="resetModel.userEmail" name="userEmail" required type="text" matInput
+            placeholder="User Email">
+        </mat-form-field>
+
+        <mat-form-field class="register-control">
+          <input [(ngModel)]="resetModel.password" name="password" required type="password" matInput placeholder="Password">
+            <span style="font-size: 11px;">Min 8 characters, upper, numbers, and special character</span>
+        </mat-form-field>
+
+        <mat-form-field class="register-control">
+          <input [(ngModel)]="resetModel.passwordConf" name="passwordConf" required type="password" matInput placeholder="Confirm Password">
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <button [disabled]="!pwResetForm.valid" type="submit" mat-stroked-button color="accent"
+        class="btn-block">Submit</button>
+    </form>
+
+  </mat-card>
+
+</div>

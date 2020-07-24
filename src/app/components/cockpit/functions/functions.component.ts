@@ -41,7 +41,6 @@ export class FunctionsComponent implements OnInit, OnDestroy {
   getAllMembers() {
     this.userService.getUsersSuper().subscribe((usersList: IUser[]) => {
       this.users = usersList;
-      console.log(usersList);
     }, error => console.error(error));
   }
 
@@ -49,7 +48,9 @@ export class FunctionsComponent implements OnInit, OnDestroy {
     this.userService.getUserClaims(obj.id).subscribe((claims: any) => {
       obj.claims = claims;
       this.openDialog(obj);
-    }, error => console.log(error));
+    }, error => {
+      this.alertify.error('Sorry, something went wrong with the claims retrieval');
+    });
   }
 
   openDialog(obj) {
@@ -58,7 +59,7 @@ export class FunctionsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(GenericModalComponent, config);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 

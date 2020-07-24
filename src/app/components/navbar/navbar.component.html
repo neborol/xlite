@@ -1,6 +1,7 @@
 <div class="navbar-container">
+  <span (click)="getEmailForReset()" class="hidden-span"></span>
   <div class="nav-label">
-    <div class="logo-container"></div>
+    <div (click)="navigateToHome()" class="logo-container"></div>
     <div class="user-account">
       <span class="user-account-items">
 
@@ -96,7 +97,7 @@
           <mat-icon class="user-menu-dropdown-icon menu-icon">event</mat-icon>
         </a>
         <a mat-menu-item routerLink="relieve">
-          Images
+          Photos
           <mat-icon class="user-menu-dropdown-icon menu-icon">assistant</mat-icon>
         </a>
 

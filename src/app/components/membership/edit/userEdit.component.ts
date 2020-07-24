@@ -16,7 +16,6 @@ export class MemberEditComponent implements OnInit {
     //    which is a ways to prevent lapses in data load
     this.route.data.subscribe(
       (data: Data) => {
-        console.log('Testing Data', data);
         this.member = data.uniqueXX; // This uniqueXX must match the name used in the route as the resolve object property
       }
     );

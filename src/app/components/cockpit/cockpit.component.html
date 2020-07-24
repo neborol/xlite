@@ -3,7 +3,9 @@
     <mat-drawer-container class="example-container spacing" [hasBackdrop]="hasBackdrop.value">
       <mat-drawer class="spacing" #drawer mode="push">   
         <div class="cockp-menu-list">
-           
+
+          
+          
           <span >
             <span *ngIf="funcs.isSuper === 'true'">
               <a mat-menu-item (click)="loadChildRoute('functions', drawer)">
@@ -11,34 +13,56 @@
                 Higher Functions
               </a>
             </span>
-            <a mat-menu-item (click)="loadChildRoute('editphotos', drawer)">
-              <mat-icon class="menu-icon" aria-label="Edit photos">insert_photo</mat-icon>
-              Edit Photos
-            </a>
-            <a mat-menu-item (click)="loadChildRoute('userslist', drawer)">
-              <mat-icon class="menu-icon" aria-label="edit user list">supervised_user_circle</mat-icon>
-              Edit Users
-            </a>                       
-            <a mat-menu-item (click)="loadChildRoute('editFinances', drawer)">
-              <mat-icon class="menu-icon" aria-label="Edit finances">attach_money</mat-icon>
-              Edit Finances
-            </a>                       
-            <a mat-menu-item (click)="loadChildRoute('editnews', drawer)">
-              <mat-icon class="menu-icon" aria-label="edit news">radio</mat-icon>
-              Edit News
-            </a>                       
-            <a mat-menu-item (click)="loadChildRoute('editfaq', drawer)">
-              <mat-icon class="menu-icon" aria-label="edit faq">help</mat-icon>
-              Edit FAQs
-            </a>                       
-            <a mat-menu-item (click)="loadChildRoute('editvideos', drawer)">
-              <mat-icon class="menu-icon" aria-label="edit faq">ondemand_video</mat-icon>
-              Edit Videos
-            </a>                       
-            <a mat-menu-item (click)="loadChildRoute('editevents', drawer)">
-              <mat-icon class="menu-icon" aria-label="edit faq">event_note</mat-icon>
-              Edit Events
-            </a>                       
+            
+            <span *ngIf="funcs.isManager === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('editphotos', drawer)">
+                <mat-icon class="menu-icon" aria-label="Edit photos">insert_photo</mat-icon>
+                Edit Photos
+              </a>
+            </span>
+            
+            <span *ngIf="funcs.isPilot === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('userslist', drawer)">
+                <mat-icon class="menu-icon" aria-label="edit user list">supervised_user_circle</mat-icon>
+                Edit Users
+              </a>    
+            </span> 
+            
+            <span *ngIf="funcs.isPilot === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('editFinances', drawer)">
+                <mat-icon class="menu-icon" aria-label="Edit finances">attach_money</mat-icon>
+                Edit Finances
+              </a>
+            </span>
+            
+            <span *ngIf="funcs.isNews === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('editnews', drawer)">
+                <mat-icon class="menu-icon" aria-label="edit news">radio</mat-icon>
+                Edit News
+              </a>   
+            </span>
+            
+            <span *ngIf="funcs.isManager === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('editfaq', drawer)">
+                <mat-icon class="menu-icon" aria-label="edit faq">help</mat-icon>
+                Edit FAQs
+              </a>    
+            </span>
+            
+            <span *ngIf="funcs.isManager === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('editvideos', drawer)">
+                <mat-icon class="menu-icon" aria-label="edit faq">ondemand_video</mat-icon>
+                Edit Videos
+              </a> 
+            </span>
+            
+            <span *ngIf="funcs.isManager === 'true'">
+              <a mat-menu-item (click)="loadChildRoute('editevents', drawer)">
+                <mat-icon class="menu-icon" aria-label="edit faq">event_note</mat-icon>
+                Edit Events
+              </a>
+            </span>  
+
         </span>
 
         </div>

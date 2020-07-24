@@ -113,7 +113,6 @@ export class EditFinancesComponent implements OnInit {
     this.getAllMembers();
     this.financeService.getTotalContributions().subscribe((resp: number) => {
       this.grandTotal = resp;
-      console.log('tag', resp);
     });
 
     this.contributionsForm = new FormGroup({
@@ -154,7 +153,6 @@ export class EditFinancesComponent implements OnInit {
     this.selectedUser = data;
     this.financeService.getFinancialSubscriptions(this.selectedUser.id).subscribe((subsc: IAmountDto[]) => {
       this.userSubscriptions = subsc;
-      console.log('subs', subsc);
 
       this.dialog.open(templateRef);
     }, error => this.alertify.error('User subscriptions can not be retrieved'));

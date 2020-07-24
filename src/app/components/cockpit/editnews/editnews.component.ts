@@ -220,7 +220,6 @@ export class EditnewsComponent implements OnInit {
 
   editSelectedArticle(templateRef: TemplateRef<any>, article) {
     this.currentUpdateArticle = article;
-    console.log('Testinggg', this.currentUpdateArticle);
 
     this.dialog.open(templateRef);
   }

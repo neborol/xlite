@@ -1,0 +1,19 @@
+.loginContainer {
+    .mat-card {
+      max-width: 465px;
+      width: 100%;
+      margin: 20px;
+    }
+  
+    .login-card {
+      position: relative;
+    }
+  
+    .close-icon-login {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      cursor: pointer;
+    }
+  }
+  

@@ -54,10 +54,9 @@ export class VideosComponent implements OnInit {
       }).map(vid => {
         vid.posterPath = this.serverUrl + vid.posterPath;
         vid.videoPath = this.serverUrl + vid.videoPath;
+        this.spinnerService.hideSpinner();
         return vid;
       });
-
-      this.spinnerService.hideSpinner();
 
       // this.videoElement = this.matVideo.getVideoTag();
       if (this.authService.isLoggedIn()) {

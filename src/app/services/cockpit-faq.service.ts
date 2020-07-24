@@ -23,7 +23,6 @@ export class CockpitFaqService {
       faqQuestion: faqObj.editQuestion,
       faqAnswer: faqObj.editAnswer
     };
-    console.log('Tessing', faqAddObject);
     return this.http.put(this.baseUrl + 'CockpitFaq/editfaq', faqAddObject);
   }
 

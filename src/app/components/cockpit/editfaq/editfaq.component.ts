@@ -42,8 +42,6 @@ export class EditfaqComponent implements OnInit {
     });
 
     this.faqService.getFaqs().subscribe((faqList: IFaqGet[]) => {
-      console.log('TT', faqList);
-
       this.listOfFaqs = faqList;
     });
 
@@ -54,7 +52,6 @@ export class EditfaqComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.faqAddForm.value);
     this.cockpitFaqService.addAnFaq(this.faqAddForm.value).subscribe((faqAdded: IResponse) => {
       if (faqAdded.success) {
         this.alertifyService.success('An FAQ was added successfully');

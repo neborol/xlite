@@ -36,3 +36,20 @@
     padding: 5px;
 }
 
+@media(max-width: 450px) {
+  .list-item {
+    min-width: 49px;
+  }
+}
+
+@media(min-width: 450px) and (min-width: 780px) {
+  .list-item {
+    min-width: 101px;
+  }
+}
+
+@media(min-width: 780px) {
+  .list-item {
+    min-width: 139px;
+  }
+}

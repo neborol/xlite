@@ -66,4 +66,12 @@ export class AuthService {
     this.router.navigateByUrl('/');
   }
 
+  resetPassWord(resetObj) {
+    const resetDto = {
+      email: resetObj.userEmail,
+      password: resetObj.password
+    };
+    return this.http.post(this.baseUrl + 'auth/resetpw', resetDto);
+  }
+
 }

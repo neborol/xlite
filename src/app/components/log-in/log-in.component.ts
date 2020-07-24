@@ -13,6 +13,7 @@ export class LogInComponent implements OnInit {
 
   model = {userEmail: '', password: ''};
   isStatusActive = false;
+  isSuper = false;
 
   constructor(
     private authService: AuthService,
@@ -22,6 +23,10 @@ export class LogInComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const rights =  JSON.parse(localStorage.getItem('eliteFuncs'));
+    if (rights.isSuper) {
+      this.isSuper = true;
+    }
     // this.authService.isLoggedIn ? this.router.navigateByUrl('/text') : this.router.navigateByUrl('/login') ;
   }
 
@@ -36,6 +41,11 @@ export class LogInComponent implements OnInit {
       this.alertify.error('Failed to login');
     });
   }
+
+
+  // getEmailForReset() {
+  //   this.router.navigateByUrl('/pwreset');
+  // }
 
   closeModal() {
     this.dialog.closeAll();

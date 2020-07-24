@@ -24,6 +24,7 @@ import { EditfaqComponent } from './components/cockpit/editfaq/editfaq.component
 import { VideosComponent } from './components/videos/videos.component';
 import { EditvideosComponent } from './components/cockpit/editvideos/editvideos.component';
 import { EditEventsComponent } from './components/cockpit/edit-events/edit-events.component';
+import { PwresetComponent } from './components/pwreset/pwreset.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'relieve', component: RelieveComponent},
   { path: 'user/edit', component: MemberEditComponent, resolve: {uniqueXX: UserEditResolver}},
   { path: 'login', component: LogInComponent },
+  { path: 'pwreset', component: PwresetComponent },
   { path: 'cockpit', component: CockpitComponent, children: [
     { path: 'editphotos', component: EditPhotosComponent },
     { path: 'editphotos/:idx', component: EditPhotosComponent },

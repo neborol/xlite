@@ -64,6 +64,7 @@ import { EditPhotosComponent } from './components/cockpit/edit-photos/edit-photo
 import { CockpitPhotoService } from './services/cockpit-photos.service';
 import { EditEventsComponent } from './components/cockpit/edit-events/edit-events.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { PwresetComponent } from './components/pwreset/pwreset.component';
 
 export function tokenGetter() {
   return localStorage.getItem('eliteToken');
@@ -105,7 +106,8 @@ export function tokenGetter() {
     RatingComponent,
     EditvideosComponent,
     EditEventsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PwresetComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

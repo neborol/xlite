@@ -91,7 +91,6 @@ export class RegisterComponent implements OnInit {
 
 
   register() {
-    console.log('MyRegForm', this.registerMembersForm);
     this.user = Object.assign({}, this.registerMembersForm.value);
     this.authService.register(this.user).subscribe((data: any) => {
       if (data.success) {
@@ -100,7 +99,6 @@ export class RegisterComponent implements OnInit {
       }
     }, error => {
       this.alertify.error('Registration failed');
-      console.log(this.user);
       console.error(error);
     });
   }

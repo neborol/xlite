@@ -33,4 +33,13 @@ export class NavbarComponent implements OnInit {
     this.authService.logOut();
     this.alertify.warning('You are currently logged out.');
   }
+
+  getEmailForReset() {
+    this.router.navigateByUrl('/pwreset');
+  }
+
+  navigateToHome() {
+    this.router.navigateByUrl('/');
+  }
+
 }
