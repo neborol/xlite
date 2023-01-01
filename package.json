@@ -15,8 +15,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "0.803.26",
-    "@angular-devkit/build-optimizer": "0.803.26",
+    "@angular-devkit/build-angular": "15.0.4",
+    "@angular-devkit/build-optimizer": "0.1302.1",
     "@angular/animations": "8.0.3",
     "@angular/cdk": "8.0.2",
     "@angular/cli": "^8.3.20",
@@ -62,10 +62,10 @@
     "karma-jasmine": "2.0.1",
     "karma-jasmine-html-reporter": "1.4.0",
     "protractor": "5.4.0",
-    "ts-loader": "^5.4.5",
+    "ts-loader": "^9.4.2",
     "ts-node": "7.0.0",
     "tslint": "5.15.0",
     "typescript": "^3.4.5",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^5.0.1"
   }
 }
